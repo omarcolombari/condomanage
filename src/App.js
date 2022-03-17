@@ -1,10 +1,10 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import Modals from "./Components/Modals";
+import DashboardUser from "./Pages/DashboardUser";
 
 function App() {
   return (
     <ChakraProvider>
-      <Modals/>
+      <DashboardUser/>
     </ChakraProvider>
   )
 }
