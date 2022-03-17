@@ -5,3 +5,25 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #0196c1 #daedf3;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 9px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #daedf3;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #0196c1;
+    border-radius: 10px;
+    border: 0px solid #ffffff;
+  }

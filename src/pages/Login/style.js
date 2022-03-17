@@ -9,10 +9,6 @@ const ContainerAnimated = keyframes`
         transform: translateX(-550px);
     }
 
-    /* to {
-
-    } */
-
 `
 
 export const Container = styled.div`
@@ -41,7 +37,7 @@ export const ContainerContent = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    animation: ${ContainerAnimated} 0.5s;
+    animation: ${ContainerAnimated} 0.3s ease-out;
 
     @media (min-width: 768px) {
         width: 50%;

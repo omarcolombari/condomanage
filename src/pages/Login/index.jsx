@@ -83,7 +83,6 @@ const Login = () => {
           Ainda não tem cadastro? <Link to="/signup">Clique aqui.</Link>
         </div>
       </ContainerContent>
-      <ToastContainer position="top-left" />
     </Container>
   );
 };

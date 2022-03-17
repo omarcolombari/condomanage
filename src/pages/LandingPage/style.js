@@ -6,11 +6,8 @@ import background1 from "../../assets/background.png"
 const ContainerAnimated = keyframes`
 
     from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
+        /* opacity: 0; */
+        transform: translateX(-550px)
     }
 
 `
@@ -23,7 +20,6 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     background-color: #daedf3;
-    animation: ${ContainerAnimated} 0.5s;
     
     @media (min-width: 768px){
         flex: 1;
@@ -43,6 +39,7 @@ export const ContainerContent = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    animation: ${ContainerAnimated} 0.5s ease-out;
 
     @media (min-width: 768px) {
         width: 50%;
