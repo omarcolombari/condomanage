@@ -9,7 +9,7 @@ import logo1 from "../../assets/modelo-4.png";
 import logo2 from "../../assets/modelo-3.png";
 import { useHistory } from "react-router-dom";
 
-const Dashboard = () => {
+const LandingPage = () => {
   const history = useHistory();
 
   const handleNavigation = (path) => {
@@ -37,4 +37,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default LandingPage;
