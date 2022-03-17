@@ -1,8 +1,10 @@
+import TenantsPage from "./components/feature_tenants";
+
+
 function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+ return(
+   <TenantsPage/>
+ )
 }
 
 export default App;
