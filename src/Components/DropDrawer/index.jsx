@@ -9,13 +9,12 @@ import {
     DrawerCloseButton,
   } from '@chakra-ui/react'
 import NavList from "../NavList";
-const DropDrawer = ({ user,isOpen,onClose,btnRefDrawer }) => {
+const DropDrawer = ({ user,isDrawerOpen,onDrawerClose }) => {
     return (
         <Drawer
-            isOpen={isOpen}
+            isOpen={isDrawerOpen}
             placement='right'
-            onClose={onClose}
-            finalFocusRef={btnRefDrawer}>
+            onClose={onDrawerClose}>
             <DrawerOverlay />
             <DrawerContent 
                 h="100vh"
@@ -32,11 +31,7 @@ const DropDrawer = ({ user,isOpen,onClose,btnRefDrawer }) => {
                         <Img src={user.foto} alt={user.name}/>}
                 </DrawerHeader>
                 <DrawerBody>
-<<<<<<< HEAD
-                    <NavList onClose={onClose} />
-=======
-                    <NavList onClose={onClose}/>
->>>>>>> 713adbcbf49c69bcfd7b8f47ab2d3be8b71ba385
+                    <NavList onClose={onDrawerClose}/>
                 </DrawerBody>
             </DrawerContent>
         </Drawer>

@@ -6,8 +6,7 @@ import React from "react";
 
 
 const Header = () => {
-    const { isOpen,onOpen,onClose } = useDisclosure();
-    const btnRefDrawer = React.useRef();
+    const { isOpen:isDrawerOpen,onOpen:onDrawerOpen,onClose:onDrawerClose } = useDisclosure();
 
     return (
         <Box
@@ -30,13 +29,11 @@ const Header = () => {
                 <IoMdMenu 
                     cursor="pointer" 
                     size={50} 
-                    ref={btnRefDrawer}
-                    onClick={onOpen}/> 
+                    onClick={onDrawerOpen}/> 
             </Box>
             <DropDrawer 
-            isOpen={isOpen}
-            onClose={onClose}
-            btnRefDrawer={btnRefDrawer}/>
+            isDrawerOpen={isDrawerOpen}
+            onDrawerClose={onDrawerClose}/>
         </Box>
     )
 }
