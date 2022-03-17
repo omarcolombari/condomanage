@@ -32,7 +32,7 @@ const DropDrawer = ({ user,isOpen,onClose,btnRefDrawer }) => {
                         <Img src={user.foto} alt={user.name}/>}
                 </DrawerHeader>
                 <DrawerBody>
-                    <NavList/>
+                    <NavList onClose={onClose} />
                 </DrawerBody>
             </DrawerContent>
         </Drawer>

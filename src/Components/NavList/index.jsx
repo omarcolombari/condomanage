@@ -1,8 +1,12 @@
 import { Heading, ListItem, UnorderedList } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-const NavList = () => {
+const NavList = ({ onClose }) => {
     const history = useHistory();
+    const logout = () => {
+        localStorage.clear();
+        onClose();
+    }
     return (
         <UnorderedList
             listStyleType="none"
@@ -35,7 +39,7 @@ const NavList = () => {
                 </Heading>
             </ListItem>
             <ListItem>
-                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]}>
+                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={logout}>
                     Sair
                 </Heading>
             </ListItem>
