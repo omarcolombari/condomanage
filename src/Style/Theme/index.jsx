@@ -27,14 +27,14 @@ const CustomTheme = extendTheme({
         Text: {
             variants: {
                 /*  Import { Text } from "@chakra-ui/react"
-                    <Text variants="title2"></Text>     */
+                    <Text variants="text2"></Text>     */
                 text1: { color:"#000000",fontStyle: "regular",fontWeight: "light" },
                 text2: { color:"#ffffff",fontStyle: "regular",fontWeight: "semibold" }
             }
         },
         Button: {
                 /*  Import { Button } from "@chakra-ui/react"
-                    <Button variants="title2"></Button>    */
+                    <Button variants="default"></Button>    */
             variants: {
                 default: {
                     bg:"#00a5ae",
