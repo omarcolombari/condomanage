@@ -1,5 +1,5 @@
 import {
-        Modal,
+    Modal,
     ModalOverlay,
     ModalContent,
     ModalHeader,
@@ -10,10 +10,11 @@ import {
    
     } from '@chakra-ui/react'
 
-const ModalAddTenants =({register,handleAddTenants,handleSubmit,setStatusHome,isOpen,onClose,errors})=>{
+const ModalAddTenants =({register,handleAddTenants,handleSubmit,setStatusHome,isAddOpen,onAddClose,errors})=>{
     
     
-   return (<Modal isOpen={isOpen} onClose={onClose}>
+   return (
+   <Modal isOpen={isAddOpen} onClose={onAddClose}>
     <ModalOverlay />
     <ModalContent>
         <ModalHeader>Adicionar Inquilino</ModalHeader>
@@ -38,7 +39,7 @@ const ModalAddTenants =({register,handleAddTenants,handleSubmit,setStatusHome,is
         </ModalBody>
 
         <ModalFooter>
-        <Button colorScheme='blue' mr={3} onClick={onClose}>
+        <Button colorScheme='blue' mr={3} onClick={onAddClose}>
         Fechar
         </Button>
         <Button variant='ghost'>Cadastrar usuario</Button>

@@ -9,11 +9,19 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import ModalAddTenants from "../ModalAddTenants";
+import ModalListTenants from "../ModalListTenants";
 const TenantsPage =()=>{
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen:isAddOpen, onOpen:onAddOpen, onClose:onAddClose } = useDisclosure();
+   
+    const { 
+        isOpen: isOpenAlterTenants, 
+        onOpen: onOpenAlterTenants, 
+        onClose: onCloseAlterTenants 
+    } = useDisclosure()
 
   const [statusHome, setStatusHome] = useState();
   const [listTenants, setListTenants] = useState();
+  const [currentTenants,setCurrentTenants]= useState([]);
 
   const schema = yup.object().shape({
     email: yup
@@ -24,7 +32,7 @@ const TenantsPage =()=>{
       .string()
       .min(6, "Minimo 6 caracteres")
       .required("Crie uma senha"),
-    number: yup.number().required("Diguite o Number do imovel"),
+    number: yup.string().required("Diguite o Number do imovel"),
     responsible: yup.string().required("Diguite o nome do responsavel"),
     cpf: yup.number().required("Diguite o CPF do Inquilino"),
     value: yup.number().required("Diguite o valor pago mensalmente"),
@@ -48,7 +56,7 @@ const TenantsPage =()=>{
     axios
       .post("https://api-condomanage.herokuapp.com/tenants", newTenants, {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NTM2NTkyLCJleHAiOjE2NDc1NDAxOTIsInN1YiI6IjEifQ.oONmzvA9UpuKkAaeC6fwEAA6mZH-t35Hh8tjJSPncaY`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NTUwMjU0LCJleHAiOjE2NDc1NTM4NTQsInN1YiI6IjEifQ._yCZUzz9Yx3OkiwI8TqDiCuxJnmkEZfJOYaR_9I3jO4`,
         },
       })
       .then((resp) => console.log(resp))
@@ -59,7 +67,7 @@ const TenantsPage =()=>{
     axios
       .get("https://api-condomanage.herokuapp.com/tenants", {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NTM2NTkyLCJleHAiOjE2NDc1NDAxOTIsInN1YiI6IjEifQ.oONmzvA9UpuKkAaeC6fwEAA6mZH-t35Hh8tjJSPncaY`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NTUwMjU0LCJleHAiOjE2NDc1NTM4NTQsInN1YiI6IjEifQ._yCZUzz9Yx3OkiwI8TqDiCuxJnmkEZfJOYaR_9I3jO4`,
         },
       })
       .then((resp) => setListTenants(resp.data));
@@ -71,25 +79,38 @@ const TenantsPage =()=>{
 
   return (
     <>
+    <div>
       <h2>Lista de apartamento</h2>
-      <Button onClick={onOpen}>+</Button>
+      <Button variants="default" onClick={onAddOpen}>+</Button>
 
       <ModalAddTenants
         register={register}
         handleAddTenants={handleAddTenants}
         handleSubmit={handleSubmit}
         setStatusHome={setStatusHome}
-        onClose={onClose}
-        isOpen={isOpen}
+        onAddClose={onAddClose}
+        isAddOpen={isAddOpen}
         errors={errors}
       />
 
+    </div>
+
       <Box>
         {listTenants?.map((tenant) => (
-          <Box key={tenant.id}>
+          <Box onClick={()=>setCurrentTenants(tenant)}>
+
+          <Button  onClick={
+            onOpenAlterTenants
+
+          } 
+          key={tenant.id}>
             {tenant.responsible} {tenant.number}
+          </Button>
           </Box>
         ))}
+        <ModalListTenants currentTenants={currentTenants} onCloseAlterTenants={onCloseAlterTenants}
+        isOpenAlterTenants={isOpenAlterTenants}/>
+
       </Box>
     </>
   );
