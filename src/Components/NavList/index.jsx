@@ -6,7 +6,7 @@ const NavList = ({ onClose }) => {
     const logout = () => {
         localStorage.clear();
         onClose();
-    }
+    }/**/
     return (
         <UnorderedList
             listStyleType="none"
