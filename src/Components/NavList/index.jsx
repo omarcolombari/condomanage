@@ -10,32 +10,32 @@ const NavList = () => {
             flexDir="column"
             alignItems="center">
             <ListItem>
-                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} fontWeight="semibold" onClick={()=>history.push("/dashboard")}>
+                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>history.push("/dashboard")}>
                     Inicio
                 </Heading>
             </ListItem>
             <ListItem>
-                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} fontWeight="semibold" onClick={()=>history.push("/tenants")}>
+                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>history.push("/tenants")}>
                     Inquilinos
                 </Heading>
             </ListItem>
             <ListItem>
-                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} fontWeight="semibold" onClick={()=>history.push("/finances")}>
+                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>history.push("/finances")}>
                     Financeiro
                 </Heading>
             </ListItem>
             <ListItem>
-                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} fontWeight="semibold" onClick={()=>history.push("/requires")}>
+                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>history.push("/requires")}>
                     Demandas
                 </Heading>
             </ListItem>
             <ListItem>
-                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} fontWeight="semibold" onClick={()=>history.push("/settings")}>
+                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>history.push("/settings")}>
                     Alterações
                 </Heading>
             </ListItem>
             <ListItem>
-                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} fontWeight="semibold">
+                <Heading variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]}>
                     Sair
                 </Heading>
             </ListItem>

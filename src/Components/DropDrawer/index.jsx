@@ -9,7 +9,6 @@ import {
     DrawerCloseButton,
   } from '@chakra-ui/react'
 import NavList from "../NavList";
-
 const DropDrawer = ({ user,isOpen,onClose,btnRefDrawer }) => {
     return (
         <Drawer
@@ -26,7 +25,7 @@ const DropDrawer = ({ user,isOpen,onClose,btnRefDrawer }) => {
                 flexDir="column"
                 justifyContent="space-around"
                 alignItems="center">
-                <DrawerCloseButton variant="default"/>
+                <DrawerCloseButton />
                 <DrawerHeader>
                     {user === undefined?
                         <Box w="200px" h="200px" borderRadius="50%" bg="grey" d="flex" justifyContent="center" alignItems="center">Adicione uma foto</Box>:
