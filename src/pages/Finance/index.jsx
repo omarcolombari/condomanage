@@ -8,13 +8,12 @@ import {
   ModalBody,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Box, Form, BoxButtons } from "./styles";
 import ListFinances from "../../components/ListFinances";
 import { Heading } from "@chakra-ui/react";
-import { useContext } from "react";
-import { FinancesContext } from "../../providers/Finance";
+import { FinancesContext } from "../../Providers/Finances";
 
 const Finance = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,15 +30,25 @@ const Finance = () => {
 
   //Pegando o array e o método do Provider
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
+  console.log(finances);
 
   //Esse state é para poder filtrar também
   const [newFinances, setNewFinances] = useState([...finances]);
 
   //envolver em useEffect monitadora pelo array finances
-  showFinances(token);
+  //showFinances(token);
+
+  showFinances(
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc2MzM1ODIsImV4cCI6MTY0NzYzNzE4Miwic3ViIjoiMiJ9.VH6qIM1ZMWVyGbB8YSlU9ukzpJLQkhoQ9MyRXfcx_eM"
+  );
 
   const handleRegisterFinance = (data) => {
-    addFinance(user.id, token, data);
+    //addFinance(user.id, token, data);
+    addFinance(
+      2,
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc2MzM1ODIsImV4cCI6MTY0NzYzNzE4Miwic3ViIjoiMiJ9.VH6qIM1ZMWVyGbB8YSlU9ukzpJLQkhoQ9MyRXfcx_eM",
+      data
+    );
   };
 
   const filterFinances = (status) => {

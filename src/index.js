@@ -6,8 +6,8 @@ import Providers from "./providers";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ColorModeScript />
     <Providers>
+      <ColorModeScript />
       <App />
     </Providers>
   </React.StrictMode>,
