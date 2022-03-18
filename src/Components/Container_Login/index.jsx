@@ -57,7 +57,7 @@ const ContainerLogin = () => {
     <Slide in={onOpen} style={{ zIndex: 10 }} direction="left">
       <Box
         w={["100vw", "100vw", "50%"]}
-        maxW="550px"
+        maxW={["100vw", "", "550px"]}
         h="100vh"
         bg={["#daedf3", "#daedf3", "#ffffff"]}
         d="flex"
