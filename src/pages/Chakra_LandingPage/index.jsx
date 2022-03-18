@@ -3,7 +3,7 @@ import background from "../../assets/background.png";
 import LandingPageContainer from "../../Components/Landing_container";
 
 const ChakraLandingPage = () => {
-    const { onOpen, onToggle } = useDisclosure();
+    const { onOpen } = useDisclosure();
     return (
         <Box
             w="100vw"
@@ -12,7 +12,7 @@ const ChakraLandingPage = () => {
             bgPos="center"
             bgRepeat="no-repeat"
             bgSize="cover">
-            <Slide in={onOpen} ddirection='bottom' style={{ zIndex: 10 }}>
+            <Slide in={onOpen}  style={{ zIndex: 10 }}>
                 <LandingPageContainer/>
             </Slide>
             
