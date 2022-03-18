@@ -1,18 +1,16 @@
-import { useFinances } from "../../providers/Finance";
 import CardFinance from "../CardFinance";
 import { Container } from "@chakra-ui/react";
+import { Box } from "./styles";
 
-const ListFinances = () => {
-  const { newFinances } = useFinances();
-
+const ListFinances = ({ finances }) => {
   return (
-    <Container>
-      {newFinances.length > 0 ? (
-        <div>
-          {newFinances.map((finance, index) => (
+    <Container padding="10px 10px 10px 10px">
+      {finances.length > 0 ? (
+        <Box>
+          {finances.map((finance, index) => (
             <CardFinance finance={finance} key={index} />
           ))}
-        </div>
+        </Box>
       ) : (
         <h1>Lista vazia</h1>
       )}

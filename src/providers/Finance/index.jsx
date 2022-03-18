@@ -12,16 +12,8 @@ export const FinancesProvider = ({ children }) => {
     localStorage.setItem("Finances", JSON.stringify([...newFinances, item]));
   };
 
-  const removeFinance = (toRemove) => {
-    const filtered = newFinances.filter((item) => item.name !== toRemove.name);
-    setNewFinances(filtered);
-    localStorage.setItem("Finances", JSON.stringify(filtered));
-  };
-
   return (
-    <FinancesContext.Provider
-      value={{ newFinances, addFinance, removeFinance }}
-    >
+    <FinancesContext.Provider value={{ newFinances, addFinance }}>
       {children}
     </FinancesContext.Provider>
   );

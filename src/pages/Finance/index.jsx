@@ -8,13 +8,13 @@ import {
   ModalBody,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Box, Form, BoxButtons } from "./styles";
 import ListFinances from "../../components/ListFinances";
-import { useFinances } from "../../providers/Finance";
-import { api } from "../../services/api";
 import { Heading } from "@chakra-ui/react";
+import { useContext } from "react";
+import { FinancesContext } from "../../providers/Finance";
 
 const Finance = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,14 +23,48 @@ const Finance = () => {
   const finalRef = useRef();
 
   const { register, handleSubmit } = useForm();
+  //supondo que dá pra capturar o token do localStorage
+  const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
 
-  const { newFinances, addFinance } = useFinances();
+  //Pegar o Id do usuário
+  const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
+
+  //Pegando o array e o método do Provider
+  const { finances, showFinances, addFinance } = useContext(FinancesContext);
+
+  //Esse state é para poder filtrar também
+  const [newFinances, setNewFinances] = useState([...finances]);
+
+  //envolver em useEffect monitadora pelo array finances
+  showFinances(token);
 
   const handleRegisterFinance = (data) => {
-    const userId = 1; //trocar pelo id resgatado no login
+    addFinance(user.id, token, data);
+  };
+
+  const filterFinances = (status) => {
+    if (status === "Todos") {
+      setNewFinances([...finances]);
+    } else {
+      const filtered = newFinances.filter(
+        (finance) => finance.status === status
+      );
+      setNewFinances([...filtered]);
+    }
+  };
+
+  //const { newFinances, addFinance } = useFinances();
+  //const [finances, setFinances] = useState([...newFinances]);
+
+  //const {finances} = useContext(FinancesContext);
+
+  /*const handleRegisterFinance = (data) => {
+    //método addFinances do Provider
+
+    const userId = 2; //trocar pelo id resgatado no login
     const newData = { ...data, userId };
     const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc1Njk0MjQsImV4cCI6MTY0NzU3MzAyNCwic3ViIjoiMSJ9.A8Dpb7NF2qF2CygQIvz_LGXIakUyEnb87KRj7DiMoPs";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc2MDMwNTksImV4cCI6MTY0NzYwNjY1OSwic3ViIjoiMiJ9.rHFAjjRT_E8T8isBP4Sez4piIaX6mD-WJsQU95CBWe4";
 
     api
       .post("/finances", newData, {
@@ -38,14 +72,13 @@ const Finance = () => {
       })
       .then((res) => {
         addFinance(data);
+        setFinances([...finances, data]);
         console.log(res);
       })
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  const filterEntries = () => {};
+  };*/
 
   return (
     <div>
@@ -65,11 +98,13 @@ const Finance = () => {
           </Button>
         </header>
         <BoxButtons>
-          <Button>Todos</Button>
-          <Button>Entradas</Button>
-          <Button>Despesas</Button>
+          <Button onClick={() => filterFinances("Todos")}>Todos</Button>
+          <Button onClick={() => filterFinances("Entrada")}>Entradas</Button>
+          <Button onClick={() => filterFinances("Despesa")}>Despesas</Button>
         </BoxButtons>
-        <ListFinances />
+
+        <ListFinances finances={newFinances} />
+
         <Modal
           initialFocusRef={initialRef}
           finalFocusRef={finalRef}

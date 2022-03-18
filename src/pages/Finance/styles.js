@@ -6,20 +6,21 @@ export const Box = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 70%;
+  width: 90%;
   max-width: 779.73px;
   margin: 0 auto;
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
-
+  gap: 20px;
   header {
     display: flex;
     width: 90%;
     justify-content: space-between;
     align-items: center;
+    margin-top: 10px;
     h1 {
-      font-size: 30px;
+      font-size: 20px;
       font-weight: 600;
       color: #141155;
     }
