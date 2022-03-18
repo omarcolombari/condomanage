@@ -36,6 +36,7 @@ const Login = () => {
   };
 
   const handleFormSubmit = (data) => {
+    console.log(data)
     api
       .post("/login", data)
       .then((response) => {
