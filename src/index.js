@@ -6,7 +6,7 @@ import { ColorModeScript } from '@chakra-ui/react';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ColorModeScript/>
+    <ColorModeScript />
     <BrowserRouter>
       <App />
     </BrowserRouter>
