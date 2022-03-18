@@ -7,6 +7,7 @@ import {
   Button,
   Box,
   useDisclosure,
+  Heading,
 } from "@chakra-ui/react";
 import ModalAddTenants from "../ModalAddTenants";
 import ModalListTenants from "../ModalListTenants";
@@ -56,7 +57,7 @@ const TenantsPage =()=>{
     axios
       .post("https://api-condomanage.herokuapp.com/tenants", newTenants, {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NTUwMjU0LCJleHAiOjE2NDc1NTM4NTQsInN1YiI6IjEifQ._yCZUzz9Yx3OkiwI8TqDiCuxJnmkEZfJOYaR_9I3jO4`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NjMzMDA4LCJleHAiOjE2NDc2MzY2MDgsInN1YiI6IjEifQ.WLAllGYoXUvJXCTSdW3orK1-_6YNKSewJdUiTcrfQM8`,
         },
       })
       .then((resp) => console.log(resp))
@@ -64,14 +65,35 @@ const TenantsPage =()=>{
   };
 
   const handleAllTenants = () => {
+    
     axios
-      .get("https://api-condomanage.herokuapp.com/tenants", {
+      .get("https://api-condomanage.herokuapp.com/tenants" ,{
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NTUwMjU0LCJleHAiOjE2NDc1NTM4NTQsInN1YiI6IjEifQ._yCZUzz9Yx3OkiwI8TqDiCuxJnmkEZfJOYaR_9I3jO4`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NjMzMDA4LCJleHAiOjE2NDc2MzY2MDgsInN1YiI6IjEifQ.WLAllGYoXUvJXCTSdW3orK1-_6YNKSewJdUiTcrfQM8`,
         },
       })
       .then((resp) => setListTenants(resp.data));
   };
+
+  const handleChangeTenants = ({email,password,number,responsible,cpf,value,})=>{
+    const changeTenants = {
+      email,
+      password,
+      number,
+      responsible,
+      cpf,
+      value,
+      status: statusHome,
+      userId: 1,
+    };
+    axios
+    .put(`https://api-condomanage.herokuapp.com/tenants/${currentTenants.id}`,changeTenants,{
+      headers:{
+        Authorization:`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NjMzMDA4LCJleHAiOjE2NDc2MzY2MDgsInN1YiI6IjEifQ.WLAllGYoXUvJXCTSdW3orK1-_6YNKSewJdUiTcrfQM8`
+      }
+    }).then((resp)=>console.log(resp).catch((erro)=>console.log(erro)))
+  }
+
 
   useEffect(() => {
     handleAllTenants();
@@ -79,9 +101,34 @@ const TenantsPage =()=>{
 
   return (
     <>
-    <div>
-      <h2>Lista de apartamento</h2>
-      <Button variants="default" onClick={onAddOpen}>+</Button>
+    <Box
+    margin="10px auto"
+    w="90%"
+    h="90%"
+    boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+    borderRadius="30px"
+    >
+    
+    <Box
+    display="flex"
+    alignItems="center"
+    justifyContent="space-between"
+    margin="10px"
+    h="90px"
+    
+    >
+
+      <Heading variant="title1">Lista de apartamento</Heading>
+      <Button 
+      variant="default" 
+      onClick={onAddOpen}
+      w="45px"
+      h="45px"
+      borderRadius="100%"
+      fontSize="40px"
+      bg="#141155"
+      >+
+      </Button>
 
       <ModalAddTenants
         register={register}
@@ -93,25 +140,64 @@ const TenantsPage =()=>{
         errors={errors}
       />
 
-    </div>
+    </Box>
 
-      <Box>
-        {listTenants?.map((tenant) => (
-          <Box onClick={()=>setCurrentTenants(tenant)}>
+      <Box
+       w={["100%"]}
+       h="100%"
+       bg="#c5e8fb"
+       d="flex"
+       flexDir="column"
+       justifyContent="center"
+       alignItems="center"
+       padding='20px'
+      >
+       
+          
+            
+        {listTenants?.map((tenant,index) => (
+          <Box 
+          
+          w="100%" 
 
-          <Button  onClick={
-            onOpenAlterTenants
+          key={index} 
+          onClick={()=>setCurrentTenants(tenant)}
+          display="flex"
+          justifyContent="center"
+          
+          >
 
-          } 
-          key={tenant.id}>
-            {tenant.responsible} {tenant.number}
+          <Button 
+          
+          display="flex"
+          justifyContent="space-between"
+          margin="10px"
+          w="80%"  
+          fontSize={["18px","28px"]}
+          h={["30px","35px","50px"]}
+          variant="default"
+          key={index} 
+          onClick={onOpenAlterTenants} >
+            <Box>{tenant.responsible} {tenant.number}</Box>
+            <Box 
+            borderRadius="100%"
+            width={["20px","30px"]}
+            height={["20px","30px"]}
+            bg="green"
+            > </Box>
           </Button>
           </Box>
         ))}
-        <ModalListTenants currentTenants={currentTenants} onCloseAlterTenants={onCloseAlterTenants}
-        isOpenAlterTenants={isOpenAlterTenants}/>
-
-      </Box>
+          </Box>
+        <ModalListTenants 
+        currentTenants={currentTenants} 
+        onCloseAlterTenants={onCloseAlterTenants}
+        isOpenAlterTenants={isOpenAlterTenants}
+        register={register}
+        handleSubmit={handleSubmit}
+        setStatusHome={setStatusHome}
+        handleChangeTenants={handleChangeTenants}/>
+    </Box>
     </>
   );
 
