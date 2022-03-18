@@ -5,7 +5,6 @@ import {
   ContainerLogo,
   ContainerText,
 } from "./style";
-import logo1 from "../../assets/modelo-4.png";
 import logo2 from "../../assets/modelo-3.png";
 import { useHistory } from "react-router-dom";
 
