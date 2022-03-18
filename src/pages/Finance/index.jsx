@@ -10,10 +10,11 @@ import {
 import { useDisclosure } from "@chakra-ui/react";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { Box, Form } from "./styles";
+import { Box, Form, BoxButtons } from "./styles";
 import ListFinances from "../../components/ListFinances";
 import { useFinances } from "../../providers/Finance";
 import { api } from "../../services/api";
+import { Heading } from "@chakra-ui/react";
 
 const Finance = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,13 +24,13 @@ const Finance = () => {
 
   const { register, handleSubmit } = useForm();
 
-  const { addFinance } = useFinances();
+  const { newFinances, addFinance } = useFinances();
 
   const handleRegisterFinance = (data) => {
-    const userId = 8; //trocar pelo id resgatado no login
+    const userId = 1; //trocar pelo id resgatado no login
     const newData = { ...data, userId };
     const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc1NTkwMTQsImV4cCI6MTY0NzU2MjYxNCwic3ViIjoiOCJ9.BHuHDIT0WBmhWr05Zuk98TFLG1kCI2_5LvmDqhYjz3Q";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc1Njk0MjQsImV4cCI6MTY0NzU3MzAyNCwic3ViIjoiMSJ9.A8Dpb7NF2qF2CygQIvz_LGXIakUyEnb87KRj7DiMoPs";
 
     api
       .post("/finances", newData, {
@@ -44,16 +45,30 @@ const Finance = () => {
       });
   };
 
+  const filterEntries = () => {};
+
   return (
     <div>
       <Box>
         <header>
-          <h1>Lista de finanças</h1>
-          <Button onClick={onOpen} variant="default">
+          <Heading fontSize={["20px", "25px", "30px"]}>
+            Lista de finanças
+          </Heading>
+          <Button
+            onClick={onOpen}
+            variant="default"
+            borderRadius="100%"
+            bg="#141155"
+            title="Adicionar finança"
+          >
             +
           </Button>
         </header>
-
+        <BoxButtons>
+          <Button>Todos</Button>
+          <Button>Entradas</Button>
+          <Button>Despesas</Button>
+        </BoxButtons>
         <ListFinances />
         <Modal
           initialFocusRef={initialRef}

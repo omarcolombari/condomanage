@@ -1,10 +1,14 @@
+import { ChakraProvider, Heading } from "@chakra-ui/react";
+import CustomTheme from "./Style/Theme";
+import "@fontsource/poppins";
+import "@fontsource/roboto";
 import Finance from "./pages/Finance";
 
 function App() {
   return (
-    <div className="App">
+    <ChakraProvider theme={CustomTheme}>
       <Finance />
-    </div>
+    </ChakraProvider>
   );
 }
 

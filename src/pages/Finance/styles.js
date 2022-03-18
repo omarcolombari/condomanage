@@ -71,3 +71,9 @@ export const Form = styled.form`
     gap: 10px;
   }
 `;
+
+export const BoxButtons = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+`;
