@@ -7,15 +7,20 @@ export const DemandsProvider = ({ children }) => {
 
   const [filteredDemand, setFilteredDemand] = useState([...demand]);
 
+  const [id, setId] = useState(0);
+
   const addDemand = (data) => {
-    setDemand([...demand, data]);
+    setDemand([...demand, { ...data, id }]);
+    setId(id + 1);
   };
 
   const updateDemand = (data) => {
-    const currentData = demand.filter(
-      (item) => item.description === data.description
-    );
-    setDemand(data);
+    console.log(data);
+    // const currentData = demand.filter(
+    //   (item) => item.description === data.description
+    // );
+
+    // setDemand(data);
   };
 
   const filterDemands = (item) => {
@@ -33,8 +38,6 @@ export const DemandsProvider = ({ children }) => {
     return filteredDemand;
   };
 
-  console.log(demand);
-
   return (
     <DemandsContext.Provider
       value={{
@@ -45,6 +48,8 @@ export const DemandsProvider = ({ children }) => {
         addDemand,
         updateDemand,
         filterDemands,
+        id,
+        setId,
       }}>
       {children}
     </DemandsContext.Provider>

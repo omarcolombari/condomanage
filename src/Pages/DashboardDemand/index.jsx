@@ -1,22 +1,22 @@
 import { Box, Button, filter, Heading, Input, useDisclosure } from "@chakra-ui/react"
 import Header from "../../Components/Header"
 import { AddIcon } from "@chakra-ui/icons"
-import React from "react";
+import React, { useState } from "react";
 import { useDemands } from '../../providers/demand';
 import ModalAddDemand from "../../Components/ModalAddDemand";
 import ModalUpdateDemand from "../../Components/ModalUpdateDemand";
 
 const DashboardDemand = () => {
     const {demand,  filteredDemand, setFilteredDemand, addDemand, filterDemands} = useDemands();
-    const { isOpen,onOpen,onClose } = useDisclosure();
-    const modalAdd = React.useRef();
-    const modalUpdate = React.useRef();
+    const { isOpen:isAddDemandOpen,onOpen:onAddDemandOpen,onClose:onAddDemandClose } = useDisclosure();
+    const { isOpen:isUpdateDemandOpen,onOpen:onUpdateDemandOpen,onClose:onUpdateDemandClose } = useDisclosure();
 
     const filters = [ 'Todas', 'Em andamento', 'Concluídas' ];
+    const [filterBase, setFilterBase] = useState('Todas')
 
-    const handleFilter = ( filter ) => {
-        filterDemands(filter)
-    }
+    // const handleFilter = ( filter ) => {
+    //     filterBase()
+    // }
 
     return (
         <Box
@@ -38,27 +38,34 @@ const DashboardDemand = () => {
             <Heading ml="10px" mt="10px" mb="20px" variant="title1" fontSize={["18px","24px","40px"]}>Lista de Demandas:</Heading>
             <Box>
                 <Box>
-                    {filters.map ((filter, index) => <Button key={index} onClick={() => handleFilter(filter)}>{filter}</Button>)}
+                    {/* {filters.map ((filter, index) => <Button key={index} onClick={() => setFilterBase(filter)}>{filter}</Button>)} */}
+                    <Button onClick={() => setFilterBase('Todas')}>Todas</Button>
+                    <Button onClick={() => setFilterBase('inProgress')}>Em andamento</Button>
+                    <Button onClick={() => setFilterBase('completed')}>Concluídas</Button>
                     <AddIcon 
                         w={6} 
                         h={6} 
-                        cursor='pointer'
-                        ref={modalAdd}
-                        onClick={onOpen}
+                        cursor='pointer'                    
+                        onClick={onAddDemandOpen}
                     />
                 </Box>
                 <Box>
-                    {filteredDemand.map((item, index) => {
+                    {demand.filter(({status}) => (filterBase === 'Todas') ? status !== 'Todas' : status === filterBase).map((item, index) => {
                         return (
                             <>
                                 <Box key={index}
                                     bg="#00A5AE"
                                     w="300px"
-                                    borderRadius="30px" onClick={onOpen}>
+                                    borderRadius="30px" onClick={onUpdateDemandOpen}>
                                         <p>{ item.name }</p>
                                         <p>{item.status === 'inProgress' ? 'verde' : 'vermelho'}</p>
                                 </Box>
-                                <ModalUpdateDemand name={item.name} description={item.description} ref={modalUpdate}></ModalUpdateDemand>
+                                <ModalUpdateDemand
+                                    item={item}
+                                    isUpdateDemandOpen={ isUpdateDemandOpen }
+                                    onUpdateDemandClose={ onUpdateDemandClose }
+                                    onAddDemandOpen={onAddDemandOpen}
+                                ></ModalUpdateDemand>
 
                             </>
                         )
@@ -68,9 +75,8 @@ const DashboardDemand = () => {
                 
                 <Box>
                     <ModalAddDemand 
-                        isOpen={isOpen} 
-                        onClose={onClose}
-                        modalAdd={modalAdd}
+                        isAddDemandOpen={isAddDemandOpen} 
+                        onAddDemandClose={onAddDemandClose}
                     />
                 </Box>
             </Box>

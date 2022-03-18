@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select } from "@chakra-ui/react";
 import React from "react";
 import { useDemands } from "../../providers/demand";
 import { useForm } from 'react-hook-form';
@@ -7,9 +7,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from "react-toastify"
 
 
-const ModalUpdateDemand = ( { isOpen, onClose, name, description, status, modalUpdate } ) => {
-  const { updateDemand } = useDemands()
-
+const ModalUpdateDemand = ( { isUpdateDemandOpen, onUpdateDemandClose, item } ) => {
+  const { updateDemand, id } = useDemands()
+console.log(item.id)
   const schema = yup.object().shape( {
     status: yup.string().required('Campo obrigatório')
   })
@@ -17,17 +17,19 @@ const ModalUpdateDemand = ( { isOpen, onClose, name, description, status, modalU
   const {register, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(schema)})
   
   const handleUpdateDemand = ( data ) => {
+    console.log(data.id)
     updateDemand( data )
     if (data.status === 'inProgress') {
       toast.success('Demanda atualizada!')
     } else {
       toast.success('Demanda concluída!')
     }
+    onUpdateDemandClose()
   }
 
   return (
       <>         
-          <Modal isOpen={isOpen} onClose={onClose} finalFocusRef={modalUpdate}>
+          <Modal isOpen={isUpdateDemandOpen} onClose={onUpdateDemandClose} >
               <ModalOverlay />
               <ModalContent
               bg="#141155">
@@ -72,7 +74,7 @@ const ModalUpdateDemand = ( { isOpen, onClose, name, description, status, modalU
                                     borderRadius="30px">
                                     <Input 
                                     name='name'
-                                    value={name}
+                                    value={item.name}
                                     readOnly
                                     variant="outline"
                                     placeholder="Digite aqui o nome"
@@ -95,7 +97,7 @@ const ModalUpdateDemand = ( { isOpen, onClose, name, description, status, modalU
                                     <Input 
                                     name='description'
                                     readOnly
-                                    value={description}
+                                    value={item.description}
                                     variant="outline"
                                     placeholder="Digite qual a demanda"
                                     focusBorderColor='transparent'
@@ -132,7 +134,7 @@ const ModalUpdateDemand = ( { isOpen, onClose, name, description, status, modalU
                       w="100%"
                       justifyContent="start"
                       alignItems="center">
-                          <Button type='submit' onClick={onClose}>
+                          <Button type='submit'>
                               Criar demanda
                           </Button>
                       </Box>

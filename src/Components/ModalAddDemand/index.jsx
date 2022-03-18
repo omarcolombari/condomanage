@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from "react-toastify"
 
 
-const ModalAddDemand = ( { isOpen, onClose, modalAdd } ) => {
+const ModalAddDemand = ( { isAddDemandOpen, onAddDemandClose } ) => {
   const { demand, addDemand } = useDemands()
 
   const schema = yup.object().shape( {
@@ -21,12 +21,12 @@ const ModalAddDemand = ( { isOpen, onClose, modalAdd } ) => {
   const handleAddDemand = ( data ) => {
     addDemand( data )   
     toast.success('Demanda adicionada!')
-
+    onAddDemandClose()
   }
 
   return (
       <>         
-          <Modal isOpen={isOpen} onClose={onClose} finalFocusRef={modalAdd}>
+          <Modal isOpen={isAddDemandOpen} onClose={onAddDemandClose}>
               <ModalOverlay />
               <ModalContent
               bg="#141155">
