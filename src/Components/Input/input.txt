@@ -1,13 +1,18 @@
-pelo input ja vir pronto no chakra e não ter como estilizar via props,criei uma doc para explicar
-como estilizar o Input;
+import { Box, Input } from "@chakra-ui/react";
 
-<Box
-    bg="#c5e8fb"
-    w="300px"
-    borderRadius="30px">
-        <Input 
-        variant="outline"
-        placeholder="teste"
-        focusBorderColor='transparent'
-        _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
-</Box>
+const Inputs = ({ register,bgColor,phColor,registerData }) => {
+    return(
+        <Box
+            bg= {bgColor}
+            w="95%"
+            borderRadius="30px">
+            <Input 
+                variant="outline"
+                placeholder="teste"
+                focusBorderColor='transparent'
+                _placeholder={{ opacity: 1,color: phColor }}/>
+        </Box>
+    )
+}
+
+export default Inputs;
