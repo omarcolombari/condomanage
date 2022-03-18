@@ -9,6 +9,10 @@ const NavList = ({ onDrawerClose }) => {
         localStorage.clear();
         onDrawerClose();
     }
+    const handlePages = (page) => {
+        history.push(page);
+    }
+
     return (
         <UnorderedList
             listStyleType="none"
@@ -16,27 +20,27 @@ const NavList = ({ onDrawerClose }) => {
             flexDir="column"
             alignItems="center">
             <ListItem>
-                <Heading d="flex" flexDir="row" alignItems="center" variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>history.push("/dashboard")}>
+                <Heading d="flex" flexDir="row" alignItems="center" variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>handlePages("/dashboard")}>
                     <IoMdApps/>Inicio
                 </Heading>
             </ListItem>
             <ListItem>
-                <Heading d="flex" flexDir="row" alignItems="center" variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>history.push("/tenants")}>
+                <Heading d="flex" flexDir="row" alignItems="center" variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>handlePages("/tenants")}>
                     <IoIosContacts/>Inquilinos
                 </Heading>
             </ListItem>
             <ListItem>
-                <Heading d="flex" flexDir="row" alignItems="center" variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>history.push("/finances")}>
+                <Heading d="flex" flexDir="row" alignItems="center" variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>handlePages("/finances")}>
                     <MdAttachMoney/>Financeiro
                 </Heading>
             </ListItem>
             <ListItem>
-                <Heading d="flex" flexDir="row" alignItems="center" variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>history.push("/requires")}>
+                <Heading d="flex" flexDir="row" alignItems="center" variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>handlePages("/requires")}>
                     <IoIosApps/>Demandas
                 </Heading>
             </ListItem>
             <ListItem>
-                <Heading d="flex" flexDir="row" alignItems="center" variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>history.push("/settings")}>
+                <Heading d="flex" flexDir="row" alignItems="center" variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>handlePages("/settings")}>
                     <IoIosSettings/>Alterações
                 </Heading>
             </ListItem>
