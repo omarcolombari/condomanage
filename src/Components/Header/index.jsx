@@ -4,7 +4,6 @@ import { IoMdMenu } from "react-icons/io";
 import DropDrawer from "../DropDrawer/index"
 import React from "react";
 
-
 const Header = () => {
     const { isOpen:isDrawerOpen,onOpen:onDrawerOpen,onClose:onDrawerClose } = useDisclosure();
         /* */
