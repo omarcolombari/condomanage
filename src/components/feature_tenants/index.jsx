@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useEffect, useState,useContext } from "react";
-import axios from "axios";
+
 import { TenantsContext} from "../../Providers/Tenants"
 import {
   Button,
@@ -15,7 +15,7 @@ import ModalListTenants from "../ModalListTenants";
 const TenantsPage =()=>{
     const { isOpen:isAddOpen, onOpen:onAddOpen, onClose:onAddClose } = useDisclosure();
    
-    const {showTenants,tenants} = useContext(TenantsContext)
+    const {showTenants,tenants, addTenant, changeTenant } = useContext(TenantsContext)
 
     const { 
         isOpen: isOpenAlterTenants, 
@@ -55,16 +55,8 @@ const TenantsPage =()=>{
       cpf,
       value,
       status: statusHome,
-      userId: 1,
     };
-    axios
-      .post("https://api-condomanage.herokuapp.com/tenants", newTenants, {
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NjkzNzUyLCJleHAiOjE2NDc2OTczNTIsInN1YiI6IjEifQ.KOdzSlK1uCk-0V3pM4crgu0jQIHiqlufUDrIcechBwY`,
-        },
-      })
-      .then((resp) => console.log(resp))
-      .catch((erro) => console.log(erro));
+    addTenant(1,"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3Njk3NDc4LCJleHAiOjE2NDc3MDEwNzgsInN1YiI6IjEifQ.WYu4cpZ0wdsTQYzReUEMJMcSesWnD8G_C6KVfSqNH28",newTenants)
   };
 
   const handleChangeTenants = ({email,password,number,responsible,cpf,value,})=>{
@@ -76,19 +68,14 @@ const TenantsPage =()=>{
       cpf,
       value,
       status: statusHome,
-      userId: 1,
+      
     };
-    axios
-    .put(`https://api-condomanage.herokuapp.com/tenants/${currentTenants.id}`,changeTenants,{
-      headers:{
-        Authorization:`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NjkzNzUyLCJleHAiOjE2NDc2OTczNTIsInN1YiI6IjEifQ.KOdzSlK1uCk-0V3pM4crgu0jQIHiqlufUDrIcechBwY`
-      }
-    }).then((resp)=>console.log(resp).catch((erro)=>console.log(erro)))
+    changeTenant("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3Njk3NDc4LCJleHAiOjE2NDc3MDEwNzgsInN1YiI6IjEifQ.WYu4cpZ0wdsTQYzReUEMJMcSesWnD8G_C6KVfSqNH28",changeTenants,1)
   }
 
 
   useEffect(() => {
-    showTenants("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NjkzNzUyLCJleHAiOjE2NDc2OTczNTIsInN1YiI6IjEifQ.KOdzSlK1uCk-0V3pM4crgu0jQIHiqlufUDrIcechBwY")
+    showTenants("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3Njk3NDc4LCJleHAiOjE2NDc3MDEwNzgsInN1YiI6IjEifQ.WYu4cpZ0wdsTQYzReUEMJMcSesWnD8G_C6KVfSqNH28")
   }, [tenants]);
 
   return (
