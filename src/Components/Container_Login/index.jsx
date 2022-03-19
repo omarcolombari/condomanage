@@ -54,7 +54,7 @@ const ContainerLogin = () => {
 
   const { onOpen } = useDisclosure();
   return (
-    <Slide in={onOpen} style={{ zIndex: 10 }} direction="left">
+    <Slide in={onOpen} style={{ zIndex: 10 }} direction="right">
       <Box
         w={["100vw", "100vw", "50%"]}
         maxW={["100vw", "", "550px"]}
@@ -65,7 +65,7 @@ const ContainerLogin = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <LoginHeader />
+        <LoginHeader link="/"/>
         <Box
           w={["100%"]}
           d="flex"

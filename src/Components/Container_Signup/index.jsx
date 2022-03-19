@@ -85,8 +85,9 @@ import {
           flexDir="column"
           justifyContent="center"
           alignItems="center"
+          ml="auto"
         >
-          <LoginHeader />
+          <LoginHeader link="/login"/>
           <Box
             w={["100%"]}
             d="flex"

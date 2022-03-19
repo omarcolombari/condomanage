@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
+import ChakraLandingPage from "../pages/Chakra_LandingPage";
+import ChakraLoginPage from "../pages/Chakra_Login";
+import ChakraSignupPage from "../pages/Chakra_Signup";
 
 const Routes = () => {
 
@@ -17,12 +20,15 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path='/' >
+                <ChakraLandingPage/>
             </Route>
             
             <Route path='/login' >
+                <ChakraLoginPage/>
             </Route>
             
             <Route path='/signup' >
+                <ChakraSignupPage/>
             </Route>
 
             <Route path='/dashboard' >

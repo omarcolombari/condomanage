@@ -2,7 +2,7 @@ import { Box, Heading } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 import { MdOutlineArrowBack } from "react-icons/md";
 
-const LoginHeader = () => {
+const LoginHeader = ({ link }) => {
   const history = useHistory();
 
   const handleNavigation = (path) => {
@@ -29,7 +29,7 @@ const LoginHeader = () => {
         cursor="pointer"
         size={30}
         color={"#00a5ae"}
-        onClick={() => handleNavigation("/")}
+        onClick={() => handleNavigation(link)}
       />
     </Box>
   );
