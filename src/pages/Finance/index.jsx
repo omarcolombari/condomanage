@@ -8,7 +8,7 @@ import {
   ModalBody,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
-import { useRef, useState, useContext } from "react";
+import { useRef, useState, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Box, Form, BoxButtons } from "./styles";
 import ListFinances from "../../components/ListFinances";
@@ -23,41 +23,39 @@ const Finance = () => {
 
   const { register, handleSubmit } = useForm();
   //supondo que dá pra capturar o token do localStorage
-  const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
+  //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc2NDc1ODksImV4cCI6MTY0NzY1MTE4OSwic3ViIjoiMiJ9.UkeAPnuNXID5jZl_AC_KTyMKLd8Xmemz5xMBhGaggvc";
 
   //Pegar o Id do usuário
   const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
 
-  //Pegando o array e o método do Provider
+  //Pegando o array e os métodos do Providers
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
-  console.log(finances);
-
   //Esse state é para poder filtrar também
-  const [newFinances, setNewFinances] = useState([...finances]);
+  const [newFinances, setNewFinances] = useState([]);
 
-  //envolver em useEffect monitadora pelo array finances
-  //showFinances(token);
+  const loadFinances = async () => {
+    await showFinances(token);
+  };
 
-  showFinances(
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc2MzM1ODIsImV4cCI6MTY0NzYzNzE4Miwic3ViIjoiMiJ9.VH6qIM1ZMWVyGbB8YSlU9ukzpJLQkhoQ9MyRXfcx_eM"
-  );
+  useEffect(() => {
+    loadFinances();
+    if (finances.length > 0) {
+      setNewFinances([...finances]);
+    }
+  }, [finances.length]);
 
   const handleRegisterFinance = (data) => {
-    //addFinance(user.id, token, data);
-    addFinance(
-      2,
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc2MzM1ODIsImV4cCI6MTY0NzYzNzE4Miwic3ViIjoiMiJ9.VH6qIM1ZMWVyGbB8YSlU9ukzpJLQkhoQ9MyRXfcx_eM",
-      data
-    );
+    addFinance(2, token, data);
+    loadFinances();
   };
 
   const filterFinances = (status) => {
     if (status === "Todos") {
       setNewFinances([...finances]);
     } else {
-      const filtered = newFinances.filter(
-        (finance) => finance.status === status
-      );
+      const filtered = finances.filter((finance) => finance.status === status);
       setNewFinances([...filtered]);
     }
   };

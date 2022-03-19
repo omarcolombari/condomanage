@@ -1,4 +1,4 @@
-import { ChakraProvider, Heading } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import CustomTheme from "./Style/Theme";
 import "@fontsource/poppins";
 import "@fontsource/roboto";
