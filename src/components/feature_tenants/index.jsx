@@ -1,8 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import axios from "axios";
+import { TenantsContext} from "../../Providers/Tenants"
 import {
   Button,
   Box,
@@ -14,6 +15,8 @@ import ModalListTenants from "../ModalListTenants";
 const TenantsPage =()=>{
     const { isOpen:isAddOpen, onOpen:onAddOpen, onClose:onAddClose } = useDisclosure();
    
+    const {showTenants,tenants} = useContext(TenantsContext)
+
     const { 
         isOpen: isOpenAlterTenants, 
         onOpen: onOpenAlterTenants, 
@@ -21,7 +24,6 @@ const TenantsPage =()=>{
     } = useDisclosure()
 
   const [statusHome, setStatusHome] = useState();
-  const [listTenants, setListTenants] = useState();
   const [currentTenants,setCurrentTenants]= useState([]);
 
   const schema = yup.object().shape({
@@ -42,7 +44,8 @@ const TenantsPage =()=>{
   const {register,handleSubmit,formState: { errors },} = useForm({
     resolver: yupResolver(schema),
   });
-
+  
+  
   const handleAddTenants = ({email,password,number,responsible,cpf,value,}) => {
     const newTenants = {
       email,
@@ -57,22 +60,11 @@ const TenantsPage =()=>{
     axios
       .post("https://api-condomanage.herokuapp.com/tenants", newTenants, {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NjMzMDA4LCJleHAiOjE2NDc2MzY2MDgsInN1YiI6IjEifQ.WLAllGYoXUvJXCTSdW3orK1-_6YNKSewJdUiTcrfQM8`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NjkzNzUyLCJleHAiOjE2NDc2OTczNTIsInN1YiI6IjEifQ.KOdzSlK1uCk-0V3pM4crgu0jQIHiqlufUDrIcechBwY`,
         },
       })
       .then((resp) => console.log(resp))
       .catch((erro) => console.log(erro));
-  };
-
-  const handleAllTenants = () => {
-    
-    axios
-      .get("https://api-condomanage.herokuapp.com/tenants" ,{
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NjMzMDA4LCJleHAiOjE2NDc2MzY2MDgsInN1YiI6IjEifQ.WLAllGYoXUvJXCTSdW3orK1-_6YNKSewJdUiTcrfQM8`,
-        },
-      })
-      .then((resp) => setListTenants(resp.data));
   };
 
   const handleChangeTenants = ({email,password,number,responsible,cpf,value,})=>{
@@ -89,15 +81,15 @@ const TenantsPage =()=>{
     axios
     .put(`https://api-condomanage.herokuapp.com/tenants/${currentTenants.id}`,changeTenants,{
       headers:{
-        Authorization:`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NjMzMDA4LCJleHAiOjE2NDc2MzY2MDgsInN1YiI6IjEifQ.WLAllGYoXUvJXCTSdW3orK1-_6YNKSewJdUiTcrfQM8`
+        Authorization:`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NjkzNzUyLCJleHAiOjE2NDc2OTczNTIsInN1YiI6IjEifQ.KOdzSlK1uCk-0V3pM4crgu0jQIHiqlufUDrIcechBwY`
       }
     }).then((resp)=>console.log(resp).catch((erro)=>console.log(erro)))
   }
 
 
   useEffect(() => {
-    handleAllTenants();
-  }, [listTenants]);
+    showTenants("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3NjkzNzUyLCJleHAiOjE2NDc2OTczNTIsInN1YiI6IjEifQ.KOdzSlK1uCk-0V3pM4crgu0jQIHiqlufUDrIcechBwY")
+  }, [tenants]);
 
   return (
     <>
@@ -125,7 +117,7 @@ const TenantsPage =()=>{
       w="45px"
       h="45px"
       borderRadius="100%"
-      fontSize="40px"
+      fontSize="30px"
       bg="#141155"
       >+
       </Button>
@@ -155,11 +147,11 @@ const TenantsPage =()=>{
        
           
             
-        {listTenants?.map((tenant,index) => (
+        {tenants?.map((tenant,index) => (
           <Box 
           
           w="100%" 
-
+          
           key={index} 
           onClick={()=>setCurrentTenants(tenant)}
           display="flex"
@@ -167,14 +159,18 @@ const TenantsPage =()=>{
           
           >
 
-          <Button 
-          
+          <Box
+          textAlign="center"
+          color="#ffffff"
+          borderRadius="18px"
+          padding={["4px","10px"]}
+           bg="#00a5ae"
           display="flex"
           justifyContent="space-between"
           margin="10px"
           w="80%"  
           fontSize={["18px","28px"]}
-          h={["30px","35px","50px"]}
+          h={["30px","35px","60px"]}
           variant="default"
           key={index} 
           onClick={onOpenAlterTenants} >
@@ -185,11 +181,12 @@ const TenantsPage =()=>{
             height={["20px","30px"]}
             bg="green"
             > </Box>
-          </Button>
+          </Box>
           </Box>
         ))}
           </Box>
         <ModalListTenants 
+         errors={errors}
         currentTenants={currentTenants} 
         onCloseAlterTenants={onCloseAlterTenants}
         isOpenAlterTenants={isOpenAlterTenants}

@@ -10,6 +10,7 @@ import {
     Box,
     Text,
     Select,
+    FormControl,
    
     } from '@chakra-ui/react'
 import Inputs from '../Input'
@@ -30,7 +31,7 @@ const ModalAddTenants =({register,handleAddTenants,handleSubmit,setStatusHome,is
         <ModalCloseButton />
         <ModalBody>
             <Box
-             h="250px"
+             h={["75%"]}
              css={{
                  "&::-webkit-scrollbar": {
                  width: "4px",
@@ -46,7 +47,8 @@ const ModalAddTenants =({register,handleAddTenants,handleSubmit,setStatusHome,is
              overflowY="scroll">
 
                 <form onSubmit={handleSubmit(handleAddTenants)}>
-                <Text color="white">Diguite o email</Text>
+                    <FormControl>
+                    <Text color="white">Diguite o email</Text>
                 <Inputs register={register} registerData="email" ph="Diguite o email" bgColor="#00A5AE" phColor="white" type="text" name="email"></Inputs>
                 
                 <Text color="white">Diguite a senha</Text>
@@ -74,7 +76,7 @@ const ModalAddTenants =({register,handleAddTenants,handleSubmit,setStatusHome,is
                     display="flex"
                     justifyContent="space-around"
                   >
-                        <Box>
+                        <Box padding="30px">
 
                             <Button colorScheme='blue' mr={3} onClick={onAddClose}>
                             Fechar
@@ -82,6 +84,9 @@ const ModalAddTenants =({register,handleAddTenants,handleSubmit,setStatusHome,is
                             <Button type="submit" variant='default'>Cadastrar usuario</Button>
                         </Box>
                     </ModalFooter>
+
+                    </FormControl>
+                
                 </form>
             </Box>
         
