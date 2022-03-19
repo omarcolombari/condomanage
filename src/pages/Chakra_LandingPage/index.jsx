@@ -1,23 +1,28 @@
-import { Box, ScaleFade, Slide, useDisclosure } from "@chakra-ui/react";
+import { Box, ScaleFade, useDisclosure } from "@chakra-ui/react";
 import background from "../../assets/background.png";
 import LandingPageContainer from "../../Components/Landing_container";
 
 const ChakraLandingPage = () => {
-    const { onOpen } = useDisclosure();
-    return (
-        <Box
-            w="100vw"
-            h="100vh"
-            bgImg={background}
-            bgPos="center"
-            bgRepeat="no-repeat"
-            bgSize="cover">
-            <Slide in={onOpen}  direction="left"style={{ zIndex: 10 }}>
-                <LandingPageContainer/>
-            </Slide>
-            
-        </Box>
-    )
-}
+  const { onOpen, onToggle } = useDisclosure();
+  return (
+    <ScaleFade
+      in={onOpen}
+      initialScale={1}
+      animate={{ opacity: [0, 1] }}
+      style={{ zIndex: 10 }}
+    >
+      <Box
+        w="100vw"
+        h="100vh"
+        bgImg={background}
+        bgPos="center"
+        bgRepeat="no-repeat"
+        bgSize="cover"
+      >
+        <LandingPageContainer />
+      </Box>
+    </ScaleFade>
+  );
+};
 
 export default ChakraLandingPage;

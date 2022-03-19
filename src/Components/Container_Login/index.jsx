@@ -42,7 +42,6 @@ const ContainerLogin = () => {
     api
       .post("/login", data)
       .then((response) => {
-        console.log(response.data);
         const { accessToken } = response.data;
         const { user } = response.data;
         toast.success("Login realizado com sucesso!");
@@ -52,9 +51,9 @@ const ContainerLogin = () => {
       .catch((err) => toast.error("E-mail ou senha inválidos"));
   };
 
-  const { onOpen } = useDisclosure();
+  const { onOpen, onToggle } = useDisclosure();
   return (
-    <Slide in={onOpen} style={{ zIndex: 10 }} direction="right">
+    <Slide in={onOpen} style={{ zIndex: 10 }} direction="left">
       <Box
         w={["100vw", "100vw", "50%"]}
         maxW={["100vw", "", "550px"]}
@@ -65,7 +64,7 @@ const ContainerLogin = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <LoginHeader link="/"/>
+        <LoginHeader />
         <Box
           w={["100%"]}
           d="flex"

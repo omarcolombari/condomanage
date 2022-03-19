@@ -29,7 +29,7 @@ const LoginHeader = ({ link }) => {
         cursor="pointer"
         size={30}
         color={"#00a5ae"}
-        onClick={() => handleNavigation(link)}
+        onClick={() => handleNavigation("/")}
       />
     </Box>
   );
