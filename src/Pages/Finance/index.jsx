@@ -16,6 +16,7 @@ import ListFinances from "../../Components/ListFinances";
 import { Heading } from "@chakra-ui/react";
 import { FinancesContext } from "../../Providers/Finances";
 import Header from "../../Components/Header";
+import ModalRegisterFinance from "../../Components/ModalRegisterFinance";
 
 const Finance = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,7 +28,7 @@ const Finance = () => {
   //supondo que dá pra capturar o token do localStorage
   //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc2NDc1ODksImV4cCI6MTY0NzY1MTE4OSwic3ViIjoiMiJ9.UkeAPnuNXID5jZl_AC_KTyMKLd8Xmemz5xMBhGaggvc";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc2OTQxODYsImV4cCI6MTY0NzY5Nzc4Niwic3ViIjoiMiJ9.6UxrqN0_obg47yu3oMFV5S123qBHlK8ohRzDGJ8k3Ks";
 
   //Pegar o Id do usuário
   const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
@@ -61,33 +62,6 @@ const Finance = () => {
       setNewFinances([...filtered]);
     }
   };
-
-  //const { newFinances, addFinance } = useFinances();
-  //const [finances, setFinances] = useState([...newFinances]);
-
-  //const {finances} = useContext(FinancesContext);
-
-  /*const handleRegisterFinance = (data) => {
-    //método addFinances do Provider
-
-    const userId = 2; //trocar pelo id resgatado no login
-    const newData = { ...data, userId };
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc2MDMwNTksImV4cCI6MTY0NzYwNjY1OSwic3ViIjoiMiJ9.rHFAjjRT_E8T8isBP4Sez4piIaX6mD-WJsQU95CBWe4";
-
-    api
-      .post("/finances", newData, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        addFinance(data);
-        setFinances([...finances, data]);
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };*/
 
   return (
     <Box display="flex" flexDirection="column" gap="20px">
@@ -126,65 +100,11 @@ const Finance = () => {
 
         <ListFinances finances={newFinances} />
 
-        <Modal
-          initialFocusRef={initialRef}
-          finalFocusRef={finalRef}
+        <ModalRegisterFinance
           isOpen={isOpen}
           onClose={onClose}
-        >
-          <ModalOverlay />
-          <ModalContent
-            w="80%"
-            maxW="400px"
-            h="400px"
-            bg="#141155"
-            color="white"
-            m="0 auto"
-            borderRadius="10px"
-            mt="40px"
-            alignSelf="center"
-          >
-            <ModalHeader
-              w="100%"
-              display="flex"
-              justifyContent="space-around"
-              padding="10px 0px 10px 0px"
-              bg="#00A5AE"
-              borderRadius="10px"
-            >
-              Cadastrar finança
-              <ModalCloseButton
-                w="50px"
-                bgColor="transparent"
-                color="white"
-                border="transparent"
-              />
-            </ModalHeader>
-
-            <ModalBody pb={6}>
-              <Form onSubmit={handleSubmit(handleRegisterFinance)}>
-                <input
-                  type="text"
-                  placeholder="Descrição"
-                  {...register("name")}
-                />
-                <input
-                  type="number"
-                  placeholder="Valor   $"
-                  {...register("value")}
-                />
-                <label>
-                  Categoria
-                  <select {...register("status")}>
-                    <option value="Entrada">Entrada</option>
-                    <option value="Despesa">Despesa</option>
-                  </select>
-                  <button type="submit">Inserir</button>
-                </label>
-              </Form>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
+          handleRegisterFinance={handleRegisterFinance}
+        />
       </Box>
     </Box>
   );
