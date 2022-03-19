@@ -18,7 +18,7 @@ import {
   import Inputs from "../Inputs";
   import LoginHeader from "../LoginHeader";
   
-  const ContainerLogin = () => {
+  const ContainerSignup = () => {
     const history = useHistory();
 
     const schema = yup.object().shape({
@@ -65,6 +65,7 @@ import {
       api
         .post("/register", data)
         .then((response) => {
+          console.log(response)
           toast.success("Cadastro realizado com sucesso!");
           history.push("/login");
         })
@@ -92,9 +93,13 @@ import {
             alignItems="center"
             justifyContent="space-around"
             flexDir="column"
+            overflowX="auto"
           >
             <form onSubmit={handleSubmit(handleFormSubmit)}>
-              <FormControl w={["290px", " ", "350px"]}>
+              <FormControl 
+              w={["290px", " ", "350px"]}
+              h={["400px"]}
+              >
                 <Box name="name">
                   <FormLabel>
                     <Heading variant="title3" fontSize="20px">
@@ -167,7 +172,7 @@ import {
                 <Box name="valueBase">
                   <FormLabel>
                     <Heading variant="title3" fontSize="20px" marginTop="15px">
-                        CNPJ*
+                      Valor condomínio*
                     </Heading>
                   </FormLabel>
                   <Inputs
@@ -370,7 +375,7 @@ import {
                   >
                     {errors.confirmPassword?.message}
                   </Text>
-                </Box>
+                </Box>         
                 <Button
                   mt="30px"
                   type="submit"
@@ -383,23 +388,15 @@ import {
                   fontWeight="600"
                   border="none"
                 >
-                  Logar
+                  Cadastrar
                 </Button>
-              </FormControl>
+                <Text>* Campos obrigatórios </Text>
+              </FormControl>   
             </form>
-            <Text fontSize={13}>
-              Ainda não tem cadastro?{" "}
-              <Link
-                style={{ color: "#005d89", fontWeight: "700" }}
-                onClick={() => handleNavigation("/signup")}
-              >
-                Clique aqui
-              </Link>
-            </Text>
           </Box>
         </Box>
       </Slide>
     );
   };
   
-  export default ContainerLogin;
+  export default ContainerSignup;

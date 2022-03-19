@@ -5,11 +5,12 @@ import "@fontsource/roboto";
 import ChakraLoginPage from "./pages/Chakra_Login";
 import { ToastContainer } from "react-toastify";
 import Signup from "./pages/Signup";
+import ChakraSignupPage from "./pages/Chakra_Signup";
 
 function App() {
   return (
     <ChakraProvider theme={CustomTheme}>
-      <ChakraLoginPage />
+      <ChakraSignupPage/>
       <ToastContainer position="top-left" />
     </ChakraProvider>
   )
