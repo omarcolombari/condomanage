@@ -6,14 +6,16 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  Box,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import { useRef, useState, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Box, Form, BoxButtons } from "./styles";
-import ListFinances from "../../components/ListFinances";
+import { Form, BoxButtons, StyledHeader } from "./styles";
+import ListFinances from "../../Components/ListFinances";
 import { Heading } from "@chakra-ui/react";
 import { FinancesContext } from "../../Providers/Finances";
+import Header from "../../Components/Header";
 
 const Finance = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -88,9 +90,21 @@ const Finance = () => {
   };*/
 
   return (
-    <div>
-      <Box>
-        <header>
+    <Box display="flex" flexDirection="column" gap="20px">
+      <Header />
+      <Box
+        w="90%"
+        maxW="779.73px"
+        margin="0 auto"
+        h="77vh"
+        borderRadius="10px"
+        boxShadow="0px 5px 10px 1px rgba(0,0,0,0.5)"
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <StyledHeader>
           <Heading fontSize={["20px", "25px", "30px"]}>
             Lista de finanças
           </Heading>
@@ -103,7 +117,7 @@ const Finance = () => {
           >
             +
           </Button>
-        </header>
+        </StyledHeader>
         <BoxButtons>
           <Button onClick={() => filterFinances("Todos")}>Todos</Button>
           <Button onClick={() => filterFinances("Entrada")}>Entradas</Button>
@@ -128,6 +142,7 @@ const Finance = () => {
             m="0 auto"
             borderRadius="10px"
             mt="40px"
+            alignSelf="center"
           >
             <ModalHeader
               w="100%"
@@ -171,7 +186,7 @@ const Finance = () => {
           </ModalContent>
         </Modal>
       </Box>
-    </div>
+    </Box>
   );
 };
 

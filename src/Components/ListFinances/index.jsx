@@ -4,7 +4,7 @@ import { Box } from "./styles";
 
 const ListFinances = ({ finances }) => {
   return (
-    <Container padding="10px 10px 10px 10px">
+    <Container padding="10px 10px 10px 10px" height="400px">
       {finances.length > 0 ? (
         <Box>
           {finances.map((finance, index) => (

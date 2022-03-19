@@ -2,7 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import CustomTheme from "./Style/Theme";
 import "@fontsource/poppins";
 import "@fontsource/roboto";
-import Finance from "./pages/Finance";
+import Finance from "./Pages/Finance";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

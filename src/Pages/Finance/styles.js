@@ -13,17 +13,18 @@ export const Box = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
   gap: 20px;
-  header {
-    display: flex;
-    width: 90%;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    h1 {
-      font-size: 20px;
-      font-weight: 600;
-      color: #141155;
-    }
+`;
+
+export const StyledHeader = styled.header`
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #141155;
   }
 `;
 
