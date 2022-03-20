@@ -7,8 +7,8 @@ export const FinancesContext = createContext();
 export const FinancesProvider = ({ children }) => {
   const [finances, setFinances] = useState([]);
 
-  const showFinances = async (token) => {
-    await api
+  const showFinances = (token) => {
+    api
       .get("/finances", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -61,6 +61,7 @@ export const FinancesProvider = ({ children }) => {
       .then((res) => {
         console.log(res);
         toast.success("Dados alterados com sucesso!");
+        showFinances(token);
       })
       .catch((res) => {
         console.log(res);
@@ -78,6 +79,7 @@ export const FinancesProvider = ({ children }) => {
       .then((res) => {
         console.log(res);
         toast.success("Dados arquivados com sucesso!");
+        showFinances(token);
       })
       .catch((res) => {
         console.log(res);

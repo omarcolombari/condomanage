@@ -11,12 +11,11 @@ const Finance = () => {
 
   //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc4MDM5NTgsImV4cCI6MTY0NzgwNzU1OCwic3ViIjoiMiJ9.Q457RanuaFLnUdR8znsZ6V4u_vKJRUa5N0WlRHGuZtQ";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc4MDc2MzIsImV4cCI6MTY0NzgxMTIzMiwic3ViIjoiMiJ9.Z5HnGM4QEWeJqaeItlFwzLIaTqhY2xXKh0aBbmy_U0U";
 
   //Pegar o Id do usuário
   //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
   //const userId = user.id
-
   const userId = 2;
 
   //Pegando o array e os métodos do Providers
@@ -27,7 +26,6 @@ const Finance = () => {
 
   const loadFinances = async () => {
     await showFinances(token);
-    setNewFinances([...finances]);
   };
 
   useEffect(() => {
@@ -87,7 +85,11 @@ const Finance = () => {
           <Button onClick={() => filterFinances("Despesa")}>Despesas</Button>
         </BoxButtons>
 
-        <ListFinances finances={newFinances} />
+        {newFinances.length < finances.length ? (
+          <ListFinances finances={newFinances} />
+        ) : (
+          <ListFinances finances={finances} />
+        )}
 
         <ModalFinance
           isOpen={isOpen}

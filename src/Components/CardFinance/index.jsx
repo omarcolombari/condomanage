@@ -11,12 +11,17 @@ const CardFinance = ({ finance }) => {
 
   //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc4MDM5NTgsImV4cCI6MTY0NzgwNzU1OCwic3ViIjoiMiJ9.Q457RanuaFLnUdR8znsZ6V4u_vKJRUa5N0WlRHGuZtQ";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc4MDc2MzIsImV4cCI6MTY0NzgxMTIzMiwic3ViIjoiMiJ9.Z5HnGM4QEWeJqaeItlFwzLIaTqhY2xXKh0aBbmy_U0U";
+
+  //Pegar o Id do usuário
+  //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
+  //const userId = user.id
+  const userId = 2;
 
   const { changeFinance, removeFinance } = useContext(FinancesContext);
 
   const handleUpdateFinance = (data) => {
-    const newData = { ...data, userId: 2 };
+    const newData = { ...data, userId: userId };
 
     changeFinance(token, newData, finance.id);
   };
@@ -27,7 +32,7 @@ const CardFinance = ({ finance }) => {
 
   return (
     <Card status={finance.status}>
-      <Box onClick={onOpen}>
+      <Box onClick={onOpen} cursor="pointer" title="Clique para editar">
         <h1>{finance.name}</h1>
         <span>R$ {Number(finance.value).toFixed(2).replace(".", ",")}</span>
         <p>{finance.status}</p>

@@ -21,7 +21,6 @@ export const Card = styled.div`
   }
   :hover {
     background: #c5e8fb;
-    cursor: pointer;
   }
 `;
 
