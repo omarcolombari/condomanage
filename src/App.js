@@ -4,7 +4,7 @@ import CustomTheme from "./Style/Theme";
 import "@fontsource/poppins";
 import "@fontsource/roboto";
 import { ToastContainer } from "react-toastify";
-import Routes from "./routes";
+import Routes from "./Routes/index";
 
 function App() {
   return (
