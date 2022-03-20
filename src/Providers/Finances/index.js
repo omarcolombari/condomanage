@@ -68,9 +68,32 @@ export const FinancesProvider = ({ children }) => {
       });
   };
 
+  const removeFinance = (token, financeId) => {
+    api
+      .delete(`/finances/${financeId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        toast.success("Dados arquivados com sucesso!");
+      })
+      .catch((res) => {
+        console.log(res);
+        toast.error("Ops! Algo deu errado");
+      });
+  };
+
   return (
     <FinancesContext.Provider
-      value={{ finances, showFinances, addFinance, changeFinance }}
+      value={{
+        finances,
+        showFinances,
+        addFinance,
+        changeFinance,
+        removeFinance,
+      }}
     >
       {children}
     </FinancesContext.Provider>

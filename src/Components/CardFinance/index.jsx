@@ -11,24 +11,32 @@ const CardFinance = ({ finance }) => {
 
   //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc3Mzk5MzEsImV4cCI6MTY0Nzc0MzUzMSwic3ViIjoiMSJ9.x7Ol8VpTCCLmt5yYr2JvMNoBwU3lc9skSS71LhIpZLc";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc4MDM5NTgsImV4cCI6MTY0NzgwNzU1OCwic3ViIjoiMiJ9.Q457RanuaFLnUdR8znsZ6V4u_vKJRUa5N0WlRHGuZtQ";
 
-  const { changeFinance } = useContext(FinancesContext);
+  const { changeFinance, removeFinance } = useContext(FinancesContext);
 
   const handleUpdateFinance = (data) => {
-    const newData = { ...data, userId: 1 };
+    const newData = { ...data, userId: 2 };
 
     changeFinance(token, newData, finance.id);
   };
 
+  const handleRemoveFinance = (financedId) => {
+    removeFinance(token, financedId);
+  };
+
   return (
-    <Card status={finance.status} onClick={onOpen}>
-      <Box>
+    <Card status={finance.status}>
+      <Box onClick={onOpen}>
         <h1>{finance.name}</h1>
         <span>R$ {Number(finance.value).toFixed(2).replace(".", ",")}</span>
         <p>{finance.status}</p>
       </Box>
-      <Button title="Arquivar" minW="48px">
+      <Button
+        title="Arquivar"
+        minW="48px"
+        onClick={() => handleRemoveFinance(finance.id)}
+      >
         <BiArchive />
       </Button>
       <ModalFinance
