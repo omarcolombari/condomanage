@@ -3,7 +3,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   Button,
@@ -14,15 +13,20 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-const ModalRegisterFinance = ({ isOpen, onClose, handleRegisterFinance }) => {
-  //const { isOpen, onOpen, onClose } = useDisclosure();
-
+const ModalFinance = ({
+  isOpen,
+  onClose,
+  handleChange,
+  title,
+  data = { name: "", value: "" },
+}) => {
   const handleSchema = yup.object().shape({
     name: yup.string().required("Campo obrigatório"),
-    value: yup.number().required("Campo obrigatório"),
+    value: yup
+      .string()
+      .required("Campo obrigatório")
+      .matches(/^[0-9 ]+$/, "O campo deve conter apenas números"),
   });
-
-  //const { register, handleSubmit } = useForm();
 
   const {
     register,
@@ -40,12 +44,14 @@ const ModalRegisterFinance = ({ isOpen, onClose, handleRegisterFinance }) => {
             borderTopLeftRadius="5px"
             borderTopRightRadius="5px"
           >
-            Modal Title
+            {title}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Box
               h="300px"
+              display="flex"
+              justifyContent="center"
               css={{
                 "&::-webkit-scrollbar": {
                   width: "4px",
@@ -60,28 +66,30 @@ const ModalRegisterFinance = ({ isOpen, onClose, handleRegisterFinance }) => {
               }}
               overflowY="scroll"
             >
-              <Form onSubmit={handleSubmit(handleRegisterFinance)}>
+              <Form onSubmit={handleSubmit(handleChange)}>
                 <input
                   type="text"
                   placeholder="Descrição"
+                  defaultValue={data.name}
                   {...register("name")}
                 />
                 {errors.name?.message && <p>{errors.name?.message}</p>}
                 <input
-                  type="number"
+                  type="text"
                   placeholder="Valor   $"
+                  defaultValue={data.value}
                   {...register("value")}
                 />
                 {errors.value?.message && <p>{errors.value?.message}</p>}
                 <label>
                   Categoria
-                  <select {...register("status")}>
+                  <select {...register("status")} initialValue={data.status}>
                     <option value="Entrada">Entrada</option>
                     <option value="Despesa">Despesa</option>
                   </select>
                 </label>
 
-                <button type="submit">Registrar finança</button>
+                <Button type="submit">Enviar</Button>
               </Form>
             </Box>
           </ModalBody>
@@ -91,4 +99,4 @@ const ModalRegisterFinance = ({ isOpen, onClose, handleRegisterFinance }) => {
   );
 };
 
-export default ModalRegisterFinance;
+export default ModalFinance;

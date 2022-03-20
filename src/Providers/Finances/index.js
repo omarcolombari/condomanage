@@ -47,7 +47,17 @@ export const FinancesProvider = ({ children }) => {
 
   const changeFinance = (token, data, financeId) => {
     api
-      .patch(`/finances/${financeId}`)
+      .patch(
+        `/finances/${financeId}`,
+        {
+          ...data,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => {
         console.log(res);
         toast.success("Dados alterados com sucesso!");

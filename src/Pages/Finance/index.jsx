@@ -1,45 +1,30 @@
-import {
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  Box,
-} from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/react";
-import { useRef, useState, useContext, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { Form, BoxButtons, StyledHeader } from "./styles";
+import { useDisclosure, Heading, Button, Box } from "@chakra-ui/react";
+import { useState, useContext, useEffect } from "react";
+import { BoxButtons, StyledHeader } from "./styles";
 import ListFinances from "../../Components/ListFinances";
-import { Heading } from "@chakra-ui/react";
 import { FinancesContext } from "../../Providers/Finances";
 import Header from "../../Components/Header";
-import ModalRegisterFinance from "../../Components/ModalRegisterFinance";
+import ModalFinance from "../../Components/ModalFinance";
 
 const Finance = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const initialRef = useRef();
-  const finalRef = useRef();
-
-  const { register, handleSubmit } = useForm();
-  //supondo que dá pra capturar o token do localStorage
   //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc2OTQxODYsImV4cCI6MTY0NzY5Nzc4Niwic3ViIjoiMiJ9.6UxrqN0_obg47yu3oMFV5S123qBHlK8ohRzDGJ8k3Ks";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc3Mzk5MzEsImV4cCI6MTY0Nzc0MzUzMSwic3ViIjoiMSJ9.x7Ol8VpTCCLmt5yYr2JvMNoBwU3lc9skSS71LhIpZLc";
 
   //Pegar o Id do usuário
-  const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
+  //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
 
   //Pegando o array e os métodos do Providers
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
+
   //Esse state é para poder filtrar também
-  const [newFinances, setNewFinances] = useState([]);
+  const [newFinances, setNewFinances] = useState([...finances]);
 
   const loadFinances = async () => {
     await showFinances(token);
+    setNewFinances([...finances]);
   };
 
   useEffect(() => {
@@ -50,7 +35,7 @@ const Finance = () => {
   }, [finances.length]);
 
   const handleRegisterFinance = (data) => {
-    addFinance(2, token, data);
+    addFinance(1, token, data);
     loadFinances();
   };
 
@@ -77,6 +62,7 @@ const Finance = () => {
         flexDirection="column"
         justifyContent="space-between"
         alignItems="center"
+        gap="12px"
       >
         <StyledHeader>
           <Heading fontSize={["20px", "25px", "30px"]}>
@@ -100,10 +86,11 @@ const Finance = () => {
 
         <ListFinances finances={newFinances} />
 
-        <ModalRegisterFinance
+        <ModalFinance
           isOpen={isOpen}
           onClose={onClose}
-          handleRegisterFinance={handleRegisterFinance}
+          handleChange={handleRegisterFinance}
+          title="Registrar finança"
         />
       </Box>
     </Box>

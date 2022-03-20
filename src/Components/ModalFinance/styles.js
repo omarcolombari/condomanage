@@ -11,7 +11,7 @@ export const Form = styled.form`
   button,
   input,
   p {
-    width: 90%;
+    width: 100%;
     color: white;
   }
   button {

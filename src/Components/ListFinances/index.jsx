@@ -1,10 +1,17 @@
 import CardFinance from "../CardFinance";
-import { Container } from "@chakra-ui/react";
+import { Container, Heading } from "@chakra-ui/react";
 import { Box } from "./styles";
+import TotalFinances from "../TotalFinances";
 
 const ListFinances = ({ finances }) => {
   return (
-    <Container padding="10px 10px 10px 10px" height="400px">
+    <Container
+      padding="10px 10px 10px 10px"
+      height="400px"
+      display="flex"
+      flexDirection="column"
+      gap="10px"
+    >
       {finances.length > 0 ? (
         <Box>
           {finances.map((finance, index) => (
@@ -12,8 +19,11 @@ const ListFinances = ({ finances }) => {
           ))}
         </Box>
       ) : (
-        <h1>Lista vazia</h1>
+        <Heading fontSize="30px" textAlign="center">
+          Lista vazia
+        </Heading>
       )}
+      <TotalFinances finances={finances} />
     </Container>
   );
 };

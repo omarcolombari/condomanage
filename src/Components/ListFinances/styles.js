@@ -5,10 +5,10 @@ export const Box = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-  height: 90%;
+  height: 75%;
   max-height: 90%;
   overflow-y: auto;
   ::-webkit-scrollbar {
-    width: 12px;
+    width: 1px;
   }
 `;
