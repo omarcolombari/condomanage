@@ -1,6 +1,7 @@
-import { Box, Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, useDisclosure } from "@chakra-ui/react";
-import React from "react";
-import { useDemands } from "../../providers/demand";
+import { Box, Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select } from "@chakra-ui/react";
+import React, { useContext } from "react";
+import { DemandsContext} from '../../Providers/Demands';
+
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -8,7 +9,7 @@ import { toast } from "react-toastify"
 
 
 const ModalAddDemand = ( { isAddDemandOpen, onAddDemandClose } ) => {
-  const { demand, addDemand } = useDemands()
+  const { addDemand, token, user } =  useContext(DemandsContext)
 
   const schema = yup.object().shape( {
     name: yup.string().required( 'Campo obrigatório' ),
@@ -19,7 +20,7 @@ const ModalAddDemand = ( { isAddDemandOpen, onAddDemandClose } ) => {
   const {register, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(schema)})
   
   const handleAddDemand = ( data ) => {
-    addDemand( data )   
+    addDemand( user.id, token, data )   
     toast.success('Demanda adicionada!')
     onAddDemandClose()
   }

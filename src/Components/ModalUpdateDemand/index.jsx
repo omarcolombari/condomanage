@@ -1,24 +1,25 @@
 import { Box, Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select } from "@chakra-ui/react";
-import React from "react";
-import { useDemands } from "../../providers/demand";
+import React, { useContext } from "react";
+import { DemandsContext} from '../../Providers/Demands';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup'
-import { toast } from "react-toastify"
+import { yupResolver } from '@hookform/resolvers/yup';
+import { toast } from "react-toastify";
 
 
 const ModalUpdateDemand = ( { isUpdateDemandOpen, onUpdateDemandClose, item } ) => {
-  const { updateDemand, id } = useDemands()
-console.log(item.id)
+
+  const { changeDemand, token } = useContext(DemandsContext);
+
   const schema = yup.object().shape( {
     status: yup.string().required('Campo obrigatório')
   })
 
   const {register, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(schema)})
   
-  const handleUpdateDemand = ( data ) => {
-    console.log(data.id)
-    updateDemand( data )
+  const handleUpdateDemand = ( data ) => {    
+    console.log("data ", data);
+    changeDemand( token, data, item.id )
     if (data.status === 'inProgress') {
       toast.success('Demanda atualizada!')
     } else {

@@ -1,22 +1,18 @@
 import { Box, Button, filter, Heading, Input, useDisclosure } from "@chakra-ui/react"
 import Header from "../../Components/Header"
 import { AddIcon } from "@chakra-ui/icons"
-import React, { useState } from "react";
-import { useDemands } from '../../providers/demand';
+import React, { useEffect, useState, useContext } from "react";
+import { DemandsContext} from '../../Providers/Demands';
 import ModalAddDemand from "../../Components/ModalAddDemand";
 import ModalUpdateDemand from "../../Components/ModalUpdateDemand";
+import { CartDemand } from "../../Components/CartDemand";
 
 const DashboardDemand = () => {
-    const {demand,  filteredDemand, setFilteredDemand, addDemand, filterDemands} = useDemands();
+    const {demands} = useContext(DemandsContext);
     const { isOpen:isAddDemandOpen,onOpen:onAddDemandOpen,onClose:onAddDemandClose } = useDisclosure();
     const { isOpen:isUpdateDemandOpen,onOpen:onUpdateDemandOpen,onClose:onUpdateDemandClose } = useDisclosure();
 
-    const filters = [ 'Todas', 'Em andamento', 'Concluídas' ];
-    const [filterBase, setFilterBase] = useState('Todas')
-
-    // const handleFilter = ( filter ) => {
-    //     filterBase()
-    // }
+    const [ filterBase, setFilterBase ] = useState( 'Todas' )
 
     return (
         <Box
@@ -38,7 +34,6 @@ const DashboardDemand = () => {
             <Heading ml="10px" mt="10px" mb="20px" variant="title1" fontSize={["18px","24px","40px"]}>Lista de Demandas:</Heading>
             <Box>
                 <Box>
-                    {/* {filters.map ((filter, index) => <Button key={index} onClick={() => setFilterBase(filter)}>{filter}</Button>)} */}
                     <Button onClick={() => setFilterBase('Todas')}>Todas</Button>
                     <Button onClick={() => setFilterBase('inProgress')}>Em andamento</Button>
                     <Button onClick={() => setFilterBase('completed')}>Concluídas</Button>
@@ -50,24 +45,22 @@ const DashboardDemand = () => {
                     />
                 </Box>
                 <Box>
-                    {demand.filter(({status}) => (filterBase === 'Todas') ? status !== 'Todas' : status === filterBase).map((item, index) => {
+                    {demands.filter(({status}) => (filterBase === 'Todas') ? status !== 'Todas' : status === filterBase).map((item, index) => {
                         return (
-                            <>
-                                <Box key={index}
+                                <Box
+                                    key={item.id}
                                     bg="#00A5AE"
                                     w="300px"
-                                    borderRadius="30px" onClick={onUpdateDemandOpen}>
-                                        <p>{ item.name }</p>
-                                        <p>{item.status === 'inProgress' ? 'verde' : 'vermelho'}</p>
-                                </Box>
-                                <ModalUpdateDemand
-                                    item={item}
+                                    borderRadius="30px" onClick={ onUpdateDemandOpen }>
+                                    <CartDemand item={ item } />
+                                    <ModalUpdateDemand
+                                    item={ item }
                                     isUpdateDemandOpen={ isUpdateDemandOpen }
                                     onUpdateDemandClose={ onUpdateDemandClose }
                                     onAddDemandOpen={onAddDemandOpen}
                                 ></ModalUpdateDemand>
+                                </Box>
 
-                            </>
                         )
                     })}
                     
