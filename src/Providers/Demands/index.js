@@ -6,6 +6,7 @@ export const DemandsContext = createContext();
 
 export const DemandsProvider = ({ children }) => {
   const [demands, setDemands] = useState([]);
+  const [demandId, setDemandId] = useState(1);
 
   const [token] = useState(
     JSON.parse(localStorage.getItem('@CondoManage:token')) || []
@@ -49,7 +50,7 @@ export const DemandsProvider = ({ children }) => {
 
         localStorage.setItem('@CondoManage:user', JSON.stringify(user));
 
-        setDemands([...demands, data]);
+        setDemands([...demands, res.data]);
 
         toast.success('Demanda adicionada com sucesso!');
         console.log(res);
