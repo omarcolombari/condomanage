@@ -1,7 +1,7 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { IoIosHome, IoMdMap, IoIosBusiness, IoIosMail } from "react-icons/io";
-import Grafico from "../grafico";
+import Grafico from "../Feats/grafico";
 
 const Dashboard = ({ authenticaded }) => {
   const [user] = useState(

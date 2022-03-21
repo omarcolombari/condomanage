@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react"
 import { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import Dashboard from "../../Components/Dashboard";
-import Header from "../../Components/Header"
+import Header from "../../Components/Feats/Header"
 
 const DashboardUser = ({ authenticaded,setAuthenticaded }) => {
     

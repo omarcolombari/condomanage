@@ -1,5 +1,5 @@
 import { Box,Img, useDisclosure } from "@chakra-ui/react";
-import Logo1 from "../../assets/Images/Logo1.png";
+import Logo1 from "../../../assets/Images/Logo1.png";
 import { IoMdMenu } from "react-icons/io";
 import DropDrawer from "../DropDrawer/index"
 import React from "react";

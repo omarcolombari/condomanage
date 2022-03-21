@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import background from "../../assets/background.png";
-import ContainerLogin from "../../Components/Container_Login";
+import ContainerLogin from "../../Components/LandingComponents/Container_Login/index";
 
 const ChakraLoginPage = ({authenticaded,setAuthenticaded}) => {
   return (

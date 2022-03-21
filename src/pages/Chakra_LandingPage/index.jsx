@@ -1,6 +1,6 @@
 import { Box, ScaleFade, useDisclosure } from "@chakra-ui/react";
 import background from "../../assets/background.png";
-import LandingPageContainer from "../../Components/Landing_container";
+import LandingPageContainer from "../../Components/LandingComponents/Landing_container";
 
 const ChakraLandingPage = () => {
   const { onOpen, onToggle } = useDisclosure();

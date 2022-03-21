@@ -11,11 +11,11 @@ import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import api from "../../services/api";
+import api from "../../../services/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import Inputs from "../Inputs";
+import Inputs from "../../Feats/Inputs";
 import LoginHeader from "../LoginHeader";
 import { Redirect } from "react-router-dom";
 

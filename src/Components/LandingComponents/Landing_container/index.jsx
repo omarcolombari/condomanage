@@ -1,6 +1,6 @@
 import { Box, Button, Img, Text } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
-import Logo1 from "../../assets/modelo-3.png";
+import Logo1 from "../../../assets//modelo-3.png";
 
 const LandingPageContainer = () => {
   const history = useHistory();

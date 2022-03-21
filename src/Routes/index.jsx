@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
-import ChakraLandingPage from "../pages/Chakra_LandingPage";
-import ChakraLoginPage from "../pages/Chakra_Login";
-import ChakraSignupPage from "../pages/Chakra_Signup";
-import DashboardUser from "../pages/DashboardUser";
+import ChakraLandingPage from "../Pages/Chakra_LandingPage";
+import ChakraLoginPage from "../Pages/Chakra_Login";
+import ChakraSignupPage from "../Pages/Chakra_Signup";
+import DashboardUser from "../Pages/DashboardUser";
 
 const Routes = () => {
 
-    //AUTENTICAÇÃO
     const [authenticaded, setAuthenticaded] = useState(false);
-    const token = JSON.parse(localStorage.getItem('@CondoManage:token')) || "";
     
     useEffect(() => {
-        // const token = JSON.parse(localStorage.getItem('@CondoManage:token'));
-        if(token !== ""){
+        const token = JSON.parse(localStorage.getItem('@CondoManage:token'));
+        if(token){
             return setAuthenticaded(true)
         }
-    }, [token])
+    }, [authenticaded])
 
     return (
         <Switch>

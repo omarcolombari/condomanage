@@ -11,10 +11,10 @@ import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import api from "../../services/api";
+import api from "../../../services/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Inputs from "../Inputs";
+import Inputs from "../../Feats/Inputs";
 import LoginHeader from "../LoginHeader";
 
 const ContainerSignup = () => {
@@ -64,7 +64,6 @@ const ContainerSignup = () => {
     api
       .post("/register", data)
       .then((response) => {
-        console.log(response);
         toast.success("Cadastro realizado com sucesso!");
         history.push("/login");
       })

@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import background from "../../assets/background.png";
-import ContainerSignup from "../../Components/Container_Signup";
+import ContainerSignup from "../../Components/LandingComponents/Container_Signup/index";
 
 const ChakraSignupPage = () => {
   return (
