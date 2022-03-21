@@ -8,14 +8,15 @@ import DashboardUser from "../Pages/DashboardUser";
 const Routes = () => {
 
     //AUTENTICAÇÃO
-    const [authenticaded, setAuthenticaded] = useState(false)
+    const [authenticaded, setAuthenticaded] = useState(false);
+    const token = JSON.parse(localStorage.getItem('@CondoManage:token')) || "";
     
     useEffect(() => {
-        const token = JSON.parse(localStorage.getItem('@CondoManage:token'));
-        if(token){
+        // const token = JSON.parse(localStorage.getItem('@CondoManage:token'));
+        if(token !== ""){
             return setAuthenticaded(true)
         }
-    }, [authenticaded])
+    }, [token])
 
     return (
         <Switch>

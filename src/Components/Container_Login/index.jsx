@@ -45,13 +45,12 @@ const ContainerLogin = ({authenticaded,setAuthenticaded}) => {
       .then((response) => {
         const { accessToken } = response.data;
         const { user } = response.data;
-        toast.success("Login realizado com sucesso!");
-        setAuthenticaded(true)
         localStorage.setItem("@CondoManage:token", JSON.stringify(accessToken));
         localStorage.setItem("@CondoManage:infos", JSON.stringify({ user }));
+        toast.success("Login realizado com sucesso!");
+        setAuthenticaded(true);
       })
       .catch((err) => toast.error("E-mail ou senha inválidos"));
-      console.log(authenticaded)
   };
 
   const { onOpen } = useDisclosure();

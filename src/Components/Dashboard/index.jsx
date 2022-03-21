@@ -4,18 +4,9 @@ import { IoIosHome,IoMdMap,IoIosBusiness,IoIosMail } from "react-icons/io";
 import Grafico from "../grafico";
 
 const Dashboard = ({authenticaded}) => {
-    const [ dataUser,setDataUser ] = useState();
- console.log("dataUser ", dataUser.user.adm);
 
     const [user] = useState(JSON.parse(localStorage.getItem("@CondoManage:infos")) || "");
-    
-    const attUser = async () => {
-        const att = await JSON.parse(localStorage.getItem("@CondoManage:infos")) || "" ;
-        setDataUser(att)
-    }
-    useEffect(()=>{
-        attUser()
-    },authenticaded)
+ console.log("user ", user);
 
     return (
         <Box
@@ -31,7 +22,7 @@ const Dashboard = ({authenticaded}) => {
                 variant="title1"
                 fontSize={["18px","24px","48px"]}
             >
-                Bem-vindo : {dataUser.user.adm}
+                Bem-vindo : {user.user.adm}
             </Heading>
             <Box
                 d="flex"
@@ -44,25 +35,25 @@ const Dashboard = ({authenticaded}) => {
                         variant="text3" 
                         fontSize={["14px","18px","28px"]}
                     >
-                        <IoIosHome/>
+                        <IoIosHome/>{user.user.name}
                     </Text>
                     <Text
                         variant="text3" 
                         fontSize={["14px","18px","28px"]}
                     >
-                        <IoMdMap/>
+                        <IoMdMap/>{user.user.address}
                     </Text>
                     <Text
                         variant="text3" 
                         fontSize={["14px","18px","28px"]}
                     >
-                        <IoIosBusiness/>
+                        <IoIosBusiness/>{user.user.complement}
                     </Text>
                     <Text 
                         variant="text3" 
                         fontSize={["14px","18px","28px"]}
                     >
-                        <IoIosMail/>
+                        <IoIosMail/>{user.user.email}
                     </Text>
                 </Box>
                 <Box
