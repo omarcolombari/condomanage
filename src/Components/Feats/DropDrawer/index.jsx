@@ -1,4 +1,3 @@
-import { Box,Img} from "@chakra-ui/react"
 import React from "react";
 import {
     Drawer,
