@@ -22,7 +22,6 @@ const CardFinance = ({ finance }) => {
 
   const handleUpdateFinance = (data) => {
     const newData = { ...data, userId: userId };
-
     changeFinance(token, newData, finance.id);
   };
 
@@ -34,7 +33,7 @@ const CardFinance = ({ finance }) => {
     <Card status={finance.status}>
       <Box onClick={onOpen} cursor="pointer" title="Clique para editar">
         <h1>{finance.name}</h1>
-        <span>R$ {Number(finance.value).toFixed(2).replace(".", ",")}</span>
+        <span>{Number(finance.value).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</span>
         <p>{finance.status}</p>
       </Box>
       <Button

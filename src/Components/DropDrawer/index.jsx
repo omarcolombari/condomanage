@@ -10,13 +10,13 @@ import {
   } from '@chakra-ui/react'
 import NavList from "../NavList";
 
-const DropDrawer = ({ user,isOpen,onClose,btnRefDrawer }) => {
+const DropDrawer = ({ user,isOpen,onClose }) => {
     return (
         <Drawer
             isOpen={isOpen}
             placement='right'
             onClose={onClose}
-            finalFocusRef={btnRefDrawer}>
+        >
             <DrawerOverlay />
             <DrawerContent 
                 h="100vh"

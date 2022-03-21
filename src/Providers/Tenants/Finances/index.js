@@ -7,15 +7,14 @@ export const FinancesContext = createContext();
 export const FinancesProvider = ({ children }) => {
   const [finances, setFinances] = useState([]);
 
-  const showFinances = (token) => {
+  const showFinances = (token,userId) => {
     api
-      .get("/finances", {
+      .get(`/finances?userId=${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
-        console.log(res);
         setFinances(res.data);
       })
       .catch((err) => console.log(err));

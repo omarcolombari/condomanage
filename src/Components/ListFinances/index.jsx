@@ -1,16 +1,13 @@
 import CardFinance from "../CardFinance";
-import { Container, Heading } from "@chakra-ui/react";
-import { Box } from "./styles";
-import TotalFinances from "../TotalFinances";
+import { Box, Heading } from "@chakra-ui/react";
 
 const ListFinances = ({ finances }) => {
   return (
-    <Container
-      padding="10px 10px 10px 10px"
-      height="400px"
+    <Box
+      height="100%"
       display="flex"
       flexDirection="column"
-      gap="10px"
+      overflowX="auto"
     >
       {finances.length > 0 ? (
         <Box>
@@ -23,8 +20,7 @@ const ListFinances = ({ finances }) => {
           Lista vazia
         </Heading>
       )}
-      <TotalFinances finances={finances} />
-    </Container>
+    </Box>
   );
 };
 
