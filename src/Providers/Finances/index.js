@@ -38,6 +38,7 @@ export const FinancesProvider = ({ children }) => {
       .then((res) => {
         console.log(res);
         toast.success("Finança adicionada com sucesso!");
+        showFinances(token);
       })
       .catch((err) => {
         console.log(err);

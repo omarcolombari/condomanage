@@ -11,12 +11,12 @@ const Finance = () => {
 
   //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc4MjQwMzIsImV4cCI6MTY0NzgyNzYzMiwic3ViIjoiMiJ9.scKztgOXybQTlrYtd6NUwLYKEaPQIrXeLC-Y_Lj14iQ";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc4Njc0MjksImV4cCI6MTY0Nzg3MTAyOSwic3ViIjoiMSJ9.W14Mq7kkuRzQ4lEWBzW2SfhvzyzROA4_4i4jQ94wRes";
 
   //Pegar o Id do usuário
   //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
   //const userId = user.id
-  const userId = 2;
+  const userId = 1;
 
   //Pegando o array e os métodos do Providers
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
@@ -37,7 +37,6 @@ const Finance = () => {
 
   const handleRegisterFinance = (data) => {
     addFinance(userId, token, data);
-    loadFinances();
   };
 
   const filterFinances = (status) => {
