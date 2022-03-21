@@ -5,6 +5,7 @@ import "@fontsource/poppins";
 import "@fontsource/roboto";
 import { ToastContainer } from "react-toastify";
 import Routes from "./Routes/index";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <ToastContainer position="top-left" />
       <Routes/>
     </ChakraProvider>
-  )
+  );
 }
 
 export default App;

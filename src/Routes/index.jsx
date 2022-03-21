@@ -4,19 +4,19 @@ import ChakraLandingPage from "../Pages/Chakra_LandingPage";
 import ChakraLoginPage from "../Pages/Chakra_Login";
 import ChakraSignupPage from "../Pages/Chakra_Signup";
 import DashboardUser from "../Pages/DashboardUser";
+import Finance from "../Pages/Finance";
 
 const Routes = () => {
 
     //AUTENTICAÇÃO
     const [authenticaded, setAuthenticaded] = useState(false);
-    const token = JSON.parse(localStorage.getItem('@CondoManage:token')) || "";
     
     useEffect(() => {
-        // const token = JSON.parse(localStorage.getItem('@CondoManage:token'));
+        const token = JSON.parse(localStorage.getItem('@CondoManage:token'));
         if(token !== ""){
             return setAuthenticaded(true)
         }
-    }, [token])
+    }, [authenticaded])
 
     return (
         <Switch>
@@ -37,6 +37,7 @@ const Routes = () => {
             </Route>
 
             <Route path='/finances' >
+                <Finance/>
             </Route>
 
             <Route path='/tenants' >

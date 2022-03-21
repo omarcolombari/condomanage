@@ -1,12 +1,16 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoIosHome,IoMdMap,IoIosBusiness,IoIosMail } from "react-icons/io";
+import { Redirect} from "react-router-dom";
 import Grafico from "../grafico";
 
 const Dashboard = ({authenticaded}) => {
 
     const [user] = useState(JSON.parse(localStorage.getItem("@CondoManage:infos")) || "");
- console.log("user ", user);
+    
+    if(!authenticaded){
+        return <Redirect to="/login"/>
+    }
 
     return (
         <Box
