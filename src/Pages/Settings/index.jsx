@@ -10,6 +10,7 @@ const Settings = ({ authenticaded }) => {
 
     const [user, setUser] = useState({})
     const { register, handleSubmit,} = useForm();
+    const [tenants, setTenats] = useState(0)
     useEffect(() => {
         getUser()
     }, [])
@@ -23,6 +24,15 @@ const Settings = ({ authenticaded }) => {
             }
         })
         .then((res) => setUser(res.data))
+        .catch((err) => console.log(err))
+    }
+    const getTenants = () => {
+        axios.get(`/tenants?userId=${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((res) => setTenats(res.data.length))
         .catch((err) => console.log(err))
     }
 
@@ -74,7 +84,7 @@ const Settings = ({ authenticaded }) => {
                                 <Input
                                 {...register('name')}
                                 variant="outline"
-                                placeholder="teste"
+                                placeholder={user.name}
                                 focusBorderColor='transparent'
                                 _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                         </Box>
@@ -89,7 +99,7 @@ const Settings = ({ authenticaded }) => {
                                 <Input
                                 {...register('address')}
                                 variant="outline"
-                                placeholder="teste"
+                                placeholder={user.address}
                                 focusBorderColor='transparent'
                                 _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                         </Box>
@@ -104,7 +114,7 @@ const Settings = ({ authenticaded }) => {
                                 <Input
                                 {...register('complement')}
                                 variant="outline"
-                                placeholder="teste"
+                                placeholder={user.complement}
                                 focusBorderColor='transparent'
                                 _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                         </Box>
@@ -119,7 +129,7 @@ const Settings = ({ authenticaded }) => {
                                 <Input
                                 {...register('apartments')}
                                 variant="outline"
-                                placeholder="teste"
+                                placeholder={user.apartments}
                                 focusBorderColor='transparent'
                                 _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                         </Box>
@@ -133,7 +143,7 @@ const Settings = ({ authenticaded }) => {
                             borderRadius="30px">
                                 <Input
                                 variant="outline"
-                                placeholder="teste"
+                                value={user.apartments - tenants}
                                 focusBorderColor='transparent'
                                 _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                         </Box>
@@ -148,7 +158,7 @@ const Settings = ({ authenticaded }) => {
                                 <Input
                                 {...register('adm')}
                                 variant="outline"
-                                placeholder="teste"
+                                placeholder={user.adm}
                                 focusBorderColor='transparent'
                                 _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                         </Box>
@@ -163,7 +173,7 @@ const Settings = ({ authenticaded }) => {
                                 <Input
                                 {...register('contact')}
                                 variant="outline"
-                                placeholder="teste"
+                                placeholder={user.contact}
                                 focusBorderColor='transparent'
                                 _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                         </Box>
@@ -178,7 +188,7 @@ const Settings = ({ authenticaded }) => {
                                 <Input
                                 {...register('email')}
                                 variant="outline"
-                                placeholder="teste"
+                                placeholder={user.email}
                                 focusBorderColor='transparent'
                                 _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                         </Box>
