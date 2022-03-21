@@ -1,6 +1,5 @@
 import { useDisclosure, Heading, Button, Box } from "@chakra-ui/react";
 import { useState, useContext, useEffect } from "react";
-import ListFinances from "../../Components/ListFinances";
 import { FinancesContext } from "../../Providers/Finances";
 import Header from "../../Components/Header";
 import ModalFinance from "../../Components/ModalFinance";

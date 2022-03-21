@@ -21,7 +21,7 @@ const TotalFinances = ({ finances }) => {
     <Box w={["95%","70%","40%"]} borderRadius="4px" bg="#00A5AE" color="white">
       <Text textAlign="center">Valor em caixa: {Number(totalPriceEntries).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</Text>
       <Text textAlign="center">
-        Valor das despesas: R$ {totalPriceExpenses}
+        Valor das despesas: R$ {Number(totalPriceExpenses).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}
       </Text>
     </Box>
   );
