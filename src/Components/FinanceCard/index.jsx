@@ -10,7 +10,7 @@ const FinanceCard = ({item}) => {
     const { changeFinance, removeFinance } = useContext(FinancesContext);  
     //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
     const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTY0Nzg5Nzk4MSwiZXhwIjoxNjQ3OTAxNTgxLCJzdWIiOiIyIn0.G1aFBGTPQaoZLj4aKB57AlDSjprlmWu8hXoErTOuotA";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTY0NzkwMzM0NywiZXhwIjoxNjQ3OTA2OTQ3LCJzdWIiOiIyIn0.0zjC3uCJPk50llrwIvFp94VpkBrUcTT26PWmKvhBMB8";
 
     //Pegar o Id do usuário
     //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));

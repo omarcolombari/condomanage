@@ -1,4 +1,4 @@
-import { useDisclosure, Heading, Button, Box } from "@chakra-ui/react";
+import { useDisclosure, Heading, Button, Box, Slide } from "@chakra-ui/react";
 import { useState, useContext, useEffect } from "react";
 import { FinancesContext } from "../../Providers/Finances";
 import Header from "../../Components/Header";
@@ -9,12 +9,13 @@ import FinanceCard from "../../Components/FinanceCard";
 import { IoMdCash } from "react-icons/io";
 
 const Finance = () => {
+  const { onOpen:onContainerOpen } = useDisclosure();
   const { isOpen:isAddFinanceOpen, onOpen:onAddFinanceOpen, onClose:onAddFinanceClose } = useDisclosure();
   const [ filterFin,setFilterFin ] = useState("Todos");
 
   //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTY0Nzg5Nzk4MSwiZXhwIjoxNjQ3OTAxNTgxLCJzdWIiOiIyIn0.G1aFBGTPQaoZLj4aKB57AlDSjprlmWu8hXoErTOuotA";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTY0NzkwMzM0NywiZXhwIjoxNjQ3OTA2OTQ3LCJzdWIiOiIyIn0.0zjC3uCJPk50llrwIvFp94VpkBrUcTT26PWmKvhBMB8";
   
   //Pegar o Id do usuário
   //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
@@ -51,7 +52,8 @@ const Finance = () => {
       flexDir="column"
       alignItems="center"
     >
-      <Box
+      <Slide in={onContainerOpen} style={{ zIndex: 10 }} direction="left">
+        <Box
         w="100%"
         mb="10px"
       >
@@ -99,18 +101,25 @@ const Finance = () => {
             newFinances.filter(({status}) =>(filterFin === "Todos")?status !== "Todos" : status === filterFin).map((item,index) => (
               <FinanceCard item={item} key={index} />
             )):
-            <Heading 
-              variant="title3" 
-              fontSize={["16px","28px"]} 
-
-              textAlign="center"
-              d="flex"
-              flexDir="column"
-              alignItems="center"
-            >
-              sem despesas no momento
-              <IoMdCash/>
-            </Heading>}
+              <Box
+                h="100%"
+                w="100%"
+                d="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Heading 
+                  variant="title3" 
+                  fontSize={["16px","28px"]} 
+                  d="flex"
+                  flexDir="column"
+                  alignItems="center"
+                >
+                  sem despesas no momento
+                  <IoMdCash/>
+                </Heading>
+              </Box>
+            }
           </Box>
           <ModalFinance
             isOpen={isAddFinanceOpen}
@@ -120,6 +129,9 @@ const Finance = () => {
           />
         </Box> 
       </Box>
+      </Slide>
+      
+
     </Box>
   );
 };
