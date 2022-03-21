@@ -17,8 +17,6 @@ import {
   EditableInput,
   EditablePreview,
 } from "@chakra-ui/react";
-import Inputs from "../Tenants-Input";
-import { useState } from "react";
 
 const ModalListTenants = ({
   isOpenAlterTenants,
@@ -30,20 +28,16 @@ const ModalListTenants = ({
   currentTenants,
   errors,
 }) => {
-
-    
   return (
-      
     <Modal isOpen={isOpenAlterTenants} onClose={onCloseAlterTenants}>
       <ModalOverlay />
       <ModalContent h={["90%", "80%"]} bg="#141155">
         <ModalHeader
-          // fontSize={["100px","200px","300px"]}  exemplo responsividade
           bg="#00A5AE"
           borderTopLeftRadius="5px"
           borderTopRightRadius="5px"
         >
-          <Heading variant="title1">Alterar Inquilino</Heading>
+          <Heading variant="title1">Alterar inquilino</Heading>
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -70,7 +64,7 @@ const ModalListTenants = ({
                   alignItems="center"
                   justifyContent="space-between"
                 >
-                  <Text color="white">Diguite o email</Text>
+                  <Text color="white">Digite o e-mail</Text>
                   <FormHelperText
                     variant="text1"
                     color="red"
@@ -80,22 +74,25 @@ const ModalListTenants = ({
                     {errors.email?.message}
                   </FormHelperText>
                 </Box>
-                
 
                 <Editable
-                   
-                  focusBorderColor='transparent'
+                  focusBorderColor="transparent"
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
                   defaultValue={currentTenants.email}
                   variant="outline"
                   w="95%"
-                    h="40px"
-                    borderRadius="5px"
-                    margin={["15px 0","15px 0"]}
+                  h="40px"
+                  borderRadius="5px"
+                  margin={["15px 0", "15px 0"]}
                 >
-                  <EditablePreview  padding="10px" />
-                  <EditableInput  borderRadius="5px" bgColor="#00A5AE" h="40px" {...register("email")} />
+                  <EditablePreview padding="10px" />
+                  <EditableInput
+                    borderRadius="5px"
+                    bgColor="#00A5AE"
+                    h="40px"
+                    {...register("email")}
+                  />
                 </Editable>
 
                 <Box
@@ -103,7 +100,7 @@ const ModalListTenants = ({
                   alignItems="center"
                   justifyContent="space-between"
                 >
-                  <Text color="white">Diguite a senha</Text>
+                  <Text color="white">Digite a senha</Text>
                   <FormHelperText
                     variant="text1"
                     color="red"
@@ -113,28 +110,32 @@ const ModalListTenants = ({
                     {errors.password?.message}
                   </FormHelperText>
                 </Box>
-              
+
                 <Editable
-                
-                _placeholder={{ opacity: 1, color: "white" }}
-                bgColor="#00A5AE"
-                defaultValue={currentTenants.password}
-                variant="outline"
-                w="95%"
+                  _placeholder={{ opacity: 1, color: "white" }}
+                  bgColor="#00A5AE"
+                  defaultValue={currentTenants.password}
+                  variant="outline"
+                  w="95%"
                   h="40px"
                   borderRadius="5px"
-                  margin={["15px 0","15px 0"]}
-              >
-                <EditablePreview padding="10px" />
-                <EditableInput borderRadius="5px" bgColor="#00A5AE" h="40px" {...register("password")} />
-              </Editable>
+                  margin={["15px 0", "15px 0"]}
+                >
+                  <EditablePreview padding="10px" />
+                  <EditableInput
+                    borderRadius="5px"
+                    bgColor="#00A5AE"
+                    h="40px"
+                    {...register("password")}
+                  />
+                </Editable>
 
                 <Box
                   display="flex"
                   alignItems="center"
                   justifyContent="space-between"
                 >
-                  <Text color="white">Diguite o numero do Imovel</Text>
+                  <Text color="white">Digite o número do imóvel</Text>
                   <FormHelperText
                     variant="text1"
                     color="red"
@@ -154,26 +155,30 @@ const ModalListTenants = ({
                   name="number"
                 ></Inputs> */}
                 <Editable
-                
-                _placeholder={{ opacity: 1, color: "white" }}
-                bgColor="#00A5AE"
-                defaultValue={currentTenants.number}
-                variant="outline"
-                w="95%"
+                  _placeholder={{ opacity: 1, color: "white" }}
+                  bgColor="#00A5AE"
+                  defaultValue={currentTenants.number}
+                  variant="outline"
+                  w="95%"
                   h="40px"
                   borderRadius="5px"
-                  margin={["15px 0","15px 0"]}
-              >
-                <EditablePreview padding="10px" />
-                <EditableInput borderRadius="5px" bgColor="#00A5AE" h="40px" {...register("number")} />
-              </Editable>
+                  margin={["15px 0", "15px 0"]}
+                >
+                  <EditablePreview padding="10px" />
+                  <EditableInput
+                    borderRadius="5px"
+                    bgColor="#00A5AE"
+                    h="40px"
+                    {...register("number")}
+                  />
+                </Editable>
 
                 <Box
                   display="flex"
                   alignItems="center"
                   justifyContent="space-between"
                 >
-                  <Text color="white">Diguite o Nome do responsavel</Text>
+                  <Text color="white">Digite o nome do responsável</Text>
                   <FormHelperText
                     variant="text1"
                     color="red"
@@ -193,26 +198,30 @@ const ModalListTenants = ({
                   name="responsible"
                 ></Inputs> */}
                 <Editable
-                
-                _placeholder={{ opacity: 1, color: "white" }}
-                bgColor="#00A5AE"
-                defaultValue={currentTenants.responsible}
-                variant="outline"
-                w="95%"
+                  _placeholder={{ opacity: 1, color: "white" }}
+                  bgColor="#00A5AE"
+                  defaultValue={currentTenants.responsible}
+                  variant="outline"
+                  w="95%"
                   h="40px"
                   borderRadius="5px"
-                  margin={["15px 0","15px 0"]}
-              >
-                <EditablePreview padding="10px" />
-                <EditableInput borderRadius="5px" bgColor="#00A5AE" h="40px" {...register("responsible")} />
-              </Editable>
+                  margin={["15px 0", "15px 0"]}
+                >
+                  <EditablePreview padding="10px" />
+                  <EditableInput
+                    borderRadius="5px"
+                    bgColor="#00A5AE"
+                    h="40px"
+                    {...register("responsible")}
+                  />
+                </Editable>
 
                 <Box
                   display="flex"
                   alignItems="center"
                   justifyContent="space-between"
                 >
-                  <Text color="white">Diguito o CPF</Text>
+                  <Text color="white">Digite o CPF</Text>
                   <FormHelperText
                     variant="text1"
                     color="red"
@@ -233,26 +242,30 @@ const ModalListTenants = ({
                 ></Inputs> */}
 
                 <Editable
-                
-                _placeholder={{ opacity: 1, color: "white" }}
-                bgColor="#00A5AE"
-                defaultValue={currentTenants.cpf}
-                variant="outline"
-                w="95%"
+                  _placeholder={{ opacity: 1, color: "white" }}
+                  bgColor="#00A5AE"
+                  defaultValue={currentTenants.cpf}
+                  variant="outline"
+                  w="95%"
                   h="40px"
                   borderRadius="5px"
-                  margin={["15px 0","15px 0"]}
-              >
-                <EditablePreview padding="10px" />
-                <EditableInput borderRadius="5px" bgColor="#00A5AE" h="40px" {...register("cpf")} />
-              </Editable>
+                  margin={["15px 0", "15px 0"]}
+                >
+                  <EditablePreview padding="10px" />
+                  <EditableInput
+                    borderRadius="5px"
+                    bgColor="#00A5AE"
+                    h="40px"
+                    {...register("cpf")}
+                  />
+                </Editable>
 
                 <Box
                   display="flex"
                   alignItems="center"
                   justifyContent="space-between"
                 >
-                  <Text color="white">Diguite o valor</Text>
+                  <Text color="white">Digite o valor</Text>
                   <FormHelperText
                     variant="text1"
                     color="red"
@@ -273,21 +286,25 @@ const ModalListTenants = ({
                 ></Inputs> */}
 
                 <Editable
-                
-                _placeholder={{ opacity: 1, color: "white" }}
-                bgColor="#00A5AE"
-                defaultValue={currentTenants.value}
-                variant="outline"
-                w="95%"
+                  _placeholder={{ opacity: 1, color: "white" }}
+                  bgColor="#00A5AE"
+                  defaultValue={currentTenants.value}
+                  variant="outline"
+                  w="95%"
                   h="40px"
                   borderRadius="5px"
-                  margin={["15px 0","15px 0"]}
-              >
-                <EditablePreview padding="10px" />
-                <EditableInput borderRadius="5px" bgColor="#00A5AE" h="40px" {...register("value")} />
-              </Editable>
+                  margin={["15px 0", "15px 0"]}
+                >
+                  <EditablePreview padding="10px" />
+                  <EditableInput
+                    borderRadius="5px"
+                    bgColor="#00A5AE"
+                    h="40px"
+                    {...register("value")}
+                  />
+                </Editable>
 
-                <Text color="white">Selecione o status do imovel</Text>
+                <Text color="white">Selecione o status do imóvel</Text>
                 <Select
                   bgColor="#00A5AE"
                   w="95%"
@@ -295,12 +312,10 @@ const ModalListTenants = ({
                   name="status"
                   onChange={(e) => setStatusHome(e.target.value)}
                 >
-                  <option selected="selected" value="selecione">
-                    vago
+                  <option defaultValue="selected" value="selecione">
+                    Vago
                   </option>
-                  <option value="comprado" selected>
-                    comprado
-                  </option>
+                  <option value="comprado">Comprado</option>
                   <option value="alugado">Alugado</option>
                 </Select>
 
@@ -314,7 +329,7 @@ const ModalListTenants = ({
                       Fechar
                     </Button>
                     <Button type="submit" variant="default">
-                      Alterar usuario
+                      Alterar usuário
                     </Button>
                   </Box>
                 </ModalFooter>
