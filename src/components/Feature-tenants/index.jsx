@@ -15,6 +15,7 @@ import ModalListTenants from "../ModalListTenants";
 const TenantsPage =()=>{
   //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   // const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
+  const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3ODk3NzYxLCJleHAiOjE2NDc5MDEzNjEsInN1YiI6IjMifQ.KQDszQy2QOzUMBD7iHoi2jPXrSvURElWiPApqyh40og"
   const {showTenants,tenants, addTenant, changeTenant } = useContext(TenantsContext)
   
     const { isOpen:isAddOpen, onOpen:onAddOpen, onClose:onAddClose } = useDisclosure();
@@ -56,7 +57,7 @@ const TenantsPage =()=>{
       value,
       status: statusHome,
     };
-    addTenant(3,"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3ODg5NDAxLCJleHAiOjE2NDc4OTMwMDEsInN1YiI6IjMifQ.PxTpLC1kV5hOpwF7MJwP-p9_qEZfvhDoXpUMNhgOp-8",newTenants)
+    addTenant(3,token,newTenants)
   };
 
   const handleChangeTenants = ({email,password,number,responsible,cpf,value,})=>{
@@ -70,11 +71,11 @@ const TenantsPage =()=>{
       status: statusHome,
       userId:3
     };
-    changeTenant("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3ODg5NDAxLCJleHAiOjE2NDc4OTMwMDEsInN1YiI6IjMifQ.PxTpLC1kV5hOpwF7MJwP-p9_qEZfvhDoXpUMNhgOp-8",changeTenants,currentTenants.id)
+    changeTenant(token,changeTenants,currentTenants.id)
   }
 
   useEffect(() => {
-    showTenants("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3ODg5NDAxLCJleHAiOjE2NDc4OTMwMDEsInN1YiI6IjMifQ.PxTpLC1kV5hOpwF7MJwP-p9_qEZfvhDoXpUMNhgOp-8")
+    showTenants(token)
   }, [tenants]);
 
   return (

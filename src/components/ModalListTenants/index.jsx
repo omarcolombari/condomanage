@@ -91,11 +91,11 @@ const ModalListTenants = ({
                   variant="outline"
                   w="95%"
                     h="40px"
-                    borderRadius="30px"
+                    borderRadius="5px"
                     margin={["15px 0","15px 0"]}
                 >
                   <EditablePreview  padding="10px" />
-                  <EditableInput  borderRadius="30px" bgColor="#00A5AE" h="40px" {...register("email")} />
+                  <EditableInput  borderRadius="5px" bgColor="#00A5AE" h="40px" {...register("email")} />
                 </Editable>
 
                 <Box
@@ -122,11 +122,11 @@ const ModalListTenants = ({
                 variant="outline"
                 w="95%"
                   h="40px"
-                  borderRadius="30px"
+                  borderRadius="5px"
                   margin={["15px 0","15px 0"]}
               >
                 <EditablePreview padding="10px" />
-                <EditableInput borderRadius="30px" bgColor="#00A5AE" h="40px" {...register("password")} />
+                <EditableInput borderRadius="5px" bgColor="#00A5AE" h="40px" {...register("password")} />
               </Editable>
 
                 <Box
@@ -161,11 +161,11 @@ const ModalListTenants = ({
                 variant="outline"
                 w="95%"
                   h="40px"
-                  borderRadius="30px"
+                  borderRadius="5px"
                   margin={["15px 0","15px 0"]}
               >
                 <EditablePreview padding="10px" />
-                <EditableInput borderRadius="30px" bgColor="#00A5AE" h="40px" {...register("number")} />
+                <EditableInput borderRadius="5px" bgColor="#00A5AE" h="40px" {...register("number")} />
               </Editable>
 
                 <Box
@@ -200,11 +200,11 @@ const ModalListTenants = ({
                 variant="outline"
                 w="95%"
                   h="40px"
-                  borderRadius="30px"
+                  borderRadius="5px"
                   margin={["15px 0","15px 0"]}
               >
                 <EditablePreview padding="10px" />
-                <EditableInput borderRadius="30px" bgColor="#00A5AE" h="40px" {...register("responsible")} />
+                <EditableInput borderRadius="5px" bgColor="#00A5AE" h="40px" {...register("responsible")} />
               </Editable>
 
                 <Box
@@ -240,11 +240,11 @@ const ModalListTenants = ({
                 variant="outline"
                 w="95%"
                   h="40px"
-                  borderRadius="30px"
+                  borderRadius="5px"
                   margin={["15px 0","15px 0"]}
               >
                 <EditablePreview padding="10px" />
-                <EditableInput borderRadius="30px" bgColor="#00A5AE" h="40px" {...register("cpf")} />
+                <EditableInput borderRadius="5px" bgColor="#00A5AE" h="40px" {...register("cpf")} />
               </Editable>
 
                 <Box
@@ -280,11 +280,11 @@ const ModalListTenants = ({
                 variant="outline"
                 w="95%"
                   h="40px"
-                  borderRadius="30px"
+                  borderRadius="5px"
                   margin={["15px 0","15px 0"]}
               >
                 <EditablePreview padding="10px" />
-                <EditableInput borderRadius="30px" bgColor="#00A5AE" h="40px" {...register("value")} />
+                <EditableInput borderRadius="5px" bgColor="#00A5AE" h="40px" {...register("value")} />
               </Editable>
 
                 <Text color="white">Selecione o status do imovel</Text>
