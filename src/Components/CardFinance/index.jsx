@@ -11,7 +11,7 @@ const CardFinance = ({ finance }) => {
 
   //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc4MDc2MzIsImV4cCI6MTY0NzgxMTIzMiwic3ViIjoiMiJ9.Z5HnGM4QEWeJqaeItlFwzLIaTqhY2xXKh0aBbmy_U0U";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc4MjQwMzIsImV4cCI6MTY0NzgyNzYzMiwic3ViIjoiMiJ9.scKztgOXybQTlrYtd6NUwLYKEaPQIrXeLC-Y_Lj14iQ";
 
   //Pegar o Id do usuário
   //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));

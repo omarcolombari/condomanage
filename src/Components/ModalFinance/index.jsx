@@ -38,7 +38,7 @@ const ModalFinance = ({
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent bg="#141155">
+        <ModalContent bg="#141155" w="90%">
           <ModalHeader
             bg="#00A5AE"
             borderTopLeftRadius="5px"
