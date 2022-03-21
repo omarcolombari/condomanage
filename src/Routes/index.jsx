@@ -6,44 +6,46 @@ import ChakraSignupPage from "../Pages/Chakra_Signup";
 import DashboardUser from "../Pages/DashboardUser";
 
 const Routes = () => {
+  const [authenticaded, setAuthenticaded] = useState(false);
 
-    const [authenticaded, setAuthenticaded] = useState(false);
-    
-    useEffect(() => {
-        const token = JSON.parse(localStorage.getItem('@CondoManage:token'));
-        if(token){
-            return setAuthenticaded(true)
-        }
-    }, [authenticaded])
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
+    if (token) {
+      return setAuthenticaded(true);
+    }
+  }, [authenticaded]);
 
-    return (
-        <Switch>
-            <Route exact path='/' >
-                <ChakraLandingPage/>
-            </Route>
-            
-            <Route path='/login' >
-                <ChakraLoginPage authenticaded={authenticaded} setAuthenticaded={setAuthenticaded}/>
-            </Route>
-            
-            <Route path='/signup' >
-                <ChakraSignupPage/>
-            </Route>
+  return (
+    <Switch>
+      <Route exact path="/">
+        <ChakraLandingPage />
+      </Route>
 
-            <Route path='/dashboard' >
-                <DashboardUser authenticaded={authenticaded} setAuthenticaded={setAuthenticaded}/>
-            </Route>
+      <Route path="/login">
+        <ChakraLoginPage
+          authenticaded={authenticaded}
+          setAuthenticaded={setAuthenticaded}
+        />
+      </Route>
 
-            <Route path='/finances' >
-            </Route>
+      <Route path="/signup">
+        <ChakraSignupPage />
+      </Route>
 
-            <Route path='/tenants' >
-            </Route>
+      <Route path="/dashboard">
+        <DashboardUser
+          authenticaded={authenticaded}
+          setAuthenticaded={setAuthenticaded}
+        />
+      </Route>
 
-            <Route path='/settings' >
-            </Route>  
-        </Switch>
-    )
-}
+      <Route path="/finances"></Route>
+
+      <Route path="/tenants"></Route>
+
+      <Route path="/settings"></Route>
+    </Switch>
+  );
+};
 
 export default Routes;
