@@ -16,7 +16,8 @@ const Header = ({setAuthenticaded}) => {
         flexDir="row"
         justifyContent="center">
             <Box
-            w={["95%","90%","85%"]}
+            w={["95%"]}
+            maxW="1300px"
             d="flex"
             flexDir="row"
             justifyContent="space-between"

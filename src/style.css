@@ -20,6 +20,8 @@
 
   *::-webkit-scrollbar-track {
     background: #daedf3;
+    
+    border-radius: 50px;
   }
 
   *::-webkit-scrollbar-thumb {

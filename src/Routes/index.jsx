@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
-import ChakraLandingPage from "../Pages/Chakra_LandingPage";
-import ChakraLoginPage from "../Pages/Chakra_Login";
-import ChakraSignupPage from "../Pages/Chakra_Signup";
-import DashboardUser from "../Pages/DashboardUser";
+import ChakraLandingPage from "../pages/Chakra_LandingPage";
+import ChakraLoginPage from "../pages/Chakra_Login";
+import ChakraSignupPage from "../pages/Chakra_Signup";
+import DashboardUser from "../pages/DashboardUser";
 
 const Routes = () => {
 
