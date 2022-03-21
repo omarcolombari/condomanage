@@ -5,9 +5,10 @@ import ListFinances from "../../Components/ListFinances";
 import { FinancesContext } from "../../Providers/Finances";
 import Header from "../../Components/Header";
 import ModalFinance from "../../Components/ModalFinance";
+import HeaderPage from "../../Components/HeaderPageVar";
 
 const Finance = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen:isAddFinanceOpen, onOpen:onAddFinanceOpen, onClose:onAddFinanceClose } = useDisclosure();
 
   //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   const token =
@@ -50,53 +51,60 @@ const Finance = () => {
   };
 
   return (
-    <Box display="flex" flexDirection="column" gap="20px">
-      <Header />
+    <Box 
+      w="100vw"
+      h="100vh"
+      d="flex"
+      flexDir="column"
+      alignItems="center"
+    >
       <Box
-        w="90%"
-        maxW="779.73px"
-        margin="0 auto"
-        h="77vh"
-        borderRadius="10px"
-        boxShadow="0px 5px 10px 1px rgba(0,0,0,0.5)"
-        display="flex"
-        flexDirection="column"
-        justifyContent="space-between"
-        alignItems="center"
-        gap="12px"
+        w="100%"
+        mb="10px"
       >
-        <StyledHeader>
-          <Heading fontSize={["20px", "25px", "30px"]}>
-            Lista de finanças
-          </Heading>
-          <Button
-            onClick={onOpen}
-            variant="default"
-            borderRadius="100%"
-            bg="#141155"
-            title="Adicionar finança"
+        <Header />
+        <Box
+          w="90%"
+          maxW="779.73px"
+          margin="0 auto"
+          h="77vh"
+          borderRadius="10px"
+          boxShadow="0px 5px 10px 1px rgba(0,0,0,0.5)"
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          alignItems="center"
+          gap="12px"
+        >
+          <HeaderPage 
+            onOpen={onAddFinanceOpen}
+            titulo="Lista de finanças"
+          />
+
+          <Box
+            w="100%"
+            d="flex"
+            flexDir="row"
+            justifyContent="space-around"
           >
-            +
-          </Button>
-        </StyledHeader>
-        <BoxButtons>
-          <Button onClick={() => filterFinances("Todos")}>Todos</Button>
-          <Button onClick={() => filterFinances("Entrada")}>Entradas</Button>
-          <Button onClick={() => filterFinances("Despesa")}>Despesas</Button>
-        </BoxButtons>
+            <Button variant="default" onClick={() => filterFinances("Todos")}>Todos</Button>
+            <Button variant="default" onClick={() => filterFinances("Entrada")}>Entradas</Button>
+            <Button variant="default" onClick={() => filterFinances("Despesa")}>Despesas</Button>
+          </Box>
 
-        {newFinances.length < finances.length ? (
-          <ListFinances finances={newFinances} />
-        ) : (
-          <ListFinances finances={finances} />
-        )}
+          {newFinances.length < finances.length ? (
+            <ListFinances finances={newFinances} />
+          ) : (
+            <ListFinances finances={finances} />
+          )}
 
-        <ModalFinance
-          isOpen={isOpen}
-          onClose={onClose}
-          handleChange={handleRegisterFinance}
-          title="Registrar finança"
-        />
+          <ModalFinance
+            isOpen={isAddFinanceOpen}
+            onClose={onAddFinanceClose}
+            handleChange={handleRegisterFinance}
+            title="Registrar finança"
+          />
+        </Box> 
       </Box>
     </Box>
   );
