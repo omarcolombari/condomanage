@@ -1,18 +1,18 @@
 import { Box, Input } from "@chakra-ui/react";
 
-const Inputs = ({ register,bgColor,phColor,registerData,ph,type,name}) => {
+const Inputs = ({ register,bgColor,phColor,registerData,ph,type,name,value}) => {
     return(
         <Box
             bg= {bgColor}
             w="95%"
             h={["20px","30px"]}
             borderRadius="30px"
-            margin={["15px 0","15px 0"]}
+            margin="15px 0"
             
             >
-            
-            
+             
             <Input 
+                
                 id={name}
                 type={type}
                 name={name}

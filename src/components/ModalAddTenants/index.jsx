@@ -11,14 +11,12 @@ import {
     Text,
     Select,
     FormControl,
+    FormHelperText,
    
     } from '@chakra-ui/react'
-import Inputs from '../Input'
-
-    
+import Inputs from '../Tenants-Input'
 
 const ModalAddTenants =({register,handleAddTenants,handleSubmit,setStatusHome,isAddOpen,onAddClose,errors})=>{
-    
     
    return (
    <Modal isOpen={isAddOpen} onClose={onAddClose}>
@@ -47,45 +45,95 @@ const ModalAddTenants =({register,handleAddTenants,handleSubmit,setStatusHome,is
              overflowY="scroll">
 
                 <form onSubmit={handleSubmit(handleAddTenants)}>
-                    <FormControl>
+                <FormControl  >
+                <Box display='flex' alignItems="center" justifyContent="space-between">
                     <Text color="white">Diguite o email</Text>
-                <Inputs register={register} registerData="email" ph="Diguite o email" bgColor="#00A5AE" phColor="white" type="text" name="email"></Inputs>
+                    <FormHelperText variant="text1"
+                    color="red"
+                    fontSize="12px"
+                    fontWeight="700px">
+                    {errors.email?.message}
+                    </FormHelperText>
+                </Box>
+                <Inputs ph="Diguite o email" register={register} registerData="email" bgColor="#00A5AE" phColor="white" type="text" name="email" ></Inputs>
                 
-                <Text color="white">Diguite a senha</Text>
-                <Inputs register={register} registerData="password" ph="Diguite a senha" bgColor="#00A5AE" phColor="white" type="password" name="password" ></Inputs>
+                <Box display='flex' alignItems="center" justifyContent="space-between">
+                    <Text color="white">Diguite a senha</Text>
+                    <FormHelperText variant="text1"
+                    color="red"
+                    fontSize="12px"
+                    fontWeight="700px">
+                    {errors.password?.message}
+                    </FormHelperText>
+                </Box>
+                <Inputs ph="Diguite a senha" register={register} registerData="password"  bgColor="#00A5AE" phColor="white" type="password" name="password"  ></Inputs>
                 
-                <Text color="white">Diguite o numero do Imovel</Text>
-                <Inputs register={register} registerData="number" ph="Diguite o numero do imovel" bgColor="#00A5AE" phColor="white" type="number" name="number" ></Inputs>
+                <Box display='flex' alignItems="center" justifyContent="space-between">
+                    <Text color="white">Diguite o numero do Imovel</Text>
+                    <FormHelperText variant="text1"
+                    color="red"
+                    fontSize="12px"
+                    fontWeight="700px">
+                    {errors.number?.message}
+                    </FormHelperText>
+                </Box>
+                <Inputs ph="Diguite o numero do imovel" register={register} registerData="number"  bgColor="#00A5AE" phColor="white" type="number" name="number" ></Inputs>
                 
-                <Text color="white">Diguite o Nome do responsavel</Text>
-                <Inputs register={register} registerData="responsible" ph="Diguite o nome do responsavel" bgColor="#00A5AE" phColor="white" type="text" name="responsible" ></Inputs>   
+                <Box display='flex' alignItems="center" justifyContent="space-between">
+                    <Text color="white">Diguite o Nome do responsavel</Text>
+                    <FormHelperText variant="text1"
+                    color="red"
+                    fontSize="12px"
+                    fontWeight="700px">
+                    {errors.responsible?.message}
+                    </FormHelperText>
+                </Box>
+                <Inputs ph="Diguite o nome do responsavel" register={register} registerData="responsible"  bgColor="#00A5AE" phColor="white" type="text" name="responsible" ></Inputs>   
                 
-                <Text color="white">Diguito o CPF</Text>
-                <Inputs register={register} registerData="cpf" ph="Diguite o numero do CPF" bgColor="#00A5AE" phColor="white" type="number" name="cpf" ></Inputs> 
+                <Box display='flex' alignItems="center" justifyContent="space-between">
+                    <Text color="white">Diguito o CPF</Text>
+                    <FormHelperText variant="text1"
+                    color="red"
+                    fontSize="12px"
+                    fontWeight="700px">
+                    {errors.cpf?.message}
+                    </FormHelperText>
+                </Box>
+                <Inputs  ph="Diguite o numero do CPF"  register={register} registerData="cpf" bgColor="#00A5AE" phColor="white" type="number" name="cpf" ></Inputs> 
                
-                <Text color="white">Diguite o valor</Text>
-                <Inputs register={register} registerData="value" ph="Valor do condominio" bgColor="#00A5AE" phColor="white" type="number" name="value" ></Inputs>
+                <Box display='flex' alignItems="center" justifyContent="space-between">
+                    <Text color="white">Diguite o valor</Text>
+                    <FormHelperText variant="text1"
+                    color="red"
+                    fontSize="12px"
+                    fontWeight="700px">
+                    {errors.cpf?.message}
+                    </FormHelperText>
+                </Box>
+                <Inputs ph="Valor do condominio" register={register} registerData="value"  bgColor="#00A5AE" phColor="white" type="number" name="value" ></Inputs>
                     
                 <Text color="white">Selecione o status do imovel</Text>
-                    <Select bgColor="#00A5AE" w="95%"{...register("status")} name="status" onChange={(e)=>setStatusHome(e.target.value)}>
+                    <Select bgColor="#00A5AE" w="94%"{...register("status")} name="status" onChange={(e)=>setStatusHome(e.target.value)}>
                         <option selected="selected" value="selecione">vago</option>
                         <option value="comprado" selected>comprado</option>
                         <option value="alugado">Alugado</option>
                     </Select>
-                    <ModalFooter
+                    
+                    <ModalFooter 
+                    
                     display="flex"
                     justifyContent="space-around"
-                  >
-                        <Box padding="30px">
+                    >
+                        <Box padding={["25px","30px"]}>
 
-                            <Button colorScheme='blue' mr={3} onClick={onAddClose}>
+                            <Button type="reset"  colorScheme='blue' mr={3} onClick={onAddClose}>
                             Fechar
                             </Button>
-                            <Button type="submit" variant='default'>Cadastrar usuario</Button>
+                            <Button  type="submit"variant='default'>Alterar usuario</Button>
                         </Box>
                     </ModalFooter>
 
-                    </FormControl>
+                </FormControl>
                 
                 </form>
             </Box>

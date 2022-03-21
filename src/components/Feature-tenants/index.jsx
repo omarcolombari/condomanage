@@ -13,10 +13,11 @@ import {
 import ModalAddTenants from "../ModalAddTenants";
 import ModalListTenants from "../ModalListTenants";
 const TenantsPage =()=>{
+  //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
+  // const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
+  const {showTenants,tenants, addTenant, changeTenant } = useContext(TenantsContext)
+  
     const { isOpen:isAddOpen, onOpen:onAddOpen, onClose:onAddClose } = useDisclosure();
-   
-    const {showTenants,tenants, addTenant, changeTenant } = useContext(TenantsContext)
-
     const { 
         isOpen: isOpenAlterTenants, 
         onOpen: onOpenAlterTenants, 
@@ -35,17 +36,16 @@ const TenantsPage =()=>{
       .string()
       .min(6, "Minimo 6 caracteres")
       .required("Crie uma senha"),
-    number: yup.string().required("Diguite o Number do imovel"),
-    responsible: yup.string().required("Diguite o nome do responsavel"),
-    cpf: yup.number().required("Diguite o CPF do Inquilino"),
-    value: yup.number().required("Diguite o valor pago mensalmente"),
+    number: yup.number("Apenas Numero").required("Diguite o Number do imovel"),
+    responsible: yup.string().required("Diguite o nome do dono"),
+    cpf: yup.string("Somente numero").required("Diguite o CPF do Inquilino"),
+    value: yup.string("Somente numero").required("Diguite o valor pago "),
   });
 
   const {register,handleSubmit,formState: { errors },} = useForm({
     resolver: yupResolver(schema),
   });
-  
-  
+   
   const handleAddTenants = ({email,password,number,responsible,cpf,value,}) => {
     const newTenants = {
       email,
@@ -56,7 +56,9 @@ const TenantsPage =()=>{
       value,
       status: statusHome,
     };
-    addTenant(1,"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3Njk3NDc4LCJleHAiOjE2NDc3MDEwNzgsInN1YiI6IjEifQ.WYu4cpZ0wdsTQYzReUEMJMcSesWnD8G_C6KVfSqNH28",newTenants)
+    
+    addTenant(3,"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3ODg4MzY2LCJleHAiOjE2NDc4OTE5NjYsInN1YiI6IjMifQ.NnyScgb5i_SXQgD3Bdhi_N7djcXz7-BrJYuMQl83EMM",newTenants)
+    
   };
 
   const handleChangeTenants = ({email,password,number,responsible,cpf,value,})=>{
@@ -68,14 +70,14 @@ const TenantsPage =()=>{
       cpf,
       value,
       status: statusHome,
-      
+      userId:3
     };
-    changeTenant("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3Njk3NDc4LCJleHAiOjE2NDc3MDEwNzgsInN1YiI6IjEifQ.WYu4cpZ0wdsTQYzReUEMJMcSesWnD8G_C6KVfSqNH28",changeTenants,1)
+    console.log(changeTenants)
+    changeTenant("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3ODg4MzY2LCJleHAiOjE2NDc4OTE5NjYsInN1YiI6IjMifQ.NnyScgb5i_SXQgD3Bdhi_N7djcXz7-BrJYuMQl83EMM",changeTenants,currentTenants.id)
   }
 
-
   useEffect(() => {
-    showTenants("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3Njk3NDc4LCJleHAiOjE2NDc3MDEwNzgsInN1YiI6IjEifQ.WYu4cpZ0wdsTQYzReUEMJMcSesWnD8G_C6KVfSqNH28")
+    showTenants("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3ODg4MzY2LCJleHAiOjE2NDc4OTE5NjYsInN1YiI6IjMifQ.NnyScgb5i_SXQgD3Bdhi_N7djcXz7-BrJYuMQl83EMM")
   }, [tenants]);
 
   return (
@@ -93,8 +95,7 @@ const TenantsPage =()=>{
     alignItems="center"
     justifyContent="space-between"
     margin="10px"
-    h="90px"
-    
+    h="90px"    
     >
 
       <Heading variant="title1">Lista de apartamento</Heading>
@@ -131,9 +132,7 @@ const TenantsPage =()=>{
        alignItems="center"
        padding='20px'
       >
-       
           
-            
         {tenants?.map((tenant,index) => (
           <Box 
           
