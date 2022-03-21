@@ -103,6 +103,13 @@ const ModalUpdateDemand = ( { isUpdateDemandOpen, onUpdateDemandClose, item } ) 
                                     placeholder="Digite qual a demanda"
                                     focusBorderColor='transparent'
                                     _placeholder={{ opacity: 1, color: '#00a5ae' }}/>
+                                    <Input 
+                                    name='description'
+                                    hidden
+                                    defaultValue={item.id}
+                                    variant="outline"
+                                    focusBorderColor='transparent'
+                                    _placeholder={{ opacity: 1, color: '#00a5ae' }}/>
                                   </Box>
                                   <FormLabel
                                      fontFamily="Open Sans, sans-serif"
