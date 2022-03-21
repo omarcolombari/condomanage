@@ -373,7 +373,7 @@ const ContainerSignup = () => {
                   phColor={"#00a5ae"}
                   registerData="confirmPassword"
                   type="password"
-                  ph="Digite o CNPJ - apenas números"
+                  ph="Confirme sua senha"
                 />
                 <Text
                   variant="text1"

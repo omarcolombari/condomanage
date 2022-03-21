@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import background from "../../assets/background.png";
 import ContainerLogin from "../../Components/Container_Login";
 
-const ChakraLoginPage = () => {
+const ChakraLoginPage = ({authenticaded,setAuthenticaded}) => {
   return (
     <Box
       w="100vw"
@@ -12,7 +12,7 @@ const ChakraLoginPage = () => {
       bgRepeat="no-repeat"
       bgSize="cover"
     >
-      <ContainerLogin />
+      <ContainerLogin authenticaded={authenticaded} setAuthenticaded={setAuthenticaded}/>
     </Box>
   );
 };

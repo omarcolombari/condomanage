@@ -17,8 +17,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import Inputs from "../Inputs";
 import LoginHeader from "../LoginHeader";
+import { Redirect } from "react-router-dom";
 
-const ContainerLogin = () => {
+const ContainerLogin = ({authenticaded,setAuthenticaded}) => {
   const history = useHistory();
 
   const schema = yup.object().shape({
@@ -45,13 +46,20 @@ const ContainerLogin = () => {
         const { accessToken } = response.data;
         const { user } = response.data;
         toast.success("Login realizado com sucesso!");
+        setAuthenticaded(true)
         localStorage.setItem("@CondoManage:token", JSON.stringify(accessToken));
         localStorage.setItem("@CondoManage:infos", JSON.stringify({ user }));
       })
       .catch((err) => toast.error("E-mail ou senha inválidos"));
+      console.log(authenticaded)
   };
 
-  const { onOpen, onToggle } = useDisclosure();
+  const { onOpen } = useDisclosure();
+
+  if(authenticaded){
+    return <Redirect to="/dashboard"/>
+  }
+
   return (
     <Slide in={onOpen} style={{ zIndex: 10 }} direction="left">
       <Box

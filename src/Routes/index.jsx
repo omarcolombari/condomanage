@@ -3,19 +3,19 @@ import { Switch, Route } from "react-router-dom";
 import ChakraLandingPage from "../Pages/Chakra_LandingPage";
 import ChakraLoginPage from "../Pages/Chakra_Login";
 import ChakraSignupPage from "../Pages/Chakra_Signup";
+import DashboardUser from "../Pages/DashboardUser";
 
 const Routes = () => {
 
     //AUTENTICAÇÃO
     const [authenticaded, setAuthenticaded] = useState(false)
-
+    
     useEffect(() => {
-        const token = JSON.parse(localStorage.getItem('@condomanage:token'))
+        const token = JSON.parse(localStorage.getItem('@CondoManage:token'));
         if(token){
             return setAuthenticaded(true)
         }
     }, [authenticaded])
-
 
     return (
         <Switch>
@@ -24,7 +24,7 @@ const Routes = () => {
             </Route>
             
             <Route path='/login' >
-                <ChakraLoginPage/>
+                <ChakraLoginPage authenticaded={authenticaded} setAuthenticaded={setAuthenticaded}/>
             </Route>
             
             <Route path='/signup' >
@@ -32,6 +32,7 @@ const Routes = () => {
             </Route>
 
             <Route path='/dashboard' >
+                <DashboardUser authenticaded={authenticaded} setAuthenticaded={setAuthenticaded}/>
             </Route>
 
             <Route path='/finances' >

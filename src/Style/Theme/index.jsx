@@ -29,7 +29,8 @@ const CustomTheme = extendTheme({
                 /*  Import { Text } from "@chakra-ui/react"
                     <Text variants="text2"></Text>     */
                 text1: { color:"#000000",fontStyle: "regular",fontWeight: "light" },
-                text2: { color:"#ffffff",fontStyle: "regular",fontWeight: "semibold" }
+                text2: { color:"#ffffff",fontStyle: "regular",fontWeight: "semibold" },
+                text3: { color:"#000000",fontStyle: "regular",fontWeight: "light",d:"flex",flexDir:"row",alignItems:"center",ml:"18px"},
             }
         },
         Button: {
