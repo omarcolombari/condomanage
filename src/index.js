@@ -10,11 +10,11 @@ import Providers from './Providers';
 ReactDOM.render(
   <React.StrictMode>
     <Providers>
-    <ChakraProvider theme={CustomTheme}>
-      
-      <ColorModeScript/>
-       <App />
-     </ChakraProvider>
+      <ChakraProvider theme={CustomTheme}>
+
+        <ColorModeScript />
+        <App />
+      </ChakraProvider>
     </Providers>
 
   </React.StrictMode>,

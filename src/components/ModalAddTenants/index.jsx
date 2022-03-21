@@ -19,7 +19,7 @@ import Inputs from '../Tenants-Input'
 const ModalAddTenants =({register,handleAddTenants,handleSubmit,setStatusHome,isAddOpen,onAddClose,errors})=>{
     
    return (
-   <Modal isOpen={isAddOpen} onClose={onAddClose}>
+   <Modal  isOpen={isAddOpen} onClose={onAddClose}>
     <ModalOverlay />
     <ModalContent  bg="#141155">
         <ModalHeader
@@ -113,7 +113,7 @@ const ModalAddTenants =({register,handleAddTenants,handleSubmit,setStatusHome,is
                 <Inputs ph="Valor do condominio" register={register} registerData="value"  bgColor="#00A5AE" phColor="white" type="number" name="value" ></Inputs>
                     
                 <Text color="white">Selecione o status do imovel</Text>
-                    <Select bgColor="#00A5AE" w="94%"{...register("status")} name="status" onChange={(e)=>setStatusHome(e.target.value)}>
+                    <Select bgColor="#00A5AE" w="95%"{...register("status")} name="status" onChange={(e)=>setStatusHome(e.target.value)}>
                         <option selected="selected" value="selecione">vago</option>
                         <option value="comprado" selected>comprado</option>
                         <option value="alugado">Alugado</option>
@@ -126,10 +126,10 @@ const ModalAddTenants =({register,handleAddTenants,handleSubmit,setStatusHome,is
                     >
                         <Box padding={["25px","30px"]}>
 
-                            <Button type="reset"  colorScheme='blue' mr={3} onClick={onAddClose}>
+                            <Button  type="reset" colorScheme='blue' mr={3} onClick={onAddClose}>
                             Fechar
                             </Button>
-                            <Button  type="submit"variant='default'>Alterar usuario</Button>
+                            <Button type="submit"variant='default'>Alterar usuario</Button>
                         </Box>
                     </ModalFooter>
 

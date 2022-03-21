@@ -36,7 +36,7 @@ const TenantsPage =()=>{
       .string()
       .min(6, "Minimo 6 caracteres")
       .required("Crie uma senha"),
-    number: yup.number("Apenas Numero").required("Diguite o Number do imovel"),
+    number: yup.string().required("Diguite o Number do imovel"),
     responsible: yup.string().required("Diguite o nome do dono"),
     cpf: yup.string("Somente numero").required("Diguite o CPF do Inquilino"),
     value: yup.string("Somente numero").required("Diguite o valor pago "),
@@ -56,9 +56,7 @@ const TenantsPage =()=>{
       value,
       status: statusHome,
     };
-    
-    addTenant(3,"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3ODg4MzY2LCJleHAiOjE2NDc4OTE5NjYsInN1YiI6IjMifQ.NnyScgb5i_SXQgD3Bdhi_N7djcXz7-BrJYuMQl83EMM",newTenants)
-    
+    addTenant(3,"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3ODg5NDAxLCJleHAiOjE2NDc4OTMwMDEsInN1YiI6IjMifQ.PxTpLC1kV5hOpwF7MJwP-p9_qEZfvhDoXpUMNhgOp-8",newTenants)
   };
 
   const handleChangeTenants = ({email,password,number,responsible,cpf,value,})=>{
@@ -72,12 +70,11 @@ const TenantsPage =()=>{
       status: statusHome,
       userId:3
     };
-    console.log(changeTenants)
-    changeTenant("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3ODg4MzY2LCJleHAiOjE2NDc4OTE5NjYsInN1YiI6IjMifQ.NnyScgb5i_SXQgD3Bdhi_N7djcXz7-BrJYuMQl83EMM",changeTenants,currentTenants.id)
+    changeTenant("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3ODg5NDAxLCJleHAiOjE2NDc4OTMwMDEsInN1YiI6IjMifQ.PxTpLC1kV5hOpwF7MJwP-p9_qEZfvhDoXpUMNhgOp-8",changeTenants,currentTenants.id)
   }
 
   useEffect(() => {
-    showTenants("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3ODg4MzY2LCJleHAiOjE2NDc4OTE5NjYsInN1YiI6IjMifQ.NnyScgb5i_SXQgD3Bdhi_N7djcXz7-BrJYuMQl83EMM")
+    showTenants("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3ODg5NDAxLCJleHAiOjE2NDc4OTMwMDEsInN1YiI6IjMifQ.PxTpLC1kV5hOpwF7MJwP-p9_qEZfvhDoXpUMNhgOp-8")
   }, [tenants]);
 
   return (
