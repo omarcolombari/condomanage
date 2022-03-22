@@ -1,4 +1,11 @@
-import { useDisclosure, Heading, Button, Box, Slide } from "@chakra-ui/react";
+import {
+  useDisclosure,
+  Heading,
+  Button,
+  Box,
+  Slide,
+  Icon,
+} from "@chakra-ui/react";
 import { useState, useContext, useEffect } from "react";
 import { FinancesContext } from "../../Providers/Finances";
 import Header from "../../Components/Feats/Header";
@@ -19,18 +26,18 @@ const Finance = () => {
 
   //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc5MDYzMTUsImV4cCI6MTY0NzkwOTkxNSwic3ViIjoiMSJ9.vQk2_VP1J78-8vmJZpEPNYlqa8-p5u-oL7-nRJbz0qg";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTY0Nzk3NTU1NiwiZXhwIjoxNjQ3OTc5MTU2LCJzdWIiOiI0In0.9etUpB-DzRjWKwlbMt2vqqeTiBG04Ym2Qm62dFz6Wr4";
 
   //Pegar o Id do usuário
   //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
   //const userId = user.id
-  const userId = 1;
+  const userId = 4;
 
   //Pegando o array e os métodos do Providers
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
 
   //Esse state é para poder filtrar também
-  const [newFinances, setNewFinances] = useState([...finances]);
+  //const [newFinances, setNewFinances] = useState([...finances]);
 
   const loadFinances = async () => {
     await showFinances(token, userId);
@@ -38,10 +45,7 @@ const Finance = () => {
 
   useEffect(() => {
     loadFinances();
-    if (finances.length > 0) {
-      setNewFinances([...finances]);
-    }
-  }, [finances.length]);
+  }, [finances]);
 
   const handleRegisterFinance = (data) => {
     addFinance(userId, token, data);
@@ -54,8 +58,8 @@ const Finance = () => {
         <Box w="100%" mb="10px">
           <Header />
           <Box
-            w={["98%"]}
-            maxW="1300px"
+            w="90%"
+            maxW="779.73px"
             margin="0 auto"
             h="77vh"
             borderRadius="10px"
@@ -102,7 +106,7 @@ const Finance = () => {
                   Despesas
                 </Button>
                 <TotalFinances
-                  d={newFinances.length > 0 ? "block" : "none"}
+                  d={finances.length > 0 ? "block" : "none"}
                   finances={finances}
                 />
               </Box>
@@ -117,8 +121,8 @@ const Finance = () => {
               flexDirection="column"
               gap="15px"
             >
-              {newFinances.length > 0 ? (
-                newFinances
+              {finances.length > 0 ? (
+                finances
                   .filter(({ status }) =>
                     filterFin === "Todos"
                       ? status !== "Todos"
