@@ -21,7 +21,6 @@ const ModalAddDemand = ( { isAddDemandOpen, onAddDemandClose } ) => {
   
   const handleAddDemand = ( data ) => {
     addDemand( user.id, token, data )   
-    toast.success('Demanda adicionada!')
     onAddDemandClose()
   }
 

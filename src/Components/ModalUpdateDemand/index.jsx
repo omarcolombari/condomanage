@@ -4,11 +4,9 @@ import { DemandsContext} from '../../Providers/Demands';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { toast } from "react-toastify";
 
 
 const ModalUpdateDemand = ( { isUpdateDemandOpen, onUpdateDemandClose, item } ) => {
-
   const { changeDemand, token } = useContext(DemandsContext);
 
   const schema = yup.object().shape( {
@@ -18,13 +16,8 @@ const ModalUpdateDemand = ( { isUpdateDemandOpen, onUpdateDemandClose, item } ) 
   const {register, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(schema)})
   
   const handleUpdateDemand = ( data ) => {    
-    console.log("data ", data);
+
     changeDemand( token, data, item.id )
-    if (data.status === 'inProgress') {
-      toast.success('Demanda atualizada!')
-    } else {
-      toast.success('Demanda concluída!')
-    }
     onUpdateDemandClose()
   }
 
@@ -103,13 +96,7 @@ const ModalUpdateDemand = ( { isUpdateDemandOpen, onUpdateDemandClose, item } ) 
                                     placeholder="Digite qual a demanda"
                                     focusBorderColor='transparent'
                                     _placeholder={{ opacity: 1, color: '#00a5ae' }}/>
-                                    <Input 
-                                    name='description'
-                                    hidden
-                                    defaultValue={item.id}
-                                    variant="outline"
-                                    focusBorderColor='transparent'
-                                    _placeholder={{ opacity: 1, color: '#00a5ae' }}/>
+                                   
                                   </Box>
                                   <FormLabel
                                      fontFamily="Open Sans, sans-serif"
@@ -143,7 +130,7 @@ const ModalUpdateDemand = ( { isUpdateDemandOpen, onUpdateDemandClose, item } ) 
                       justifyContent="start"
                       alignItems="center">
                           <Button type='submit'>
-                              Criar demanda
+                              Atualizar demanda
                           </Button>
                       </Box>
                               </FormControl>

@@ -1,18 +1,29 @@
-import { Box, Button, filter, Heading, Input, useDisclosure } from "@chakra-ui/react"
+import { Box, Button, filter, Heading, Input, Slide, useDisclosure } from "@chakra-ui/react"
 import Header from "../../Components/Header"
-import { AddIcon } from "@chakra-ui/icons"
 import React, { useEffect, useState, useContext } from "react";
 import { DemandsContext} from '../../Providers/Demands';
 import ModalAddDemand from "../../Components/ModalAddDemand";
-import ModalUpdateDemand from "../../Components/ModalUpdateDemand";
-import { CartDemand } from "../../Components/CartDemand";
+import CartDemand  from "../../Components/CartDemand";
+import HeaderPage from "../../Components/HeaderPageDemand";
 
 const DashboardDemand = () => {
-    const {demands} = useContext(DemandsContext);
+    const { demands, showDemands, token, user } = useContext(DemandsContext);
     const { isOpen:isAddDemandOpen,onOpen:onAddDemandOpen,onClose:onAddDemandClose } = useDisclosure();
-    const { isOpen:isUpdateDemandOpen,onOpen:onUpdateDemandOpen,onClose:onUpdateDemandClose } = useDisclosure();
+    const { onOpen: onUpdateDemandOpen } = useDisclosure();
+    const { onOpen: onContainerDemandOpen  } = useDisclosure();
 
-    const [ filterBase, setFilterBase ] = useState( 'Todas' )
+    const [update, setUpdate] = useState([])
+
+    const [ filterBase, setFilterBase ] = useState( 'Todas' );
+
+    const loadDemands = async () => {
+        await showDemands(token, user.id);
+      };
+    
+    useEffect(() => {
+      loadDemands();
+      
+    }, [demands.length]);
 
     return (
         <Box
@@ -21,51 +32,48 @@ const DashboardDemand = () => {
         d="flex"
         flexDir="column"
         alignItems="center">
+            <Slide style={{zIndex:10}} direction='left' in={onContainerDemandOpen}>
             <Box
             w="100%"
             mb="10px">
                 <Header />
-            </Box>
-            <Box
-        w="98%"
-        h={["70vh","80vh"]}
-        borderRadius="10px"
-        boxShadow="0px 5px 10px 1px rgba(0,0,0,0.5)">
-            <Heading ml="10px" mt="10px" mb="20px" variant="title1" fontSize={["18px","24px","40px"]}>Lista de Demandas:</Heading>
-            <Box>
-                <Box>
-                    <Button onClick={() => setFilterBase('Todas')}>Todas</Button>
-                    <Button onClick={() => setFilterBase('inProgress')}>Em andamento</Button>
-                    <Button onClick={() => setFilterBase('completed')}>Concluídas</Button>
-                    <AddIcon 
-                        w={6} 
-                        h={6} 
-                        cursor='pointer'                    
-                        onClick={onAddDemandOpen}
-                    />
+                <Box
+                w="90%"
+                maxW='779.73px'
+                h={["77vh"]}
+                borderRadius="10px"
+                boxShadow="0px 5px 10px 1px rgba(0,0,0,0.5)"
+                d='flex'
+                flexDir='column'
+                alignItems='center'
+                ml='auto'
+                mr='auto'
+                mt='20px'
+                >
+                <Box w='100%'>
+                    <HeaderPage onOpen={onAddDemandOpen} titulo='Lista de demandas'/>      
+                    <Box w='100%' d='flex' flexDir={['column', '', 'row']} justifyContent='space-evenly' alignItems='center'>
+                        <Button variant='default' mt={['5px', '', '0px']} w={['95%', '70%', '100px']} onClick={() => setFilterBase('Todas')}>Todas</Button>
+                        <Button variant='default' mt={['5px', '', '0px']} w={['95%', '70%', '120px']} onClick={() => setFilterBase('inProgress')}>Em andamento</Button>
+                        <Button variant='default' mt={['5px', '', '0px']} w={['95%', '70%', '100px']} onClick={() => setFilterBase('completed')}>Concluídas</Button>
+                    </Box>
                 </Box>
-                <Box>
-                    {demands.filter(({status}) => (filterBase === 'Todas') ? status !== 'Todas' : status === filterBase).map((item, index) => {
-                        return (
-                                <Box
-                                    key={item.id}
-                                    bg="#00A5AE"
-                                    w="300px"
-                                    borderRadius="30px" onClick={ onUpdateDemandOpen }>
-                                    <CartDemand item={ item } />
-                                    <ModalUpdateDemand
-                                    item={ item }
-                                    isUpdateDemandOpen={ isUpdateDemandOpen }
-                                    onUpdateDemandClose={ onUpdateDemandClose }
-                                    onAddDemandOpen={onAddDemandOpen}
-                                ></ModalUpdateDemand>
-                                </Box>
 
-                        )
-                    })}
+                <Box 
+                    w={['95%', '70%', '90%']} 
+                    borderRadius='4px' 
+                    h={['32vh', '', '50vh']} 
+                    overflow='auto' 
+                    mt='10px' 
+                    d='flex'
+                    flexDir='column'
+                    gap='15px'
+                >
+                            { demands.filter( ( { status } ) => ( filterBase === 'Todas' ) ? status !== 'Todas' : status === filterBase ).map( ( item ) =>
+                                <CartDemand key={ item.id } item={ item } />
+                            ) }
                     
-                </Box>
-                
+                </Box>                
                 <Box>
                     <ModalAddDemand 
                         isAddDemandOpen={isAddDemandOpen} 
@@ -73,7 +81,9 @@ const DashboardDemand = () => {
                     />
                 </Box>
             </Box>
-        </Box>
+            </Box>
+
+            </Slide>
         </Box>
     )
 }
