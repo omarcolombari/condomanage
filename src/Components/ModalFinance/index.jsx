@@ -83,7 +83,7 @@ const ModalFinance = ({
                 {errors.value?.message && <p>{errors.value?.message}</p>}
                 <label>
                   Categoria
-                  <select {...register("status")} initialValue={data.status}>
+                  <select defaultValue={data.status} {...register("status")}>
                     <option value="Entrada">Entrada</option>
                     <option value="Despesa">Despesa</option>
                   </select>

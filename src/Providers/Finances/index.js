@@ -7,7 +7,11 @@ export const FinancesContext = createContext();
 export const FinancesProvider = ({ children }) => {
   const [finances, setFinances] = useState([]);
 
-  const showFinances = (token,userId) => {
+  //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
+  //const userId = user.id
+  const userId = 2;
+
+  const showFinances = (token, userId) => {
     api
       .get(`/finances?userId=${userId}`, {
         headers: {
@@ -17,7 +21,10 @@ export const FinancesProvider = ({ children }) => {
       .then((res) => {
         setFinances(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setFinances([]);
+      });
   };
 
   const addFinance = (id, token, data) => {
@@ -60,7 +67,7 @@ export const FinancesProvider = ({ children }) => {
       .then((res) => {
         console.log(res);
         toast.success("Dados alterados com sucesso!");
-        showFinances(token);
+        showFinances(token, userId);
       })
       .catch((res) => {
         console.log(res);
@@ -78,7 +85,7 @@ export const FinancesProvider = ({ children }) => {
       .then((res) => {
         console.log(res);
         toast.success("Dados arquivados com sucesso!");
-        showFinances(token);
+        showFinances(token, userId);
       })
       .catch((res) => {
         console.log(res);
