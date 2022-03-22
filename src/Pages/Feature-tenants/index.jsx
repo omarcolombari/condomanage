@@ -8,9 +8,13 @@ import ModalAddTenants from "../../Components/ModalAddTenants";
 import ModalListTenants from "../../Components/ModalListTenants";
 import Header from "../../Components/Feats/Header";
 
-const TenantsPage = () => {
-  const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
-  const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
+const TenantsPage = ({ setAuthenticaded }) => {
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token") || "")
+  );
+  const [user] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:infos") || "")
+  );
   const { showTenants, tenants, addTenant, changeTenant } =
     useContext(TenantsContext);
 
@@ -98,11 +102,11 @@ const TenantsPage = () => {
 
   return (
     <>
-      <Header />
+      <Header setAuthenticaded={setAuthenticaded} />
       <Box
         margin="10px auto"
         w={["98%"]}
-      maxW="1300px"
+        maxW="1300px"
         h="90%"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         borderRadius="30px"

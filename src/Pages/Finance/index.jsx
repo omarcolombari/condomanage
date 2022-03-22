@@ -7,33 +7,33 @@ import HeaderPage from "../../Components/HeaderPageVar";
 import TotalFinances from "../../Components/TotalFinances";
 import FinanceCard from "../../Components/FinanceCard";
 import { IoMdCash } from "react-icons/io";
+import { Redirect } from "react-router-dom";
 
-const Finance = () => {
+const Finance = ({ authenticaded }) => {
   const { onOpen: onContainerOpen } = useDisclosure();
+
   const {
     isOpen: isAddFinanceOpen,
     onOpen: onAddFinanceOpen,
     onClose: onAddFinanceClose,
   } = useDisclosure();
+
   const [filterFin, setFilterFin] = useState("Todos");
 
-  //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc5MDYzMTUsImV4cCI6MTY0NzkwOTkxNSwic3ViIjoiMSJ9.vQk2_VP1J78-8vmJZpEPNYlqa8-p5u-oL7-nRJbz0qg";
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
+  );
 
-  //Pegar o Id do usuário
-  //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
-  //const userId = user.id
-  const userId = 1;
+  const [user] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:infos")) || ""
+  );
 
-  //Pegando o array e os métodos do Providers
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
 
-  //Esse state é para poder filtrar também
   const [newFinances, setNewFinances] = useState([...finances]);
 
   const loadFinances = async () => {
-    await showFinances(token, userId);
+    await showFinances(token, user.user.id);
   };
 
   useEffect(() => {
@@ -43,8 +43,12 @@ const Finance = () => {
     }
   }, [finances.length]);
 
+  if (!authenticaded) {
+    return <Redirect to="/login" />;
+  }
+
   const handleRegisterFinance = (data) => {
-    addFinance(userId, token, data);
+    addFinance(user.user.id, token, data);
     loadFinances();
   };
 

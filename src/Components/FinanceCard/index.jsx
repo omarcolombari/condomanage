@@ -1,5 +1,5 @@
 import { Box, Heading, Text, useDisclosure } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { IoIosTrash } from "react-icons/io";
 import { FinancesContext } from "../../Providers/Finances";
 import ModalFinance from "../ModalFinance";
@@ -12,20 +12,19 @@ const FinanceCard = ({ item }) => {
   } = useDisclosure();
 
   const { changeFinance, removeFinance } = useContext(FinancesContext);
-  //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc5MDYzMTUsImV4cCI6MTY0NzkwOTkxNSwic3ViIjoiMSJ9.vQk2_VP1J78-8vmJZpEPNYlqa8-p5u-oL7-nRJbz0qg";
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token"))
+  );
 
-  //Pegar o Id do usuário
-  //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
-  //const userId = user.id
-  const userId = 1;
+  const [user] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:infos"))
+  );
 
   const handleRemoveFinance = (financedId) => {
     removeFinance(token, financedId);
   };
   const handleUpdateFinance = (data) => {
-    const newData = { ...data, userId: userId };
+    const newData = { ...data, userId: user.user.id };
 
     changeFinance(token, newData, item.id);
   };
