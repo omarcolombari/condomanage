@@ -11,7 +11,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosBusiness} from "react-icons/io";
 const TenantsPage = () => {
   // const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
-  const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3OTg2MzUzLCJleHAiOjE2NDc5ODk5NTMsInN1YiI6IjEifQ.S2dd-4Sy_XHATOvlSzZKJUsG3h_pPiFFIysPWQ59Wak"
+  const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3OTkwMTA5LCJleHAiOjE2NDc5OTM3MDksInN1YiI6IjEifQ.H2ZLZQ1B5QI8Bdp2Ibosw6HioGW0142vZagcKFftg44"
   const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
   const { showTenants, tenants, addTenant, changeTenant } =
     useContext(TenantsContext);
@@ -49,6 +49,7 @@ const TenantsPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -71,7 +72,7 @@ const TenantsPage = () => {
       status: statusHome,
     };
     const findNumberTenants = tenants.find((item)=> item.number === newTenants.number)
-
+    reset()
     if(findNumberTenants){
       return toast.error('Numero de Apartamento ja existe')
     }
@@ -98,7 +99,9 @@ const TenantsPage = () => {
       status: statusHome,
       userId: 1,
     };
+    reset()
     changeTenant(token, changeTenants, currentTenants.id);
+    
   };
 
   useEffect(() => {
@@ -127,7 +130,7 @@ const TenantsPage = () => {
           justifyContent="space-around"
           w="100%"
           fontSize={["20px","25px","30px"]}
-          alignItems="center">Lista de apartamentos
+          alignItems="center">Lista de Inquilinos
           <IoIosAddCircleOutline
           cursor="pointer"
           w="15px"

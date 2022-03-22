@@ -145,15 +145,7 @@ const ModalListTenants = ({
                     {errors.number?.message}
                   </FormHelperText>
                 </Box>
-                {/* <Inputs
-                  register={register}
-                  registerData="number"
-                  ph={currentTenants.number}
-                  bgColor="#00A5AE"
-                  phColor="white"
-                  type="number"
-                  name="number"
-                ></Inputs> */}
+                
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
@@ -188,15 +180,6 @@ const ModalListTenants = ({
                     {errors.responsible?.message}
                   </FormHelperText>
                 </Box>
-                {/* <Inputs
-                  register={register}
-                  registerData="responsible"
-                  ph={currentTenants.responsible}
-                  bgColor="#00A5AE"
-                  phColor="white"
-                  type="text"
-                  name="responsible"
-                ></Inputs> */}
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
@@ -231,15 +214,6 @@ const ModalListTenants = ({
                     {errors.cpf?.message}
                   </FormHelperText>
                 </Box>
-                {/* <Inputs
-                  register={register}
-                  registerData="cpf"
-                  ph={currentTenants.cpf}
-                  bgColor="#00A5AE"
-                  phColor="white"
-                  type="number"
-                  name="cpf"
-                ></Inputs> */}
 
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
@@ -275,15 +249,6 @@ const ModalListTenants = ({
                     {errors.cpf?.message}
                   </FormHelperText>
                 </Box>
-                {/* <Inputs
-                  register={register}
-                  registerData="value"
-                  ph={currentTenants.value}
-                  bgColor="#00A5AE"
-                  phColor="white"
-                  type="number"
-                  name="value"
-                ></Inputs> */}
 
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
@@ -312,7 +277,8 @@ const ModalListTenants = ({
                   name="status"
                   onChange={(e) => setStatusHome(e.target.value)}
                 >
-                  <option defaultValue="selected" value="selecione">
+                  <option value="Vago">selecione</option>
+                  <option  value="Vago">
                     Vago
                   </option>
                   <option value="comprado">Comprado</option>
