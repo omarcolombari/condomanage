@@ -4,6 +4,7 @@ import ChakraLandingPage from "../Pages/Chakra_LandingPage";
 import ChakraLoginPage from "../Pages/Chakra_Login";
 import ChakraSignupPage from "../Pages/Chakra_Signup";
 import DashboardUser from "../Pages/DashboardUser";
+import TenantsPage from '../Pages/Feature-tenants'
 
 const Routes = () => {
   const [authenticaded, setAuthenticaded] = useState(false);
@@ -41,7 +42,9 @@ const Routes = () => {
 
       <Route path="/finances"></Route>
 
-      <Route path="/tenants"></Route>
+      <Route path="/tenants">
+        <TenantsPage/>
+      </Route>
 
       <Route path="/settings"></Route>
     </Switch>
