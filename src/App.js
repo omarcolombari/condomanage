@@ -1,18 +1,20 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import CustomTheme from "./Style/Theme";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import "@fontsource/poppins";
 import "@fontsource/roboto";
-import Finance from "./Pages/Finance";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "./style.css"
+import { ChakraProvider } from "@chakra-ui/react";
+import CustomTheme from "./Style/Theme";
+import Routes from "./Routes/index";
 
 function App() {
   return (
     <ChakraProvider theme={CustomTheme}>
-      <Finance />
-      <ToastContainer />
+      <ToastContainer position="top-left" />
+      <Routes/>
     </ChakraProvider>
   );
+
 }
 
 export default App;

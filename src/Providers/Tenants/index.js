@@ -8,7 +8,7 @@ export const TenantsProvider = ({ children }) => {
     const [tenants, setTenants] = useState([])
 
     const showTenants = (token) => {
-        api.get('/tenants', {
+        api.get('tenants', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -20,7 +20,7 @@ export const TenantsProvider = ({ children }) => {
     }
 
     const addTenant = (id, token, data) => {
-        api.post('/tenants', {
+        api.post('tenants', {
             ...data,
             "userId": id
         }, {
@@ -39,7 +39,7 @@ export const TenantsProvider = ({ children }) => {
     }
 
     const changeTenant = (token, data, tenantId) => {
-        api.patch(`/tenants/${tenantId}`, {
+        api.patch(`tenants/${tenantId}`, {
             ...data,
         }, {
             headers: {
