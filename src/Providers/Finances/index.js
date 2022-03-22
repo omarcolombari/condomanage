@@ -8,7 +8,7 @@ export const FinancesProvider = ({ children }) => {
   const [finances, setFinances] = useState([]);
 
   //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
-  //const userId = user.id
+  //const userId = user.user.id
   const userId = 2;
 
   const showFinances = (token, userId) => {

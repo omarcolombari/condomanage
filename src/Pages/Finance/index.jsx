@@ -1,11 +1,4 @@
-import {
-  useDisclosure,
-  Heading,
-  Button,
-  Box,
-  Slide,
-  Icon,
-} from "@chakra-ui/react";
+import { useDisclosure, Heading, Button, Box, Slide } from "@chakra-ui/react";
 import { useState, useContext, useEffect } from "react";
 import { FinancesContext } from "../../Providers/Finances";
 import Header from "../../Components/Header";
@@ -24,13 +17,13 @@ const Finance = () => {
   } = useDisclosure();
   const [filterFin, setFilterFin] = useState("Todos");
 
-  //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
+  //const [token] = useState(JSON.parse(localStorage.getItem("@CondoManage:token")));
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc5NTc4NzcsImV4cCI6MTY0Nzk2MTQ3Nywic3ViIjoiMiJ9.5zmpHfwcwXg0zGvEzXz8x646VFl8OVSZ_yDjJ9kifdU";
 
   //Pegar o Id do usuário
-  //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
-  //const userId = user.id
+  //const [user] = useState(JSON.parse(localStorage.getItem("@CondoManage:infos")));
+  //const userId = user.user.id
   const userId = 2;
 
   //Pegando o array e os métodos do Providers
