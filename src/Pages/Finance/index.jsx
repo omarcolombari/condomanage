@@ -54,8 +54,8 @@ const Finance = () => {
         <Box w="100%" mb="10px">
           <Header />
           <Box
-            w="90%"
-            maxW="779.73px"
+            w={["98%"]}
+            maxW="1300px"
             margin="0 auto"
             h="77vh"
             borderRadius="10px"

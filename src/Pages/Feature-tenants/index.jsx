@@ -101,7 +101,8 @@ const TenantsPage = () => {
       <Header />
       <Box
         margin="10px auto"
-        w="90%"
+        w={["98%"]}
+      maxW="1300px"
         h="90%"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         borderRadius="30px"

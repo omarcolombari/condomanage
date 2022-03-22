@@ -241,7 +241,7 @@ const ModalAddTenants = ({
                       Fechar
                     </Button>
                     <Button type="submit" variant="default">
-                      Alterar usuário
+                      Adicionar inquilino
                     </Button>
                   </Box>
                 </ModalFooter>
