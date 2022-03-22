@@ -1,18 +1,18 @@
-
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import TenantsPage from "./components/Feature-tenants";
 import "@fontsource/poppins";
 import "@fontsource/roboto";
+import "./style.css"
+import { ChakraProvider } from "@chakra-ui/react";
+import CustomTheme from "./Style/Theme";
+import Routes from "./Routes/index";
 
 function App() {
-
   return (
-    <div className="App">
-      
-       <TenantsPage/>
-      <ToastContainer />
-    </div>
+    <ChakraProvider theme={CustomTheme}>
+      <ToastContainer position="top-left" />
+      <Routes/>
+    </ChakraProvider>
   );
 
 }

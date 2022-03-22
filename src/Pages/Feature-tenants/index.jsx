@@ -2,11 +2,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useEffect, useState, useContext } from "react";
-
 import { TenantsContext } from "../../Providers/Tenants";
 import { Button, Box, useDisclosure, Heading } from "@chakra-ui/react";
-import ModalAddTenants from "../ModalAddTenants";
-import ModalListTenants from "../ModalListTenants";
+import ModalAddTenants from "../../Components/ModalAddTenants";
+import ModalListTenants from "../../Components/ModalListTenants";
+
 const TenantsPage = () => {
   const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
