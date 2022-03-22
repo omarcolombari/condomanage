@@ -6,6 +6,7 @@ import { TenantsContext } from "../../Providers/Tenants";
 import { Button, Box, useDisclosure, Heading } from "@chakra-ui/react";
 import ModalAddTenants from "../../Components/ModalAddTenants";
 import ModalListTenants from "../../Components/ModalListTenants";
+import Header from "../../Components/Feats/Header";
 
 const TenantsPage = () => {
   const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
@@ -97,6 +98,7 @@ const TenantsPage = () => {
 
   return (
     <>
+      <Header />
       <Box
         margin="10px auto"
         w="90%"

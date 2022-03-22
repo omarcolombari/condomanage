@@ -12,7 +12,7 @@ const Dashboard = ({ authenticaded }) => {
     <Box
       w={["98%"]}
       maxW="1300px"
-      h={["85vh", "80vh", "80vh"]}
+      h={["85vh", "80vh"]}
       display="flex"
       flexDir="column"
       alignItems={["", "", "center"]}
@@ -57,7 +57,7 @@ const Dashboard = ({ authenticaded }) => {
         </Box>
         <Box
           w={["95%", "", "45%", "auto"]}
-          h={["55vh", "", "50vh"]}
+          h={["45vh", "45vh", "50vh"]}
           overflowX="hidden"
           mt={["20px", "", "0px"]}
         >
