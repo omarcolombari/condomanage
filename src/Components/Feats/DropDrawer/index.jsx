@@ -6,7 +6,8 @@ import {
     DrawerContent,
     DrawerCloseButton,
   } from '@chakra-ui/react'
-import NavList from "../NavList";
+import NavList from '../../Feats/NavList'
+
 const DropDrawer = ({ isDrawerOpen,onDrawerClose,setAuthenticaded }) => {
     return (
         <Drawer

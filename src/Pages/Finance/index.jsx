@@ -1,17 +1,25 @@
-import { useDisclosure, Heading, Button, Box } from "@chakra-ui/react";
+import { useDisclosure, Heading, Button, Box, Slide } from "@chakra-ui/react";
 import { useState, useContext, useEffect } from "react";
-import { BoxButtons, StyledHeader } from "./styles";
-import ListFinances from "../../Components/ListFinances";
 import { FinancesContext } from "../../Providers/Finances";
 import Header from "../../Components/Header";
 import ModalFinance from "../../Components/ModalFinance";
+import HeaderPage from "../../Components/HeaderPageVar";
+import TotalFinances from "../../Components/TotalFinances";
+import FinanceCard from "../../Components/FinanceCard";
+import { IoMdCash } from "react-icons/io";
 
 const Finance = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onOpen: onContainerOpen } = useDisclosure();
+  const {
+    isOpen: isAddFinanceOpen,
+    onOpen: onAddFinanceOpen,
+    onClose: onAddFinanceClose,
+  } = useDisclosure();
+  const [filterFin, setFilterFin] = useState("Todos");
 
   //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc4Njc0MjksImV4cCI6MTY0Nzg3MTAyOSwic3ViIjoiMSJ9.W14Mq7kkuRzQ4lEWBzW2SfhvzyzROA4_4i4jQ94wRes";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc5MDYzMTUsImV4cCI6MTY0NzkwOTkxNSwic3ViIjoiMSJ9.vQk2_VP1J78-8vmJZpEPNYlqa8-p5u-oL7-nRJbz0qg";
 
   //Pegar o Id do usuário
   //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
@@ -25,7 +33,7 @@ const Finance = () => {
   const [newFinances, setNewFinances] = useState([...finances]);
 
   const loadFinances = async () => {
-    await showFinances(token);
+    await showFinances(token, userId);
   };
 
   useEffect(() => {
@@ -37,66 +45,116 @@ const Finance = () => {
 
   const handleRegisterFinance = (data) => {
     addFinance(userId, token, data);
-  };
-
-  const filterFinances = (status) => {
-    if (status === "Todos") {
-      setNewFinances([...finances]);
-    } else {
-      const filtered = finances.filter((finance) => finance.status === status);
-      setNewFinances([...filtered]);
-    }
+    loadFinances();
   };
 
   return (
-    <Box display="flex" flexDirection="column" gap="20px">
-      <Header />
-      <Box
-        w="90%"
-        maxW="779.73px"
-        margin="0 auto"
-        h="77vh"
-        borderRadius="10px"
-        boxShadow="0px 5px 10px 1px rgba(0,0,0,0.5)"
-        display="flex"
-        flexDirection="column"
-        justifyContent="space-between"
-        alignItems="center"
-        gap="12px"
-      >
-        <StyledHeader>
-          <Heading fontSize={["20px", "25px", "30px"]}>
-            Lista de finanças
-          </Heading>
-          <Button
-            onClick={onOpen}
-            variant="default"
-            borderRadius="100%"
-            bg="#141155"
-            title="Adicionar finança"
+    <Box w="100vw" h="100vh" d="flex" flexDir="column" alignItems="center">
+      <Slide in={onContainerOpen} style={{ zIndex: 10 }} direction="left">
+        <Box w="100%" mb="10px">
+          <Header />
+          <Box
+            w="90%"
+            maxW="779.73px"
+            margin="0 auto"
+            h="77vh"
+            borderRadius="10px"
+            boxShadow="0px 5px 10px 1px rgba(0,0,0,0.5)"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt="20px"
           >
-            +
-          </Button>
-        </StyledHeader>
-        <BoxButtons>
-          <Button onClick={() => filterFinances("Todos")}>Todos</Button>
-          <Button onClick={() => filterFinances("Entrada")}>Entradas</Button>
-          <Button onClick={() => filterFinances("Despesa")}>Despesas</Button>
-        </BoxButtons>
-
-        {newFinances.length < finances.length ? (
-          <ListFinances finances={newFinances} />
-        ) : (
-          <ListFinances finances={finances} />
-        )}
-
-        <ModalFinance
-          isOpen={isOpen}
-          onClose={onClose}
-          handleChange={handleRegisterFinance}
-          title="Registrar finança"
-        />
-      </Box>
+            <Box w="100%">
+              <HeaderPage
+                onOpen={onAddFinanceOpen}
+                titulo="Lista de finanças"
+              />
+              <Box
+                w="100%"
+                d="flex"
+                flexDir={["column-reverse", "", "row"]}
+                justifyContent="space-evenly"
+                alignItems="center"
+              >
+                <Button
+                  variant="default"
+                  mt={["5px", "", "0px"]}
+                  w={["95%", "70%", "100px"]}
+                  onClick={() => setFilterFin("Todos")}
+                >
+                  Todos
+                </Button>
+                <Button
+                  variant="default"
+                  mt={["5px", "", "0px"]}
+                  w={["95%", "70%", "100px"]}
+                  onClick={() => setFilterFin("Entrada")}
+                >
+                  Entradas
+                </Button>
+                <Button
+                  variant="default"
+                  mt={["5px", "", "0px"]}
+                  w={["95%", "70%", "100px"]}
+                  onClick={() => setFilterFin("Despesa")}
+                >
+                  Despesas
+                </Button>
+                <TotalFinances
+                  d={newFinances.length > 0 ? "block" : "none"}
+                  finances={finances}
+                />
+              </Box>
+            </Box>
+            <Box
+              w={["95%", "70%", "90%"]}
+              borderRadius="4px"
+              h={["32vh", "", "50vh"]}
+              overflow="auto"
+              mt="10px"
+              display="flex"
+              flexDirection="column"
+              gap="15px"
+            >
+              {newFinances.length > 0 ? (
+                newFinances
+                  .filter(({ status }) =>
+                    filterFin === "Todos"
+                      ? status !== "Todos"
+                      : status === filterFin
+                  )
+                  .map((item, index) => <FinanceCard item={item} key={index} />)
+              ) : (
+                <Box
+                  h="100%"
+                  w="100%"
+                  d="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Heading
+                    variant="title3"
+                    fontSize={["16px", "28px"]}
+                    d="flex"
+                    flexDir="column"
+                    alignItems="center"
+                  >
+                    sem despesas no momento
+                    <IoMdCash />
+                  </Heading>
+                </Box>
+              )}
+            </Box>
+            <ModalFinance
+              isOpen={isAddFinanceOpen}
+              onClose={onAddFinanceClose}
+              handleChange={handleRegisterFinance}
+              title="Registrar finança"
+            />
+          </Box>
+        </Box>
+      </Slide>
     </Box>
   );
 };

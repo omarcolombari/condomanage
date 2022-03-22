@@ -1,4 +1,4 @@
-import Chart from "react-google-charts"
+/*import Chart from "react-google-charts"
 
 const Grafico = ({ infoName,infoDescribe,infoUp,infoUpValue,infoDown,infoDownValue,infoTittle }) => {
     const data = [
@@ -23,4 +23,4 @@ const Grafico = ({ infoName,infoDescribe,infoUp,infoUpValue,infoDown,infoDownVal
         />
     )
 }
-export default Grafico
+export default Grafico*/
