@@ -56,7 +56,6 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
     addFinance(user.user.id, token, data);
     loadFinances();
     onAddFinanceClose();
-    reset();
   };
 
   if (!authenticaded) {

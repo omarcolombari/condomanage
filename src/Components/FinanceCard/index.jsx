@@ -27,6 +27,7 @@ const FinanceCard = ({ item }) => {
     const newData = { ...data, userId: user.user.id };
 
     changeFinance(token, newData, item.id);
+    onChangeFinanceClose();
   };
 
   return (
