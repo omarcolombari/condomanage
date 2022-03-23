@@ -10,6 +10,7 @@ const NavList = ({setAuthenticaded}) => {
     }
     const logout = () => {
         localStorage.clear();
+        setAuthenticaded(false);
         handlePages("/login");
     }
 

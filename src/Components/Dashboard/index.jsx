@@ -1,6 +1,8 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IoIosHome, IoMdMap, IoIosBusiness, IoIosMail } from "react-icons/io";
+import { DemandsContext } from "../../Providers/Demands";
+import { FinancesContext } from "../../Providers/Finances";
 import { TenantsContext } from "../../Providers/Tenants";
 import Grafico from "../Feats/grafico";
 
@@ -8,8 +10,27 @@ const Dashboard = ({ authenticaded }) => {
   const [user] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:infos")) || ""
   );
-  const {tenants} = useContext(TenantsContext)
- console.log("tenants ", tenants);
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
+  );
+
+  const {tenants,showTenants} = useContext(TenantsContext);
+  const {finances,showFinances} = useContext(FinancesContext);
+  const {demands,showDemands} = useContext(DemandsContext);
+
+ console.log("finances ", demands);
+ useEffect(() => {
+  showTenants(token, user.user.id);
+  }, [tenants.length]);
+  useEffect(()=> {
+    showFinances(token,user.user.id)
+  },[finances.lenght]);
+  useEffect(()=> {
+    showDemands(token,user.user.id)
+  },[demands.lenght]);
+
+  const graficFinancesEntrada = finances.filter((item) => item.status === "Entrada").length;
+  const graficFinancesDespesas = finances.filter((item) => item.status === "Despesa").length;
 
   return (
     <Box
@@ -69,9 +90,9 @@ const Dashboard = ({ authenticaded }) => {
               infoName="ocupação"
               infoDescribe="desocupados e ocupados"
               infoUp="desocupados"
-              infoUpValue={11}
+              infoUpValue={user.user.apartments}
               infoDown="ocupados"
-              infoDownValue={2}
+              infoDownValue={tenants.length}
               infoTittle="Overview de ocupação"
             />
           </Box>
@@ -80,9 +101,9 @@ const Dashboard = ({ authenticaded }) => {
               infoName="finança"
               infoDescribe="entradas e despesas"
               infoUp="entradas"
-              infoUpValue={11}
+              infoUpValue={graficFinancesEntrada}
               infoDown="despesas"
-              infoDownValue={2}
+              infoDownValue={graficFinancesDespesas}
               infoTittle="Overview financeiro"
             />
           </Box>

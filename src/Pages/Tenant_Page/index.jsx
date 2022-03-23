@@ -2,8 +2,7 @@ import { Box, Slide ,useDisclosure} from "@chakra-ui/react"
 import TenantsPage from "../../Pages/Feature-tenants";
 const PageTenant = ( authenticaded, setAuthenticaded )=>{
     const {onOpen:onTenantPageOpen} = useDisclosure()
-    return(
-        
+    return(   
         <Box
             w="100vw" 
             h="100vh" 
