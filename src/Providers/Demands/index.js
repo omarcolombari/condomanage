@@ -7,25 +7,16 @@ export const DemandsContext = createContext();
 export const DemandsProvider = ({ children }) => {
   const [demands, setDemands] = useState([]);
 
-  // const [token] = useState(
-  //   JSON.parse(localStorage.getItem('@CondoManage:token')) || []
-  // );
+  const [token] = useState(
+    JSON.parse(localStorage.getItem('@CondoManage:token')) || []
+  );
+  const [user] = useState(
+    JSON.parse(localStorage.getItem('@CondoManage:infos')) || []
+  );
 
-  // const [user] = useState(
-  //   JSON.parse(localStorage.getItem('@CondoManage:user')) || []
-  // );
-
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF2YWxlc2thMjkwOEBob3RtYWlsLmNvbSIsImlhdCI6MTY0Nzk2MzY0OCwiZXhwIjoxNjQ3OTY3MjQ4LCJzdWIiOiIzIn0.klvbnwdixD4KrNvTTltdZ9eAsZRxaqAA0rE9iEZq6Xs';
-
-  const user = {
-    email: 'avaleska2908@hotmail.com',
-    id: 3,
-  };
-
-  const showDemands = (token, userId) => {
+  const showDemands = () => {
     api
-      .get(`/demands?userId=${userId}`, {
+      .get(`/demands?userId=${user.user.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,13 +27,13 @@ export const DemandsProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  const addDemand = (id, token, data) => {
+  const addDemand = (token, data) => {
     api
       .post(
         `/demands`,
         {
           ...data,
-          userId: id,
+          userId: user.user.id,
         },
         {
           headers: {
@@ -67,7 +58,7 @@ export const DemandsProvider = ({ children }) => {
   };
 
   const changeDemand = (token, data, demandId) => {
-    const newData = { ...data, userId: user.id };
+    const newData = { ...data, userId: user.user.id };
 
     api
       .patch(`/demands/${demandId}`, newData, {
@@ -85,7 +76,7 @@ export const DemandsProvider = ({ children }) => {
         setDemands([...currentData, res.data]);
 
         toast.success('Dados alterados com sucesso!');
-        showDemands(token, user.id);
+        showDemands(token, user.user.id);
       })
       .catch((err) => {
         toast.error('Ops! Algo deu errado');
@@ -101,7 +92,7 @@ export const DemandsProvider = ({ children }) => {
       })
       .then((_) => {
         toast.success('Dados apagados com sucesso!');
-        showDemands(token, user.id);
+        showDemands(token, user.user.id);
       })
       .catch((err) => {
         toast.error('Ops! Algo deu errado');

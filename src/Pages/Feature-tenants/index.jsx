@@ -121,7 +121,7 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
     showTenants(token, user.user.id);
   }, [tenants.length]);
   
-      if (!authenticaded) {
+    if (!authenticaded) {
         return <Redirect to="/login" />;
     }
 
