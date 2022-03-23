@@ -1,47 +1,52 @@
 import { useDisclosure, Heading, Button, Box, Slide } from "@chakra-ui/react";
 import { useState, useContext, useEffect } from "react";
 import { FinancesContext } from "../../Providers/Finances";
-import Header from "../../Components/Header";
+import Header from "../../Components/Feats/Header";
 import ModalFinance from "../../Components/ModalFinance";
 import HeaderPage from "../../Components/HeaderPageVar";
 import TotalFinances from "../../Components/TotalFinances";
 import FinanceCard from "../../Components/FinanceCard";
 import { IoMdCash } from "react-icons/io";
+import { Redirect } from "react-router-dom";
 
-const Finance = () => {
+const Finance = ({ authenticaded }) => {
   const { onOpen: onContainerOpen } = useDisclosure();
+
   const {
     isOpen: isAddFinanceOpen,
     onOpen: onAddFinanceOpen,
     onClose: onAddFinanceClose,
   } = useDisclosure();
+
   const [filterFin, setFilterFin] = useState("Todos");
 
-  //const [token] = useState(JSON.parse(localStorage.getItem("@CondoManage:token")));
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyZW5kb0BlbWFpbC5jb20iLCJpYXQiOjE2NDc5NTc4NzcsImV4cCI6MTY0Nzk2MTQ3Nywic3ViIjoiMiJ9.5zmpHfwcwXg0zGvEzXz8x646VFl8OVSZ_yDjJ9kifdU";
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
+  );
 
-  //Pegar o Id do usuário
-  //const [user] = useState(JSON.parse(localStorage.getItem("@CondoManage:infos")));
-  //const userId = user.user.id
-  const userId = 2;
+  const [user] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:infos")) || ""
+  );
 
-  //Pegando o array e os métodos do Providers
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
 
   //Esse state é para poder filtrar também
   //const [newFinances, setNewFinances] = useState([...finances]);
 
   const loadFinances = async () => {
-    await showFinances(token, userId);
+    await showFinances(token, user.user.id);
   };
 
   useEffect(() => {
     loadFinances();
   }, [finances]);
 
+  if (!authenticaded) {
+    return <Redirect to="/login" />;
+  }
+
   const handleRegisterFinance = (data) => {
-    addFinance(userId, token, data);
+    addFinance(user.user.id, token, data);
     loadFinances();
   };
 
@@ -51,8 +56,8 @@ const Finance = () => {
         <Box w="100%" mb="10px">
           <Header />
           <Box
-            w="90%"
-            maxW="779.73px"
+            w={["98%"]}
+            maxW="1300px"
             margin="0 auto"
             h="77vh"
             borderRadius="10px"

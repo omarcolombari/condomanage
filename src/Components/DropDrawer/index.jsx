@@ -8,7 +8,7 @@ import {
     DrawerContent,
     DrawerCloseButton,
   } from '@chakra-ui/react'
-import NavList from "../NavList";
+  import NavList from '../Feats/NavList'
 
 const DropDrawer = ({ user,isOpen,onClose }) => {
     return (
@@ -33,7 +33,7 @@ const DropDrawer = ({ user,isOpen,onClose }) => {
                         <Img src={user.foto} alt={user.name}/>}
                 </DrawerHeader>
                 <DrawerBody>
-                    <NavList/>
+                    <NavList onClose={onClose} />
                 </DrawerBody>
             </DrawerContent>
         </Drawer>

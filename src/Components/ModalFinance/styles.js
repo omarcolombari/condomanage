@@ -24,7 +24,7 @@ export const Form = styled.form`
   }
   input,
   select {
-    height: 40px;
+    height: 50px;
     box-sizing: border-box;
     font-size: 13.0293px;
     padding: 10px;

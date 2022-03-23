@@ -7,9 +7,9 @@ export const FinancesContext = createContext();
 export const FinancesProvider = ({ children }) => {
   const [finances, setFinances] = useState([]);
 
-  //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
-  //const userId = user.user.id
-  const userId = 2;
+  const [user] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:infos")) || "[]"
+  );
 
   const showFinances = (token, userId) => {
     api
@@ -43,6 +43,7 @@ export const FinancesProvider = ({ children }) => {
       )
       .then((res) => {
         console.log(res);
+        showFinances(token, id);
         toast.success("Finança adicionada com sucesso!");
       })
       .catch((err) => {
@@ -67,7 +68,7 @@ export const FinancesProvider = ({ children }) => {
       .then((res) => {
         console.log(res);
         toast.success("Dados alterados com sucesso!");
-        showFinances(token, userId);
+        showFinances(token, user.user.id);
       })
       .catch((res) => {
         console.log(res);
@@ -85,7 +86,7 @@ export const FinancesProvider = ({ children }) => {
       .then((res) => {
         console.log(res);
         toast.success("Dados arquivados com sucesso!");
-        showFinances(token, userId);
+        showFinances(token, user.user.id);
       })
       .catch((res) => {
         console.log(res);

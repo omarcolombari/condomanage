@@ -1,15 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { ColorModeScript } from "@chakra-ui/react";
-import Providers from "./Providers";
+import { ColorModeScript } from '@chakra-ui/react';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import App from './App';
+import Providers from './Providers';
 
 ReactDOM.render(
   <React.StrictMode>
     <Providers>
       <ColorModeScript />
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Providers>
+
   </React.StrictMode>,
   document.getElementById("root")
 );

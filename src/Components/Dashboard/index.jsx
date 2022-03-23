@@ -1,5 +1,5 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoIosHome, IoMdMap, IoIosBusiness, IoIosMail } from "react-icons/io";
 import Grafico from "../Feats/grafico";
 
@@ -7,13 +7,12 @@ const Dashboard = ({ authenticaded }) => {
   const [user] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:infos")) || ""
   );
-  console.log("user ", user);
 
   return (
     <Box
       w={["98%"]}
       maxW="1300px"
-      h={["85vh", "80vh", "80vh"]}
+      h={["85vh", "80vh"]}
       display="flex"
       flexDir="column"
       alignItems={["", "", "center"]}
@@ -58,7 +57,7 @@ const Dashboard = ({ authenticaded }) => {
         </Box>
         <Box
           w={["95%", "", "45%", "auto"]}
-          h={["55vh", "", "50vh"]}
+          h={["45vh", "45vh", "50vh"]}
           overflowX="hidden"
           mt={["20px", "", "0px"]}
         >

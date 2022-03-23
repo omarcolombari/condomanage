@@ -49,10 +49,10 @@ const ModalFinance = ({
           <ModalCloseButton />
           <ModalBody>
             <Box
-              h="300px"
+              h="350px"
               display="flex"
               justifyContent="center"
-              css={{
+              /*css={{
                 "&::-webkit-scrollbar": {
                   width: "4px",
                 },
@@ -64,7 +64,7 @@ const ModalFinance = ({
                   borderRadius: "24px",
                 },
               }}
-              overflowY="scroll"
+              overflowY="scroll"*/
             >
               <Form onSubmit={handleSubmit(handleChange)}>
                 <input
