@@ -22,7 +22,6 @@ const FinanceCard = ({ item }) => {
 
   const handleRemoveFinance = (financedId) => {
     removeFinance(token, financedId);
-    onChangeFinanceClose();
   };
   const handleUpdateFinance = (data) => {
     const newData = { ...data, userId: user.user.id };
