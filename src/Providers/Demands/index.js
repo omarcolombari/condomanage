@@ -50,14 +50,14 @@ export const DemandsProvider = ({ children }) => {
 
         toast.success('Demanda adicionada com sucesso!');
 
-        showDemands(token, userId);
+        showDemands(userId);
       })
       .catch((err) => {
         toast.error('Ops! Algo deu errado');
       });
   };
 
-  const changeDemand = (token, data, demandId) => {
+  const changeDemand = (data, demandId) => {
     const newData = { ...data, userId: user.user.id };
 
     api
@@ -91,6 +91,13 @@ export const DemandsProvider = ({ children }) => {
         },
       })
       .then((_) => {
+        let storageDemands = [...demands];
+
+        const currentData = storageDemands.filter(
+          (item) => item.id !== demandId
+        );
+
+        setDemands([...currentData]);
         toast.success('Dados apagados com sucesso!');
         showDemands(token, user.user.id);
       })

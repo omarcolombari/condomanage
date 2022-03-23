@@ -8,7 +8,6 @@ const NavList = ( { setAuthenticaded } ) => {
     const history = useHistory();
     const handlePages = (page) => {
         history.push( page );
-        console.log(page)
     }
 
     const logout = () => {
