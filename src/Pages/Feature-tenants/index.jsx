@@ -19,7 +19,8 @@ const TenantsPage = ({ setAuthenticaded }) => {
     JSON.parse(localStorage.getItem("@CondoManage:infos") || "")
   );
 
-  console.log(user);
+  console.log(user.user.id);
+  console.log(token);
 
   const { showTenants, tenants, addTenant, changeTenant } =
     useContext(TenantsContext);
@@ -87,7 +88,7 @@ const TenantsPage = ({ setAuthenticaded }) => {
       return toast.error("Numero de Apartamento ja existe");
     }
 
-    return addTenant(1, token, newTenants);
+    return addTenant(user.user.id, token, newTenants);
   };
 
   const handleChangeTenants = ({
@@ -106,7 +107,7 @@ const TenantsPage = ({ setAuthenticaded }) => {
       cpf,
       value,
       status: statusHome,
-      userId: 1,
+      userId: user.user.id,
     };
     reset();
     changeTenant(token, changeTenants, currentTenants.id);

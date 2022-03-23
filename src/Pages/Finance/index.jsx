@@ -27,16 +27,6 @@ const Finance = ({ authenticaded }) => {
 
   const [filterFin, setFilterFin] = useState("Todos");
 
-<<<<<<< HEAD
-  //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
-  const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTY0Nzk3NTU1NiwiZXhwIjoxNjQ3OTc5MTU2LCJzdWIiOiI0In0.9etUpB-DzRjWKwlbMt2vqqeTiBG04Ym2Qm62dFz6Wr4";
-
-  //Pegar o Id do usuário
-  //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
-  //const userId = user.id
-  const userId = 4;
-=======
   const [token] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
   );
@@ -44,7 +34,6 @@ const Finance = ({ authenticaded }) => {
   const [user] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:infos")) || ""
   );
->>>>>>> 07e7604b23e6909d33a0d0468387023722f7af3d
 
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
 
@@ -57,11 +46,7 @@ const Finance = ({ authenticaded }) => {
 
   useEffect(() => {
     loadFinances();
-<<<<<<< HEAD
-  }, [finances]);
-=======
   }, [finances.length]);
->>>>>>> 07e7604b23e6909d33a0d0468387023722f7af3d
 
   if (!authenticaded) {
     return <Redirect to="/login" />;

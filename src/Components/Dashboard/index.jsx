@@ -1,12 +1,15 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { IoIosHome, IoMdMap, IoIosBusiness, IoIosMail } from "react-icons/io";
+import { TenantsContext } from "../../Providers/Tenants";
 import Grafico from "../Feats/grafico";
 
 const Dashboard = ({ authenticaded }) => {
   const [user] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:infos")) || ""
   );
+  const {tenants} = useContext(TenantsContext)
+ console.log("tenants ", tenants);
 
   return (
     <Box
@@ -80,7 +83,7 @@ const Dashboard = ({ authenticaded }) => {
               infoUpValue={11}
               infoDown="despesas"
               infoDownValue={2}
-              infoTittle="Balanço financeiro"
+              infoTittle="Overview financeiro"
             />
           </Box>
           <Box w={["250px", "", "400px"]} width="auto" bg="transparent">
