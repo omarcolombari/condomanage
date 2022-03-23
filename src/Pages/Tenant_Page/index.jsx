@@ -1,6 +1,6 @@
 import { Box, Slide ,useDisclosure} from "@chakra-ui/react"
-import TenantsPage from "../../components/Feature-tenants";
-const PageTenant = ()=>{
+import TenantsPage from "../../Pages/Feature-tenants";
+const PageTenant = ( authenticaded, setAuthenticaded )=>{
     const {onOpen:onTenantPageOpen} = useDisclosure()
     return(
         
@@ -16,7 +16,7 @@ const PageTenant = ()=>{
                style={{ zIndex: 10 }} 
                direction="left" 
             >
-                <TenantsPage/>
+                <TenantsPage authenticaded={authenticaded} setAuthenticaded={setAuthenticaded}/>
                 
             </Slide>
         </Box>

@@ -5,14 +5,22 @@ import { useEffect, useState, useContext } from "react";
 import { toast } from "react-toastify";
 import { TenantsContext } from "../../Providers/Tenants";
 import { Button, Box, useDisclosure, Heading } from "@chakra-ui/react";
-import ModalAddTenants from "../ModalAddTenants";
-import ModalListTenants from "../ModalListTenants";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosBusiness} from "react-icons/io";
-const TenantsPage = () => {
-  // const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
-  const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjAxdGVzdGVAdGVzdGUuY29tIiwiaWF0IjoxNjQ3OTkwMTA5LCJleHAiOjE2NDc5OTM3MDksInN1YiI6IjEifQ.H2ZLZQ1B5QI8Bdp2Ibosw6HioGW0142vZagcKFftg44"
-  const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
+import ModalAddTenants from "../../Components/ModalAddTenants";
+import ModalListTenants from "../../Components/ModalListTenants";
+import Header from "../../Components/Feats/Header";
+
+const TenantsPage = ({ setAuthenticaded }) => {
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token") || "")
+  );
+  const [user] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:infos") || "")
+  );
+
+  console.log(user)
+
   const { showTenants, tenants, addTenant, changeTenant } =
     useContext(TenantsContext);
 
@@ -110,12 +118,14 @@ const TenantsPage = () => {
 
   return (
     <>
+      <Header setAuthenticaded={setAuthenticaded} />
       <Box
         d="flex"
         flexDirection="column"
         alignItems="center"
         margin="10px auto"
-        w="90%"
+        w={["98%"]}
+        maxW="1300px"
         h="90%"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         borderRadius="30px"
