@@ -16,7 +16,7 @@ import FinanceCard from "../../Components/FinanceCard";
 import { IoMdCash } from "react-icons/io";
 import { Redirect } from "react-router-dom";
 
-const Finance = ({ authenticaded }) => {
+const Finance = ({ authenticaded, setAuthenticaded }) => {
   const { onOpen: onContainerOpen } = useDisclosure();
 
   const {
@@ -58,11 +58,14 @@ const Finance = ({ authenticaded }) => {
     onAddFinanceClose();
   };
 
+  if (!authenticaded) {
+    return <Redirect to="/login" />;
+  }
   return (
     <Box w="100vw" h="100vh" d="flex" flexDir="column" alignItems="center">
       <Slide in={onContainerOpen} style={{ zIndex: 10 }} direction="left">
         <Box w="100%" mb="10px">
-          <Header />
+          <Header setAuthenticaded={setAuthenticaded} />
           <Box
             w="90%"
             maxW="779.73px"
