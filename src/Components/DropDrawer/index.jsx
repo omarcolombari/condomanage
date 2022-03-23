@@ -3,37 +3,31 @@ import React from "react";
 import {
     Drawer,
     DrawerBody,
-    DrawerHeader,
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
   } from '@chakra-ui/react'
-  import NavList from '../Feats/NavList'
-
-const DropDrawer = ({ user,isOpen,onClose }) => {
+import NavList from "../NavList";
+const DropDrawer = ({ isDrawerOpen,onDrawerClose,setAuthenticaded }) => {
     return (
         <Drawer
-            isOpen={isOpen}
+            isOpen={isDrawerOpen}
             placement='right'
-            onClose={onClose}
-        >
+            onClose={onDrawerClose}>
             <DrawerOverlay />
             <DrawerContent 
                 h="100vh"
                 bg="#00A5AE"
                 borderBottomLeftRadius="25px"
                 d="flex"
-                flexDir="column"
-                justifyContent="space-around"
-                alignItems="center">
-                <DrawerCloseButton variant="default"/>
-                <DrawerHeader>
-                    {user === undefined?
-                        <Box w="200px" h="200px" borderRadius="50%" bg="grey" d="flex" justifyContent="center" alignItems="center">Adicione uma foto</Box>:
-                        <Img src={user.foto} alt={user.name}/>}
-                </DrawerHeader>
-                <DrawerBody>
-                    <NavList onClose={onClose} />
+                flexDir="column">
+                <DrawerCloseButton />
+                <DrawerBody
+                    d="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                >
+                    <NavList setAuthenticaded={setAuthenticaded}/>
                 </DrawerBody>
             </DrawerContent>
         </Drawer>

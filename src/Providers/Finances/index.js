@@ -7,13 +7,16 @@ export const FinancesContext = createContext();
 export const FinancesProvider = ({ children }) => {
   const [finances, setFinances] = useState([]);
 
+  const [token] = useState(
+    JSON.parse(localStorage.getItem('@CondoManage:token')) || []
+  );
   const [user] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:infos")) || "[]"
+    JSON.parse(localStorage.getItem('@CondoManage:infos')) || []
   );
 
-  const showFinances = (token, userId) => {
+  const showFinances = () => {
     api
-      .get(`/finances?userId=${userId}`, {
+      .get(`/finances?userId=${user.user.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -22,18 +25,17 @@ export const FinancesProvider = ({ children }) => {
         setFinances(res.data);
       })
       .catch((err) => {
-        console.log(err);
         setFinances([]);
       });
   };
 
-  const addFinance = (id, token, data) => {
+  const addFinance = (data) => {
     api
       .post(
         "/finances",
         {
           ...data,
-          userId: id,
+          userId: user.user.id,
         },
         {
           headers: {
@@ -42,17 +44,15 @@ export const FinancesProvider = ({ children }) => {
         }
       )
       .then((res) => {
-        console.log(res);
-        showFinances(token, id);
+        showFinances(token);
         toast.success("Finança adicionada com sucesso!");
       })
       .catch((err) => {
-        console.log(err);
         toast.error("Ops! Algo deu errado");
       });
   };
 
-  const changeFinance = (token, data, financeId) => {
+  const changeFinance = (data, financeId) => {
     api
       .patch(
         `/finances/${financeId}`,
@@ -66,17 +66,15 @@ export const FinancesProvider = ({ children }) => {
         }
       )
       .then((res) => {
-        console.log(res);
         toast.success("Dados alterados com sucesso!");
         showFinances(token, user.user.id);
       })
       .catch((res) => {
-        console.log(res);
         toast.error("Ops! Algo deu errado");
       });
   };
 
-  const removeFinance = (token, financeId) => {
+  const removeFinance = (financeId) => {
     api
       .delete(`/finances/${financeId}`, {
         headers: {
@@ -84,12 +82,10 @@ export const FinancesProvider = ({ children }) => {
         },
       })
       .then((res) => {
-        console.log(res);
         toast.success("Dados arquivados com sucesso!");
         showFinances(token, user.user.id);
       })
       .catch((res) => {
-        console.log(res);
         toast.error("Ops! Algo deu errado");
       });
   };

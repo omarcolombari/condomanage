@@ -6,16 +6,11 @@ import ModalUpdateDemand from "../ModalUpdateDemand";
 
 const CartDemand = ({ item }) => {
   const { isOpen: isUpdateDemandOpen, onOpen: onUpdateDemandOpen, onClose: onUpdateDemandClose } = useDisclosure();
-
-  const { delDemand, token } = useContext(DemandsContext);
-  //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
-
-
+  const { delDemand } = useContext(DemandsContext);
   const handleDeleteDemand = (demandId) => {
-    delDemand(token, demandId);
+    delDemand(demandId);
   };
-
-
+  
   return (
     <>
       <Box

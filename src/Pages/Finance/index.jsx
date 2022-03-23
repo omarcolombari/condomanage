@@ -26,22 +26,11 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
   } = useDisclosure();
 
   const [filterFin, setFilterFin] = useState("Todos");
-
-  const [token] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
-  );
-
-  const [user] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:infos")) || ""
-  );
-
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
 
-  //Esse state é para poder filtrar também
-  //const [newFinances, setNewFinances] = useState([...finances]);
 
   const loadFinances = async () => {
-    await showFinances(token, user.user.id);
+    await showFinances();
   };
 
   useEffect(() => {
@@ -49,7 +38,7 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
   }, [finances.length]);
 
   const handleRegisterFinance = (data) => {
-    addFinance(user.user.id, token, data);
+    addFinance(data);
     loadFinances();
     onAddFinanceClose();
   };
@@ -57,6 +46,7 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
   if (!authenticaded) {
     return <Redirect to="/login" />;
   }
+
   return (
     <Box w="100vw" h="100vh" d="flex" flexDir="column" alignItems="center">
       <Slide in={onContainerOpen} style={{ zIndex: 10 }} direction="left">
@@ -149,7 +139,7 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
                     flexDir="column"
                     alignItems="center"
                   >
-                    sem despesas no momento
+                    Sem despesas no momento
                     <IoMdCash />
                   </Heading>
                 </Box>

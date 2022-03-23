@@ -13,15 +13,10 @@ import Header from "../../Components/Feats/Header";
 import { Redirect } from "react-router-dom";
 
 const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
-  const [token] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:token") || "")
-  );
+  
   const [user] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:infos") || "")
   );
-
-  console.log(user.user.id);
-  console.log(token);
 
   const { showTenants, tenants, addTenant, changeTenant } =
     useContext(TenantsContext);
@@ -89,10 +84,10 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
     );
     reset();
     if (findNumberTenants) {
-      return toast.error("Numero de Apartamento ja existe");
+      return toast.error("Número de apartamento já existe");
     }
 
-    return addTenant(user.user.id, token, newTenants);
+    return addTenant(newTenants);
   };
 
   const handleChangeTenants = ({
@@ -114,11 +109,11 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
       userId: user.user.id,
     };
     reset();
-    changeTenant(token, changeTenants, currentTenants.id);
+    changeTenant(changeTenants, currentTenants.id);
   };
 
   useEffect(() => {
-    showTenants(token, user.user.id);
+    showTenants();
   }, [tenants.length]);
   
     if (!authenticaded) {

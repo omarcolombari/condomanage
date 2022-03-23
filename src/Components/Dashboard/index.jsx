@@ -16,7 +16,6 @@ const Dashboard = ({ authenticaded }) => {
   const {tenants,showTenants} = useContext(TenantsContext);
   const {finances,showFinances} = useContext(FinancesContext);
   const {demands,showDemands} = useContext(DemandsContext);
-console.log("finances ", demands);
 useEffect(() => {
   showTenants(token, user.user.id);
   }, [tenants.length]);
