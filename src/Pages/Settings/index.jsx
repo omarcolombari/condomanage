@@ -1,41 +1,22 @@
 import { Box, Input,Heading, FormControl, Button } from "@chakra-ui/react"
 import { useForm } from 'react-hook-form';
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Header from "../../Components/Header";
+import { UserContext } from "../../Providers/User";
+import { TenantsContext } from "../../Providers/Tenants";
 
-const Settings = ({ authenticaded,setAuthenticaded }) => {
+const Settings = ({ authenticaded, setAuthenticaded }) => {
 
     const [user, setUser] = useState({})
     const { register, handleSubmit,} = useForm();
-    const [tenants, setTenats] = useState(0)
+    const { userInfo, getUser, changeUser } = useContext(UserContext)
+    const { tenants, showTenants } = useContext(TenantsContext)
+
     useEffect(() => {
         getUser()
-    }, [])
-
-    const id = JSON.parse(localStorage.getItem("@condomanage:id"))
-    const token = JSON.parse(localStorage.getItem("@condomanage:token"))
-    const getUser = () => {
-        axios.get(`/users/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then((res) => setUser(res.data))
-        .catch((err) => console.log(err))
-    }
-    const getTenants = () => {
-        axios.get(`/tenants?userId=${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then((res) => setTenats(res.data.length))
-        .catch((err) => console.log(err))
-    }
-
-
+        showTenants()
+    }, [userInfo])
 
     const onSubmit = (data) => {
         if(data.name === ''){
@@ -59,12 +40,10 @@ const Settings = ({ authenticaded,setAuthenticaded }) => {
         if(data.email === ''){
             delete data.email
         }
-
-        console.log(data)
+        changeUser(data)
     }
 
-    //AUTENTICAÇÃO QUANDO JUNTAR TODAS AS FEATURES
-    /*if(!authenticaded){
+    /*if(!authenticaded ){
         return <Redirect to='/'/>
     }*/
 
@@ -122,7 +101,7 @@ const Settings = ({ authenticaded,setAuthenticaded }) => {
                                             <Input
                                             {...register('name')}
                                             variant="outline"
-                                            placeholder={user.name}
+                                            placeholder={userInfo.name}
                                             focusBorderColor='transparent'
                                             _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                                     </Box>
@@ -137,7 +116,7 @@ const Settings = ({ authenticaded,setAuthenticaded }) => {
                                             <Input
                                             {...register('address')}
                                             variant="outline"
-                                            placeholder={user.address}
+                                            placeholder={userInfo.address}
                                             focusBorderColor='transparent'
                                             _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                                     </Box>
@@ -152,7 +131,7 @@ const Settings = ({ authenticaded,setAuthenticaded }) => {
                                                 <Input
                                                 {...register('complement')}
                                                 variant="outline"
-                                                placeholder={user.complement}
+                                                placeholder={userInfo.complement}
                                                 focusBorderColor='transparent'
                                                 _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                                         </Box>
@@ -167,7 +146,7 @@ const Settings = ({ authenticaded,setAuthenticaded }) => {
                                             <Input
                                             {...register('apartments')}
                                             variant="outline"
-                                            placeholder={user.apartments}
+                                            placeholder={userInfo.apartments}
                                             focusBorderColor='transparent'
                                             _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                                     </Box>
@@ -181,7 +160,7 @@ const Settings = ({ authenticaded,setAuthenticaded }) => {
                                         borderRadius="30px">
                                             <Input
                                             variant="outline"
-                                            value={user.apartments - tenants}
+                                            value={userInfo.apartments - tenants.length}
                                             focusBorderColor='transparent'
                                             _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                                     </Box>
@@ -196,7 +175,7 @@ const Settings = ({ authenticaded,setAuthenticaded }) => {
                                             <Input
                                             {...register('adm')}
                                             variant="outline"
-                                            placeholder={user.adm}
+                                            placeholder={userInfo.adm}
                                             focusBorderColor='transparent'
                                             _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                                     </Box>
@@ -211,7 +190,7 @@ const Settings = ({ authenticaded,setAuthenticaded }) => {
                                             <Input
                                             {...register('contact')}
                                             variant="outline"
-                                            placeholder={user.contact}
+                                            placeholder={userInfo.contact}
                                             focusBorderColor='transparent'
                                             _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                                     </Box>
@@ -226,7 +205,7 @@ const Settings = ({ authenticaded,setAuthenticaded }) => {
                                             <Input
                                             {...register('email')}
                                             variant="outline"
-                                            placeholder={user.email}
+                                            placeholder={userInfo.email}
                                             focusBorderColor='transparent'
                                             _placeholder={{ opacity: 1,color: '#00a5ae' }}/>
                                     </Box>

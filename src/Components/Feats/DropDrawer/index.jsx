@@ -1,4 +1,3 @@
-import { Box,Img} from "@chakra-ui/react"
 import React from "react";
 import {
     Drawer,
@@ -7,7 +6,8 @@ import {
     DrawerContent,
     DrawerCloseButton,
   } from '@chakra-ui/react'
-import NavList from "../NavList";
+import NavList from '../../Feats/NavList'
+
 const DropDrawer = ({ isDrawerOpen,onDrawerClose,setAuthenticaded }) => {
     return (
         <Drawer

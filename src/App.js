@@ -1,16 +1,28 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import Settings from "./Pages/Settings";
-import CustomTheme from "./Style/Theme";
-import "@fontsource/poppins";
-import "@fontsource/roboto";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '@fontsource/poppins';
+import '@fontsource/roboto';
+import { ChakraProvider } from '@chakra-ui/react';
+import CustomTheme from './Style/Theme';
+import './style.css';
+import Routes from './Routes/index';
 
 function App() {
   return (
-    <div className="App">
-      <ChakraProvider theme={CustomTheme}>
-        <Settings /> 
-      </ChakraProvider>
-    </div>
+    <ChakraProvider theme={CustomTheme}>
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <Routes />
+    </ChakraProvider>
   );
 }
 
