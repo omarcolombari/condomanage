@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 
 const ModalUpdateDemand = ( { isUpdateDemandOpen, onUpdateDemandClose, item } ) => {
-  const { changeDemand, token } = useContext(DemandsContext);
+  const { changeDemand } = useContext(DemandsContext);
 
   const schema = yup.object().shape( {
     status: yup.string().required('Campo obrigatório')
@@ -17,7 +17,7 @@ const ModalUpdateDemand = ( { isUpdateDemandOpen, onUpdateDemandClose, item } ) 
   
   const handleUpdateDemand = ( data ) => {    
 
-    changeDemand( token, data, item.id )
+    changeDemand( data, item.id )
     onUpdateDemandClose()
   }
 

@@ -3,14 +3,16 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { IoIosApps,IoMdApps,IoIosContacts,IoIosSettings,IoMdExit } from "react-icons/io";
 import { MdAttachMoney } from "react-icons/md";
 
-const NavList = ({setAuthenticaded}) => {
+const NavList = ( { setAuthenticaded } ) => {
+    
     const history = useHistory();
     const handlePages = (page) => {
-        history.push(page);
+        history.push( page );
     }
+
     const logout = () => {
         localStorage.clear();
-        setAuthenticaded(false)
+        setAuthenticaded( false )
         handlePages("/login");
     }
 

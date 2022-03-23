@@ -48,11 +48,7 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
     loadFinances();
   }, [finances.length]);
 
-  if (!authenticaded) {
-    return <Redirect to="/login" />;
-  }
-
-  const handleRegisterFinance = (data, reset) => {
+  const handleRegisterFinance = (data) => {
     addFinance(user.user.id, token, data);
     loadFinances();
     onAddFinanceClose();

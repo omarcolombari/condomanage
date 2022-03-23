@@ -1,29 +1,35 @@
 import { Box, Button, filter, Heading, Input, Slide, useDisclosure } from "@chakra-ui/react"
-import Header from "../../Components/Header"
+import Header from "../../Components/Feats/Header"
 import React, { useEffect, useState, useContext } from "react";
 import { DemandsContext} from '../../Providers/Demands';
 import ModalAddDemand from "../../Components/ModalAddDemand";
 import CartDemand  from "../../Components/CartDemand";
 import HeaderPage from "../../Components/HeaderPageDemand";
+import { Redirect } from "react-router-dom";
 
-const DashboardDemand = () => {
+const DashboardDemand = ({ authenticaded, setAuthenticaded}) => {
     const { demands, showDemands, token, user } = useContext(DemandsContext);
     const { isOpen:isAddDemandOpen,onOpen:onAddDemandOpen,onClose:onAddDemandClose } = useDisclosure();
     const { onOpen: onUpdateDemandOpen } = useDisclosure();
     const { onOpen: onContainerDemandOpen  } = useDisclosure();
 
     const [update, setUpdate] = useState([])
+    
 
     const [ filterBase, setFilterBase ] = useState( 'Todas' );
 
     const loadDemands = async () => {
-        await showDemands(token, user.id);
+        await showDemands();
       };
     
     useEffect(() => {
       loadDemands();
       
     }, [demands.length]);
+
+    if (!authenticaded) {
+        return <Redirect to="/login" />;
+    }
 
     return (
         <Box
@@ -36,7 +42,7 @@ const DashboardDemand = () => {
             <Box
             w="100%"
             mb="10px">
-                <Header />
+                    <Header setAuthenticaded={ setAuthenticaded }/>
                 <Box
                 w="90%"
                 maxW='779.73px'

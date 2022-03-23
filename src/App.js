@@ -1,12 +1,11 @@
-import { ToastContainer } from "react-toastify";
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import "@fontsource/poppins";
-import "@fontsource/roboto";
-import PageTenant from "./Pages/Tenant_Page";
+import '@fontsource/poppins';
+import '@fontsource/roboto';
 import { ChakraProvider } from '@chakra-ui/react';
 import CustomTheme from './Style/Theme';
-import "./style.css"
-import Routes from "./Routes/index";
+import './style.css';
+import Routes from './Routes/index';
 
 function App() {
   return (
@@ -22,10 +21,9 @@ function App() {
         draggable
         pauseOnHover
       />
-      <Routes/>
+      <Routes />
     </ChakraProvider>
   );
-
 }
 
 export default App;

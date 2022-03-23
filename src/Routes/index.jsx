@@ -4,11 +4,14 @@ import ChakraLandingPage from "../Pages/Chakra_LandingPage";
 import ChakraLoginPage from "../Pages/Chakra_Login";
 import ChakraSignupPage from "../Pages/Chakra_Signup";
 import DashboardUser from "../Pages/DashboardUser";
-import PageTenant from "../Pages/Tenant_Page";
+import DashboardDemand from "../Pages/DashboardDemand";
+
 import Finance from "../Pages/Finance";
+import TenantsPage from "../Pages/Feature-tenants";
 
 const Routes = () => {
-  const [authenticaded, setAuthenticaded] = useState(false);
+  const [ authenticaded, setAuthenticaded ] = useState( false );
+  
   useEffect(() => {
     const token =JSON.parse(localStorage.getItem("@CondoManage:token"))
     
@@ -50,7 +53,14 @@ const Routes = () => {
       </Route>
 
       <Route path="/tenants">
-        <PageTenant
+        <TenantsPage
+          authenticaded={authenticaded}
+          setAuthenticaded={setAuthenticaded}
+        />
+      </Route>
+
+      <Route path="/requires">
+        <DashboardDemand
           authenticaded={authenticaded}
           setAuthenticaded={setAuthenticaded}
         />
