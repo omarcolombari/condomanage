@@ -38,7 +38,7 @@ const ModalAddTenants = ({
         <ModalCloseButton />
         <ModalBody>
           <Box
-            h={["75%"]}
+            h={["65vh"]}
             css={{
               "&::-webkit-scrollbar": {
                 width: "4px",
@@ -214,9 +214,7 @@ const ModalAddTenants = ({
                   onChange={(e) => setStatusHome(e.target.value)}
                 >
                   <option value="Vago">selecione</option>
-                  <option  value="Vago">
-                    Vago
-                  </option>
+                  <option value="Vago">Vago</option>
                   <option value="comprado">Comprado</option>
                   <option value="alugado">Alugado</option>
                 </Select>

@@ -37,12 +37,14 @@ const ModalListTenants = ({
           borderTopLeftRadius="5px"
           borderTopRightRadius="5px"
         >
-          <Heading variant="title1">Alterar inquilino</Heading>
+          <Heading variant="title1" fontSize="23px">
+            Alterar inquilino
+          </Heading>
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Box
-            h="850px"
+            h="65vh"
             css={{
               "&::-webkit-scrollbar": {
                 width: "4px",
@@ -145,7 +147,7 @@ const ModalListTenants = ({
                     {errors.number?.message}
                   </FormHelperText>
                 </Box>
-                
+
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
@@ -278,9 +280,7 @@ const ModalListTenants = ({
                   onChange={(e) => setStatusHome(e.target.value)}
                 >
                   <option value="Vago">selecione</option>
-                  <option  value="Vago">
-                    Vago
-                  </option>
+                  <option value="Vago">Vago</option>
                   <option value="comprado">Comprado</option>
                   <option value="alugado">Alugado</option>
                 </Select>

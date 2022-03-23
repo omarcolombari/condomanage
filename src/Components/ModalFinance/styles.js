@@ -24,14 +24,13 @@ export const Form = styled.form`
   }
   input,
   select {
-    height: 50px;
+    height: 45px;
     box-sizing: border-box;
     font-size: 13.0293px;
     padding: 10px;
     transition: 0.5s;
-    border: 3px solid #c5e8fb;
     box-sizing: border-box;
-    border-radius: 30px;
+    border-radius: 10px;
     background-color: #00a5ae;
     ::placeholder {
       color: white;
@@ -39,10 +38,7 @@ export const Form = styled.form`
   }
 
   label {
-    font-size: 12.182px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    font-size: 15px;
     color: white;
   }
 `;

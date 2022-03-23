@@ -34,6 +34,9 @@ const FinanceCard = ({ item }) => {
     <>
       <Box
         w="100%"
+        height="80px"
+        display="flex"
+        justifyContent="space-between"
         borderLeft={
           item.status === "Entrada" ? "6px solid green" : "6px solid red"
         }
@@ -43,6 +46,7 @@ const FinanceCard = ({ item }) => {
         borderRadius="4px"
         marginBottom="4px"
         cursor="pointer"
+        backgroundColor="#f6f6f6"
         _hover={{
           background:
             "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(205,247,255,1) 50%, rgba(56,222,255,1) 100%, rgba(0,212,255,1) 100%, rgba(28,217,255,1) 100%, rgba(56,222,255,1) 100%, rgba(56,222,255,1) 100%)",
@@ -53,12 +57,14 @@ const FinanceCard = ({ item }) => {
           d="flex"
           ml="10px"
           mr="2%"
+          w="100%"
           justifyContent="space-between"
           overflowX="auto"
           alignItems="center"
         >
           <Box
             d="flex"
+            
             flexDir="column"
             gap="5px"
             onClick={onChangeFinanceOpen}

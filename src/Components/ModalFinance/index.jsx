@@ -38,7 +38,7 @@ const ModalFinance = ({
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent bg="#141155" w="90%">
+        <ModalContent bg="#141155" w="90%" height="65vh">
           <ModalHeader
             bg="#00A5AE"
             borderTopLeftRadius="5px"
@@ -48,46 +48,35 @@ const ModalFinance = ({
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Box
-              h="350px"
-              display="flex"
-              justifyContent="center"
-              /*css={{
-                "&::-webkit-scrollbar": {
-                  width: "4px",
-                },
-                "&::-webkit-scrollbar-track": {
-                  width: "6px",
-                },
-                "&::-webkit-scrollbar-thumb": {
-                  background: "#00A5AE",
-                  borderRadius: "24px",
-                },
-              }}
-              overflowY="scroll"*/
-            >
+            <Box h="350px" display="flex" justifyContent="center" height="55vh">
               <Form onSubmit={handleSubmit(handleChange)}>
+                <label>Descrição</label>
                 <input
                   type="text"
                   placeholder="Descrição"
                   defaultValue={data.name}
                   {...register("name")}
                 />
-                {errors.name?.message && <p>{errors.name?.message}</p>}
+                {errors.name?.message && (
+                  <p color="red">{errors.name?.message}</p>
+                )}
+                <label>Valor</label>
                 <input
                   type="text"
-                  placeholder="Valor   $"
+                  placeholder="Valor (R$)"
                   defaultValue={data.value}
                   {...register("value")}
                 />
-                {errors.value?.message && <p>{errors.value?.message}</p>}
-                <label>
-                  Categoria
-                  <select defaultValue={data.status} {...register("status")}>
-                    <option value="Entrada">Entrada</option>
-                    <option value="Despesa">Despesa</option>
-                  </select>
-                </label>
+                {errors.value?.message && (
+                  <p style={{ color: "red", fontSize: "12px" }}>
+                    {errors.value?.message}
+                  </p>
+                )}
+                <label>Categoria</label>
+                <select defaultValue={data.status} {...register("status")}>
+                  <option value="Entrada">Entrada</option>
+                  <option value="Despesa">Despesa</option>
+                </select>
 
                 <Button type="submit">Enviar</Button>
               </Form>
