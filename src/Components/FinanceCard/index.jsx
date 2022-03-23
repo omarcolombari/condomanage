@@ -1,4 +1,4 @@
-import { Box, Heading, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Heading, Icon, Text, useDisclosure } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { IoIosTrash } from "react-icons/io";
 import { FinancesContext } from "../../Providers/Finances";
@@ -73,9 +73,12 @@ const FinanceCard = ({ item }) => {
               })}
             </Text>
           </Box>
-          <IoIosTrash
-            onClick={() => handleRemoveFinance(item.id)}
+          <Icon
+            as={IoIosTrash}
+            w="20px"
+            h="20px"
             title="Arquivar"
+            onClick={() => handleRemoveFinance(item.id)}
           />
         </Box>
         <ModalFinance

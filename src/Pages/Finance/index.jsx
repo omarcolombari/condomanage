@@ -30,7 +30,8 @@ const Finance = ({ authenticaded }) => {
 
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
 
-  const [newFinances, setNewFinances] = useState([...finances]);
+  //Esse state é para poder filtrar também
+  //const [newFinances, setNewFinances] = useState([...finances]);
 
   const loadFinances = async () => {
     await showFinances(token, user.user.id);
@@ -38,10 +39,7 @@ const Finance = ({ authenticaded }) => {
 
   useEffect(() => {
     loadFinances();
-    if (finances.length > 0) {
-      setNewFinances([...finances]);
-    }
-  }, [finances.length]);
+  }, [finances]);
 
   if (!authenticaded) {
     return <Redirect to="/login" />;
@@ -106,7 +104,7 @@ const Finance = ({ authenticaded }) => {
                   Despesas
                 </Button>
                 <TotalFinances
-                  d={newFinances.length > 0 ? "block" : "none"}
+                  d={finances.length > 0 ? "block" : "none"}
                   finances={finances}
                 />
               </Box>
@@ -121,8 +119,8 @@ const Finance = ({ authenticaded }) => {
               flexDirection="column"
               gap="15px"
             >
-              {newFinances.length > 0 ? (
-                newFinances
+              {finances.length > 0 ? (
+                finances
                   .filter(({ status }) =>
                     filterFin === "Todos"
                       ? status !== "Todos"
