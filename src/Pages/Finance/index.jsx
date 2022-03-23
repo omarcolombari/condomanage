@@ -55,6 +55,7 @@ const Finance = ({ authenticaded }) => {
   const handleRegisterFinance = (data) => {
     addFinance(user.user.id, token, data);
     loadFinances();
+    onAddFinanceClose();
   };
 
   return (
