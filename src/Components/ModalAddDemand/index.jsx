@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 
 const ModalAddDemand = ( { isAddDemandOpen, onAddDemandClose } ) => {
-  const { addDemand, token} =  useContext(DemandsContext)
+  const { addDemand } =  useContext(DemandsContext)
 
   const schema = yup.object().shape( {
     name: yup.string().required( 'Campo obrigatório' ),
@@ -18,7 +18,7 @@ const ModalAddDemand = ( { isAddDemandOpen, onAddDemandClose } ) => {
   const {register, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(schema)})
   
   const handleAddDemand = ( data ) => {
-    addDemand(token, data )   
+    addDemand( data )   
     onAddDemandClose()
   }
 

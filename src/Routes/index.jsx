@@ -8,14 +8,14 @@ import DashboardDemand from "../Pages/DashboardDemand";
 
 import Finance from "../Pages/Finance";
 import TenantsPage from "../Pages/Feature-tenants";
+import Settings from "../Pages/Settings";
 
 const Routes = () => {
   const [ authenticaded, setAuthenticaded ] = useState( false );
   
   useEffect(() => {
     const token =JSON.parse(localStorage.getItem("@CondoManage:token"))
-    
-   
+
     if (token) {
       return setAuthenticaded(true);
     }
@@ -66,7 +66,9 @@ const Routes = () => {
         />
       </Route>
 
-      <Route path="/settings"></Route>
+      <Route path="/settings">
+        <Settings authenticaded={authenticaded} setAuthenticaded={setAuthenticaded} />
+      </Route>
     </Switch>
   );
 };

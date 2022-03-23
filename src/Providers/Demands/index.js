@@ -24,10 +24,10 @@ export const DemandsProvider = ({ children }) => {
       .then((res) => {
         setDemands(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   };
 
-  const addDemand = (token, data) => {
+  const addDemand = (data) => {
     api
       .post(
         `/demands`,
@@ -83,7 +83,7 @@ export const DemandsProvider = ({ children }) => {
       });
   };
 
-  const delDemand = (token, demandId) => {
+  const delDemand = (demandId) => {
     api
       .delete(`/demands/${demandId}`, {
         headers: {

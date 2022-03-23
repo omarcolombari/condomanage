@@ -7,10 +7,11 @@ export const TenantsContext = createContext();
 export const TenantsProvider = ({ children }) => {
   const [tenants, setTenants] = useState([]);
 
-  // const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
-
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || []
+  );
   const [user] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:infos")) || "[]"
+    JSON.parse(localStorage.getItem("@CondoManage:infos")) || []
   );
 
   const showTenants = (token, userId) => {
@@ -23,16 +24,16 @@ export const TenantsProvider = ({ children }) => {
       .then((res) => {
         setTenants(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => err);
   };
 
-  const addTenant = (id, token, data) => {
+  const addTenant = (data) => {
     api
       .post(
         "tenants",
         {
           ...data,
-          userId: id,
+          userId: user.user.id,
         },
         {
           headers: {
@@ -43,15 +44,13 @@ export const TenantsProvider = ({ children }) => {
       .then((res) => {
         toast.success("Morador adicionado com sucesso!");
         showTenants(token, user.user.id);
-        console.log(res);
       })
       .catch((err) => {
         toast.error("Ops! Algo deu errado");
-        console.log(err);
       });
   };
 
-  const changeTenant = (token, data, tenantId) => {
+  const changeTenant = (data, tenantId) => {
     api
       .patch(
         `tenants/${tenantId}`,
@@ -67,11 +66,9 @@ export const TenantsProvider = ({ children }) => {
       .then((res) => {
         toast.success("Dados alterados com sucesso!");
         showTenants(token, user.user.id);
-        console.log(res);
       })
       .catch((err) => {
         toast.error("Ops! Algo deu errado");
-        console.log(err);
       });
   };
 

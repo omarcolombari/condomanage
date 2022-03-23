@@ -8,7 +8,7 @@ import HeaderPage from "../../Components/HeaderPageDemand";
 import { Redirect } from "react-router-dom";
 
 const DashboardDemand = ({ authenticaded, setAuthenticaded}) => {
-    const { demands, showDemands, token, user } = useContext(DemandsContext);
+    const { demands, showDemands } = useContext(DemandsContext);
     const { isOpen:isAddDemandOpen,onOpen:onAddDemandOpen,onClose:onAddDemandClose } = useDisclosure();
     const { onOpen: onUpdateDemandOpen } = useDisclosure();
     const { onOpen: onContainerDemandOpen  } = useDisclosure();
