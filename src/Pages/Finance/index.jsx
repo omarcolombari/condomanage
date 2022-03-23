@@ -16,7 +16,7 @@ import FinanceCard from "../../Components/FinanceCard";
 import { IoMdCash } from "react-icons/io";
 import { Redirect } from "react-router-dom";
 
-const Finance = ({ authenticaded }) => {
+const Finance = ({ authenticaded,setAuthenticaded }) => {
   const { onOpen: onContainerOpen } = useDisclosure();
 
   const {
@@ -27,16 +27,7 @@ const Finance = ({ authenticaded }) => {
 
   const [filterFin, setFilterFin] = useState("Todos");
 
-<<<<<<< HEAD
-  //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
-  const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTY0Nzk3NTU1NiwiZXhwIjoxNjQ3OTc5MTU2LCJzdWIiOiI0In0.9etUpB-DzRjWKwlbMt2vqqeTiBG04Ym2Qm62dFz6Wr4";
 
-  //Pegar o Id do usuário
-  //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
-  //const userId = user.id
-  const userId = 4;
-=======
   const [token] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
   );
@@ -44,7 +35,6 @@ const Finance = ({ authenticaded }) => {
   const [user] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:infos")) || ""
   );
->>>>>>> 07e7604b23e6909d33a0d0468387023722f7af3d
 
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
 
@@ -57,11 +47,8 @@ const Finance = ({ authenticaded }) => {
 
   useEffect(() => {
     loadFinances();
-<<<<<<< HEAD
-  }, [finances]);
-=======
   }, [finances.length]);
->>>>>>> 07e7604b23e6909d33a0d0468387023722f7af3d
+
 
   if (!authenticaded) {
     return <Redirect to="/login" />;
@@ -72,11 +59,14 @@ const Finance = ({ authenticaded }) => {
     loadFinances();
   };
 
+  if (!authenticaded) {
+    return <Redirect to="/login" />;
+  }
   return (
     <Box w="100vw" h="100vh" d="flex" flexDir="column" alignItems="center">
       <Slide in={onContainerOpen} style={{ zIndex: 10 }} direction="left">
         <Box w="100%" mb="10px">
-          <Header />
+          <Header setAuthenticaded={setAuthenticaded}/>
           <Box
             w="90%"
             maxW="779.73px"

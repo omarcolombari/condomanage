@@ -9,9 +9,10 @@ import Finance from "../Pages/Finance";
 
 const Routes = () => {
   const [authenticaded, setAuthenticaded] = useState(false);
-
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
+    const token =JSON.parse(localStorage.getItem("@CondoManage:token"))
+    
+   
     if (token) {
       return setAuthenticaded(true);
     }

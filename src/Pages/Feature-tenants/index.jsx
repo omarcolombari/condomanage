@@ -10,8 +10,9 @@ import { IoIosBusiness } from "react-icons/io";
 import ModalAddTenants from "../../Components/ModalAddTenants";
 import ModalListTenants from "../../Components/ModalListTenants";
 import Header from "../../Components/Feats/Header";
+import { Redirect } from "react-router-dom";
 
-const TenantsPage = ({ setAuthenticaded }) => {
+const TenantsPage = ({ setAuthenticaded,authenticaded }) => {
   const [token] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:token") || "")
   );
@@ -115,6 +116,8 @@ const TenantsPage = ({ setAuthenticaded }) => {
   useEffect(() => {
     showTenants(token, user.user.id);
   }, [tenants.length]);
+  
+  
 
   return (
     <>
