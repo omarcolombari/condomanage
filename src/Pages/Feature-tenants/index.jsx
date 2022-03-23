@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState, useContext } from "react";
 import { toast } from "react-toastify";
 import { TenantsContext } from "../../Providers/Tenants";
-import { Button, Box, useDisclosure, Heading } from "@chakra-ui/react";
+import { Box, useDisclosure, Heading, Slide } from "@chakra-ui/react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { IoIosBusiness } from "react-icons/io";
 import ModalAddTenants from "../../Components/ModalAddTenants";
@@ -12,7 +12,7 @@ import ModalListTenants from "../../Components/ModalListTenants";
 import Header from "../../Components/Feats/Header";
 import { Redirect } from "react-router-dom";
 
-const TenantsPage = ({ setAuthenticaded,authenticaded }) => {
+const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
   const [token] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:token") || "")
   );
@@ -36,6 +36,9 @@ const TenantsPage = ({ setAuthenticaded,authenticaded }) => {
     onOpen: onOpenAlterTenants,
     onClose: onCloseAlterTenants,
   } = useDisclosure();
+
+  const { onOpen: onTenantPageOpen } = useDisclosure()
+
 
   const [statusHome, setStatusHome] = useState();
   const [currentTenants, setCurrentTenants] = useState([]);
@@ -118,10 +121,25 @@ const TenantsPage = ({ setAuthenticaded,authenticaded }) => {
     showTenants(token, user.user.id);
   }, [tenants.length]);
   
-  
+      if (!authenticaded) {
+        return <Redirect to="/login" />;
+    }
 
   return (
     <>
+            <Box
+            w="100vw" 
+            h="100vh" 
+            d="flex"
+            flexDir="column"
+            alignItems="center"
+        >
+            <Slide
+               in={onTenantPageOpen}
+               style={{ zIndex: 10 }} 
+               direction="left" 
+            >
+                
       <Header setAuthenticaded={setAuthenticaded} />
       <Box
         d="flex"
@@ -243,6 +261,8 @@ const TenantsPage = ({ setAuthenticaded,authenticaded }) => {
           handleChangeTenants={handleChangeTenants}
         />
       </Box>
+            </Slide>
+        </Box>  
     </>
   );
 };
