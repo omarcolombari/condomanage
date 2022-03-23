@@ -213,7 +213,8 @@ const ModalAddTenants = ({
                   name="status"
                   onChange={(e) => setStatusHome(e.target.value)}
                 >
-                  <option defaultValue="selected" value="selecione">
+                  <option value="Vago">selecione</option>
+                  <option  value="Vago">
                     Vago
                   </option>
                   <option value="comprado">Comprado</option>

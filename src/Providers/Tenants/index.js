@@ -7,8 +7,10 @@ export const TenantsContext = createContext()
 export const TenantsProvider = ({ children }) => {
     const [tenants, setTenants] = useState([])
 
+    // const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
+
     const showTenants = (token) => {
-        api.get('tenants', {
+        api.get(`tenants/?userId=1`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -30,6 +32,7 @@ export const TenantsProvider = ({ children }) => {
         })
         .then((res) => {
             toast.success('Morador adicionado com sucesso!')
+            showTenants(token)
             console.log(res)
         })
         .catch((err) => {
@@ -48,6 +51,7 @@ export const TenantsProvider = ({ children }) => {
         })
         .then((res) => {
             toast.success('Dados alterados com sucesso!')
+            showTenants(token)
             console.log(res)
         })
         .catch((err) => {

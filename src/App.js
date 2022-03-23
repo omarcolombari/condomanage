@@ -1,9 +1,10 @@
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import "@fontsource/poppins";
+import "@fontsource/roboto";
+import PageTenant from "./Pages/Tenant_Page";
 import { ChakraProvider } from '@chakra-ui/react';
 import CustomTheme from './Style/Theme';
-import '@fontsource/poppins';
-import '@fontsource/roboto';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import "./style.css"
 import Routes from "./Routes/index";
 
