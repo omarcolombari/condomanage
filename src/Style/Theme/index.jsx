@@ -16,7 +16,7 @@ const CustomTheme = extendTheme({
         Heading: {
             variants: {
                 /*  Import { Heading } from "@chakra-ui/react"
-                    <Heading variants="title2"></Heading>   */
+                    <Heading variant="title2"></Heading>   */
                 title1: { color:"#141155",fontStyle: "regular",fontWeight: "semibold" },
                 title2: { color:"#00a5ae",fontStyle: "regular",fontWeight: "semibold" },
                 title3: { color:"#000000",fontStyle: "regular",fontWeight: "light" },
@@ -29,12 +29,13 @@ const CustomTheme = extendTheme({
                 /*  Import { Text } from "@chakra-ui/react"
                     <Text variants="text2"></Text>     */
                 text1: { color:"#000000",fontStyle: "regular",fontWeight: "light" },
-                text2: { color:"#ffffff",fontStyle: "regular",fontWeight: "semibold" }
+                text2: { color:"#ffffff",fontStyle: "regular",fontWeight: "semibold" },
+                text3: { color:"#000000",fontStyle: "regular",fontWeight: "light",d:"flex",flexDir:"row",alignItems:"center",ml:"18px"},
             }
         },
         Button: {
                 /*  Import { Button } from "@chakra-ui/react"
-                    <Button variants="default"></Button>    */
+                    <Button variant="default"></Button>    */
             variants: {
                 default: {
                     bg:"#00a5ae",

@@ -4,9 +4,8 @@ import '@fontsource/poppins';
 import '@fontsource/roboto';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-// import DashboardUser from './Pages/DashboardUser';
-import DashboardDemand from './Pages/DashboardDemand';
+import "./style.css"
+import Routes from "./Routes/index";
 
 function App() {
   return (
@@ -22,10 +21,10 @@ function App() {
         draggable
         pauseOnHover
       />
-      {/* <DashboardUser></DashboardUser> */}
-      <DashboardDemand />
+      <Routes/>
     </ChakraProvider>
   );
+
 }
 
 export default App;
