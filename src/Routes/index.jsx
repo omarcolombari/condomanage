@@ -4,8 +4,8 @@ import ChakraLandingPage from "../Pages/Chakra_LandingPage";
 import ChakraLoginPage from "../Pages/Chakra_Login";
 import ChakraSignupPage from "../Pages/Chakra_Signup";
 import DashboardUser from "../Pages/DashboardUser";
-import TenantsPage from '../Pages/Feature-tenants'
-import Finance from '../Pages/Finance'
+import PageTenant from "../Pages/Tenant_Page";
+import Finance from "../Pages/Finance";
 
 const Routes = () => {
   const [authenticaded, setAuthenticaded] = useState(false);
@@ -42,11 +42,17 @@ const Routes = () => {
       </Route>
 
       <Route path="/finances">
-        <Finance />
+        <Finance
+          authenticaded={authenticaded}
+          setAuthenticaded={setAuthenticaded}
+        />
       </Route>
 
       <Route path="/tenants">
-        <TenantsPage/>
+        <PageTenant
+          authenticaded={authenticaded}
+          setAuthenticaded={setAuthenticaded}
+        />
       </Route>
 
       <Route path="/settings"></Route>

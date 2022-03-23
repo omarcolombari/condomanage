@@ -14,16 +14,20 @@ import HeaderPage from "../../Components/HeaderPageVar";
 import TotalFinances from "../../Components/TotalFinances";
 import FinanceCard from "../../Components/FinanceCard";
 import { IoMdCash } from "react-icons/io";
+import { Redirect } from "react-router-dom";
 
-const Finance = () => {
+const Finance = ({ authenticaded }) => {
   const { onOpen: onContainerOpen } = useDisclosure();
+
   const {
     isOpen: isAddFinanceOpen,
     onOpen: onAddFinanceOpen,
     onClose: onAddFinanceClose,
   } = useDisclosure();
+
   const [filterFin, setFilterFin] = useState("Todos");
 
+<<<<<<< HEAD
   //const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
   const token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImlhdCI6MTY0Nzk3NTU1NiwiZXhwIjoxNjQ3OTc5MTU2LCJzdWIiOiI0In0.9etUpB-DzRjWKwlbMt2vqqeTiBG04Ym2Qm62dFz6Wr4";
@@ -32,23 +36,39 @@ const Finance = () => {
   //const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
   //const userId = user.id
   const userId = 4;
+=======
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
+  );
 
-  //Pegando o array e os métodos do Providers
+  const [user] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:infos")) || ""
+  );
+>>>>>>> 07e7604b23e6909d33a0d0468387023722f7af3d
+
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
 
   //Esse state é para poder filtrar também
   //const [newFinances, setNewFinances] = useState([...finances]);
 
   const loadFinances = async () => {
-    await showFinances(token, userId);
+    await showFinances(token, user.user.id);
   };
 
   useEffect(() => {
     loadFinances();
+<<<<<<< HEAD
   }, [finances]);
+=======
+  }, [finances.length]);
+>>>>>>> 07e7604b23e6909d33a0d0468387023722f7af3d
+
+  if (!authenticaded) {
+    return <Redirect to="/login" />;
+  }
 
   const handleRegisterFinance = (data) => {
-    addFinance(userId, token, data);
+    addFinance(user.user.id, token, data);
     loadFinances();
   };
 

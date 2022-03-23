@@ -2,15 +2,25 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useEffect, useState, useContext } from "react";
+import { toast } from "react-toastify";
 import { TenantsContext } from "../../Providers/Tenants";
 import { Button, Box, useDisclosure, Heading } from "@chakra-ui/react";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { IoIosBusiness } from "react-icons/io";
 import ModalAddTenants from "../../Components/ModalAddTenants";
 import ModalListTenants from "../../Components/ModalListTenants";
 import Header from "../../Components/Feats/Header";
 
-const TenantsPage = () => {
-  const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
-  const user = JSON.parse(localStorage.getItem("@CondoManage:infos"));
+const TenantsPage = ({ setAuthenticaded }) => {
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token") || "")
+  );
+  const [user] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:infos") || "")
+  );
+
+  console.log(user);
+
   const { showTenants, tenants, addTenant, changeTenant } =
     useContext(TenantsContext);
 
@@ -47,6 +57,7 @@ const TenantsPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -68,7 +79,15 @@ const TenantsPage = () => {
       value,
       status: statusHome,
     };
-    addTenant(user.id, token, newTenants);
+    const findNumberTenants = tenants.find(
+      (item) => item.number === newTenants.number
+    );
+    reset();
+    if (findNumberTenants) {
+      return toast.error("Numero de Apartamento ja existe");
+    }
+
+    return addTenant(1, token, newTenants);
   };
 
   const handleChangeTenants = ({
@@ -87,45 +106,48 @@ const TenantsPage = () => {
       cpf,
       value,
       status: statusHome,
-      userId: user.id,
+      userId: 1,
     };
+    reset();
     changeTenant(token, changeTenants, currentTenants.id);
   };
 
   useEffect(() => {
-    showTenants(token);
-  }, [tenants]);
+    showTenants(token, user.user.id);
+  }, [tenants.length]);
 
   return (
     <>
-      <Header />
+      <Header setAuthenticaded={setAuthenticaded} />
       <Box
+        d="flex"
+        flexDirection="column"
+        alignItems="center"
         margin="10px auto"
         w={["98%"]}
-      maxW="1300px"
+        maxW="1300px"
         h="90%"
         boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         borderRadius="30px"
       >
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          margin="10px"
-          h="90px"
-        >
-          <Heading variant="title1">Lista de apartamentos</Heading>
-          <Button
-            variant="default"
-            onClick={onAddOpen}
-            w="45px"
-            h="45px"
-            borderRadius="100%"
-            fontSize="30px"
-            bg="#141155"
+        <Box w="100%">
+          <Heading
+            padding="30px"
+            variant="title1"
+            d="flex"
+            justifyContent="space-around"
+            w="100%"
+            fontSize={["20px", "25px", "30px"]}
+            alignItems="center"
           >
-            +
-          </Button>
+            Lista de Inquilinos
+            <IoIosAddCircleOutline
+              cursor="pointer"
+              w="15px"
+              title="Adicionar finança"
+              onClick={onAddOpen}
+            />
+          </Heading>
 
           <ModalAddTenants
             register={register}
@@ -139,54 +161,72 @@ const TenantsPage = () => {
         </Box>
 
         <Box
-          w={["100%"]}
-          h="100%"
-          bg="#c5e8fb"
+          w={["95%", "70%", "90%"]}
+          h={["32vh", "", "50vh"]}
+          marginTop="10px"
           d="flex"
           flexDir="column"
-          justifyContent="center"
-          alignItems="center"
-          padding="20px"
-          borderRadius="0 0 30px 30px"
+          borderRadius="4px"
+          overflow="auto"
         >
-          {tenants?.map((tenant, index) => (
-            <Box
-              w="100%"
-              key={index}
-              onClick={() => setCurrentTenants(tenant)}
-              display="flex"
-              justifyContent="center"
-            >
+          {tenants.length > 0 ? (
+            tenants?.map((tenant, index) => (
               <Box
-                textAlign="center"
-                color="#ffffff"
-                borderRadius="18px"
-                padding={["4px", "10px"]}
-                bg="#00a5ae"
-                display="flex"
-                justifyContent="space-between"
-                margin="10px"
-                w="80%"
-                fontSize={["18px", "28px"]}
-                h={["30px", "35px", "60px"]}
-                variant="default"
+                margin="5px 0 5px 0"
+                w="100%"
                 key={index}
-                onClick={onOpenAlterTenants}
+                onClick={() => setCurrentTenants(tenant)}
+                borderLeft={
+                  tenant.status === "Vago" ? "6px solid red" : "6px solid green"
+                }
+                borderRight={
+                  tenant.status === "Vago" ? "6px solid red" : "6px solid green"
+                }
+                borderRadius="4px"
+                marginBottom="4px"
+                cursor="pointer"
+                _hover={{
+                  background:
+                    "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(205,247,255,1) 50%, rgba(56,222,255,1) 100%, rgba(0,212,255,1) 100%, rgba(28,217,255,1) 100%, rgba(56,222,255,1) 100%, rgba(56,222,255,1) 100%)",
+                  boxShadow: "0px 4px 42px -12px rgba(0, 0, 0, 0.25);",
+                }}
               >
-                <Box>
-                  {tenant.responsible} {tenant.number}
-                </Box>
                 <Box
-                  borderRadius="100%"
-                  width={["20px", "30px"]}
-                  height={["20px", "30px"]}
-                  bg="green"
+                  h="40px"
+                  d="flex"
+                  ml="10px"
+                  mr="2%"
+                  justifyContent="space-between"
+                  overflowX="auto"
+                  alignItems="center"
+                  onClick={onOpenAlterTenants}
                 >
-                  {" "}
+                  <Box d="flex" flexDir="column" gap="5px">
+                    {tenant.responsible} {tenant.number}
+                  </Box>
                 </Box>
               </Box>
+            ))
+          ) : (
+            <Box
+              h="100%"
+              w="100%"
+              d="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Heading
+                variant="title3"
+                fontSize={["16px", "28px"]}
+                d="flex"
+                flexDir="column"
+                alignItems="center"
+              >
+                Sem Inquilinos registrado
+                <IoIosBusiness />
+              </Heading>
             </Box>
-          ))}
+          )}
         </Box>
         <ModalListTenants
           errors={errors}
