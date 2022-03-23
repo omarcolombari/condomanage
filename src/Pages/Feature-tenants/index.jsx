@@ -85,6 +85,7 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
       return toast.error("Número de apartamento já existe");
     }
 
+    onAddClose();
     return addTenant(newTenants);
   };
 
@@ -108,6 +109,7 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
     };
     reset();
     changeTenant(changeTenants, currentTenants.id);
+    onCloseAlterTenants();
   };
 
   useEffect(() => {

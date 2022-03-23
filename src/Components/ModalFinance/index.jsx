@@ -12,12 +12,16 @@ import { Form } from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext } from "react";
+import { FinancesContext } from "../../Providers/Finances";
 
 const ModalFinance = ({
   isOpen,
   onClose,
   handleChange,
   title,
+  onAddFinanceClose,
+  loadFinances,
   data = { name: "", value: "" },
 }) => {
   const handleSchema = yup.object().shape({
@@ -27,12 +31,21 @@ const ModalFinance = ({
       .required("Campo obrigatório")
       .matches(/^[0-9 ]+$/, "O campo deve conter apenas números"),
   });
+  const { finances, showFinances, addFinance } = useContext(FinancesContext);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({ resolver: yupResolver(handleSchema) });
+
+  const handleRegisterFinance = (data) => {
+    addFinance(data);
+    loadFinances();
+    onAddFinanceClose();
+    reset();
+  };
 
   return (
     <>
@@ -49,7 +62,7 @@ const ModalFinance = ({
           <ModalCloseButton />
           <ModalBody>
             <Box h="350px" display="flex" justifyContent="center" height="55vh">
-              <Form onSubmit={handleSubmit(handleChange)}>
+              <Form onSubmit={handleSubmit(handleRegisterFinance)}>
                 <label>Descrição</label>
                 <input
                   type="text"

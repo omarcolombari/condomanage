@@ -4,7 +4,7 @@ import { IoIosHome, IoMdMap, IoIosBusiness, IoIosMail } from "react-icons/io";
 import { DemandsContext } from "../../Providers/Demands";
 import { FinancesContext } from "../../Providers/Finances";
 import { TenantsContext } from "../../Providers/Tenants";
-import Grafico from '../Feats/grafico'
+import Grafico from "../Feats/grafico";
 
 const Dashboard = ({ authenticaded }) => {
   const [user] = useState(
@@ -13,20 +13,27 @@ const Dashboard = ({ authenticaded }) => {
   const [token] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
   );
-  const {tenants,showTenants} = useContext(TenantsContext);
-  const {finances,showFinances} = useContext(FinancesContext);
-  const {demands,showDemands} = useContext(DemandsContext);
-useEffect(() => {
-  showTenants(token, user.user.id);
-  }, [tenants.length]);
-  useEffect(()=> {
-    showFinances(token,user.user.id)
-  },[finances.lenght]);
-  useEffect(()=> {
-    showDemands(token,user.user.id)
-  },[demands.lenght]);
-  const graficFinancesEntrada = finances.filter((item) => item.status === "Entrada").length;
-  const graficFinancesDespesas = finances.filter((item) => item.status === "Despesa").length;
+  const { tenants, showTenants } = useContext(TenantsContext);
+  const { finances, showFinances } = useContext(FinancesContext);
+  const { demands, showDemands } = useContext(DemandsContext);
+  useEffect(() => {
+    showTenants(token, user.user.id);
+    showFinances(token, user.user.id);
+    showDemands(token, user.user.id);
+  }, [tenants.length, finances.lenght, demands.lenght]);
+
+  const graficFinancesEntrada = finances.filter(
+    (item) => item.status === "Entrada"
+  ).length;
+  const graficFinancesDespesas = finances.filter(
+    (item) => item.status === "Despesa"
+  ).length;
+  const graficDemandsEntradas = demands.filter(
+    (item) => item.status === "inProgress"
+  ).length;
+  const graficDemandsDespesas = demands.filter(
+    (item) => item.status === "completed"
+  ).length;
   return (
     <Box
       w={["98%"]}
@@ -95,10 +102,16 @@ useEffect(() => {
             <Grafico
               infoName="finança"
               infoDescribe="entradas e despesas"
-              infoUp="entradas"
-              infoUpValue={graficFinancesEntrada}
-              infoDown="despesas"
-              infoDownValue={graficFinancesDespesas}
+              infoUp={graficFinancesEntrada === 0 ? "sem entrada" : "entradas"}
+              infoUpValue={
+                graficFinancesEntrada === 0 ? 1 : graficFinancesEntrada
+              }
+              infoDown={
+                graficFinancesDespesas === 0 ? "sem Despesas" : "despesas"
+              }
+              infoDownValue={
+                graficFinancesDespesas === 0 ? 1 : graficFinancesDespesas
+              }
               infoTittle="Overview financeiro"
             />
           </Box>
@@ -106,10 +119,16 @@ useEffect(() => {
             <Grafico
               infoName="demandas"
               infoDescribe="em progresso e concluídas"
-              infoUp="em progresso"
-              infoUpValue={11}
-              infoDown="concluídas"
-              infoDownValue={2}
+              infoUp={graficDemandsEntradas === 0 ? "sem demandas" : "demandas"}
+              infoUpValue={
+                graficDemandsEntradas === 0 ? 1 : graficDemandsEntradas
+              }
+              infoDown={
+                graficDemandsDespesas === 0 ? "sem comcluídas" : "concluídas"
+              }
+              infoDownValue={
+                graficDemandsDespesas === 0 ? 1 : graficDemandsDespesas
+              }
               infoTittle="Overview de demandas"
             />
           </Box>

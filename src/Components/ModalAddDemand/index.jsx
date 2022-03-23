@@ -33,11 +33,13 @@ const ModalAddDemand = ({ isAddDemandOpen, onAddDemandClose }) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleAddDemand = (data) => {
     addDemand(data);
     onAddDemandClose();
+    reset();
   };
 
   return (
@@ -134,7 +136,13 @@ const ModalAddDemand = ({ isAddDemandOpen, onAddDemandClose }) => {
                     justifyContent="center"
                     alignItems="center"
                   >
-                    <Button backgroundColor="#00a5ae" color="#FFF" type="submit">Criar demanda</Button>
+                    <Button
+                      backgroundColor="#00a5ae"
+                      color="#FFF"
+                      type="submit"
+                    >
+                      Criar demanda
+                    </Button>
                   </Box>
                 </FormControl>
               </form>

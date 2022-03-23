@@ -28,7 +28,6 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
   const [filterFin, setFilterFin] = useState("Todos");
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
 
-
   const loadFinances = async () => {
     await showFinances();
   };
@@ -36,12 +35,6 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
   useEffect(() => {
     loadFinances();
   }, [finances.length]);
-
-  const handleRegisterFinance = (data) => {
-    addFinance(data);
-    loadFinances();
-    onAddFinanceClose();
-  };
 
   if (!authenticaded) {
     return <Redirect to="/login" />;
@@ -149,7 +142,8 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
             <ModalFinance
               isOpen={isAddFinanceOpen}
               onClose={onAddFinanceClose}
-              handleChange={handleRegisterFinance}
+              loadFinances={loadFinances}
+              onAddFinanceClose={onAddFinanceClose}
               title="Registrar finança"
             />
           </Box>
