@@ -39,7 +39,7 @@ const Finance = ({ authenticaded }) => {
 
   useEffect(() => {
     loadFinances();
-  }, [finances]);
+  }, [finances.length]);
 
   if (!authenticaded) {
     return <Redirect to="/login" />;
