@@ -22,8 +22,7 @@ const SettingsPage = ({ authenticaded, setAuthenticaded }) => {
     JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
   );
   const [user] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:infos")) || ""
-  );
+    JSON.parse(localStorage.getItem("@CondoManage:infos")));
 
   const { register, handleSubmit } = useForm();
   const { userInfo, getUser, changeUser } = useContext(UserContext);
@@ -32,9 +31,11 @@ const SettingsPage = ({ authenticaded, setAuthenticaded }) => {
   const { onOpen: onContainerDemandOpen } = useDisclosure();
 
   useEffect(() => {
-    getUser(user.user.id, token);
-    showTenants(token, user.user.id);
-  }, [userInfo.length]);
+    if(user){
+      getUser(user.user.id, token);
+      showTenants(token, user.user.id);
+    }
+  }, [userInfo]);
 
   const logout = () => {
     localStorage.clear();
@@ -69,7 +70,7 @@ const SettingsPage = ({ authenticaded, setAuthenticaded }) => {
   };
 
   if (!authenticaded) {
-    return <Link to="/login" />;
+    return <Redirect to="/login" />;
   }
 
   return (

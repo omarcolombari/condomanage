@@ -17,17 +17,69 @@ import {
   EditableInput,
   EditablePreview,
 } from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { TenantsContext } from "../../../Providers/Tenants";
 
 const ModalListTenants = ({
   isOpenAlterTenants,
   onCloseAlterTenants,
-  handleSubmit,
-  register,
   setStatusHome,
-  handleChangeTenants,
   currentTenants,
-  errors,
+  statusHome
 }) => {
+
+  const [user] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:infos")));
+
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
+  );
+
+  const { changeTenant } = useContext(TenantsContext);
+  const { handleSubmit, register, reset, formState: { isSubmitSuccessful }} = useForm()
+
+  const handleChangeTenants = (data) => {
+    const changeTenants = {
+      ...data,
+      status: statusHome
+    };
+
+    if (changeTenants.email === "") {
+      delete changeTenants.email;
+    }
+    if (changeTenants.password === "") {
+      delete changeTenants.password;
+    }
+    if (changeTenants.number === "") {
+      delete changeTenants.number;
+    }
+    if (changeTenants.responsible === "") {
+      delete changeTenants.responsible;
+    }
+    if (changeTenants.cpf === "") {
+      delete changeTenants.cpf;
+    }
+    if (changeTenants.value === "") {
+      delete changeTenants.value;
+    }
+    changeTenant(changeTenants, currentTenants.id, user.user.id, token);
+    onCloseAlterTenants();
+  };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset({
+        email: '',
+        password: '',
+        number: '',
+        responsible: '',
+        cpf: '',
+        value: ''
+      });
+    }
+  }, [isSubmitSuccessful, reset]);
+
   return (
     <Modal isOpen={isOpenAlterTenants} onClose={onCloseAlterTenants}>
       <ModalOverlay />
@@ -73,7 +125,7 @@ const ModalListTenants = ({
                     fontSize="12px"
                     fontWeight="700px"
                   >
-                    {errors.email?.message}
+                    
                   </FormHelperText>
                 </Box>
 
@@ -81,7 +133,7 @@ const ModalListTenants = ({
                   focusBorderColor="transparent"
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
-                  defaultValue={currentTenants.email}
+                  placeholder={currentTenants.email}
                   variant="outline"
                   w="95%"
                   h="40px"
@@ -109,14 +161,14 @@ const ModalListTenants = ({
                     fontSize="12px"
                     fontWeight="700px"
                   >
-                    {errors.password?.message}
+                    
                   </FormHelperText>
                 </Box>
 
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
-                  defaultValue={currentTenants.password}
+                  placeholder={currentTenants.password}
                   variant="outline"
                   w="95%"
                   h="40px"
@@ -144,14 +196,14 @@ const ModalListTenants = ({
                     fontSize="12px"
                     fontWeight="700px"
                   >
-                    {errors.number?.message}
+                    
                   </FormHelperText>
                 </Box>
 
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
-                  defaultValue={currentTenants.number}
+                  placeholder={currentTenants.number}
                   variant="outline"
                   w="95%"
                   h="40px"
@@ -179,13 +231,13 @@ const ModalListTenants = ({
                     fontSize="12px"
                     fontWeight="700px"
                   >
-                    {errors.responsible?.message}
+                    
                   </FormHelperText>
                 </Box>
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
-                  defaultValue={currentTenants.responsible}
+                  placeholder={currentTenants.responsible}
                   variant="outline"
                   w="95%"
                   h="40px"
@@ -213,14 +265,14 @@ const ModalListTenants = ({
                     fontSize="12px"
                     fontWeight="700px"
                   >
-                    {errors.cpf?.message}
+                    
                   </FormHelperText>
                 </Box>
 
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
-                  defaultValue={currentTenants.cpf}
+                  placeholder={currentTenants.cpf}
                   variant="outline"
                   w="95%"
                   h="40px"
@@ -248,14 +300,14 @@ const ModalListTenants = ({
                     fontSize="12px"
                     fontWeight="700px"
                   >
-                    {errors.cpf?.message}
+                    
                   </FormHelperText>
                 </Box>
 
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
-                  defaultValue={currentTenants.value}
+                  placeholder={currentTenants.value}
                   variant="outline"
                   w="95%"
                   h="40px"
@@ -275,6 +327,7 @@ const ModalListTenants = ({
                 <Select
                   bgColor="#00A5AE"
                   w="95%"
+                  defaultValue={currentTenants.status}
                   {...register("status")}
                   name="status"
                   onChange={(e) => setStatusHome(e.target.value)}
