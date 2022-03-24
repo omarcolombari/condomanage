@@ -26,7 +26,6 @@ const ModalListTenants = ({
   setStatusHome,
   handleChangeTenants,
   currentTenants,
-  errors,
 }) => {
   return (
     <Modal isOpen={isOpenAlterTenants} onClose={onCloseAlterTenants}>
@@ -73,7 +72,7 @@ const ModalListTenants = ({
                     fontSize="12px"
                     fontWeight="700px"
                   >
-                    {errors.email?.message}
+                    
                   </FormHelperText>
                 </Box>
 
@@ -109,7 +108,7 @@ const ModalListTenants = ({
                     fontSize="12px"
                     fontWeight="700px"
                   >
-                    {errors.password?.message}
+                    
                   </FormHelperText>
                 </Box>
 
@@ -144,7 +143,7 @@ const ModalListTenants = ({
                     fontSize="12px"
                     fontWeight="700px"
                   >
-                    {errors.number?.message}
+                    
                   </FormHelperText>
                 </Box>
 
@@ -179,7 +178,7 @@ const ModalListTenants = ({
                     fontSize="12px"
                     fontWeight="700px"
                   >
-                    {errors.responsible?.message}
+                    
                   </FormHelperText>
                 </Box>
                 <Editable
@@ -213,7 +212,7 @@ const ModalListTenants = ({
                     fontSize="12px"
                     fontWeight="700px"
                   >
-                    {errors.cpf?.message}
+                    
                   </FormHelperText>
                 </Box>
 
@@ -248,7 +247,7 @@ const ModalListTenants = ({
                     fontSize="12px"
                     fontWeight="700px"
                   >
-                    {errors.cpf?.message}
+                    
                   </FormHelperText>
                 </Box>
 
