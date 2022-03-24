@@ -10,10 +10,10 @@ import LoginPage from "../Pages/LoginPage";
 import SignupPage from "../Pages/SignupPage";
 
 const Routes = () => {
-  const [ authenticaded, setAuthenticaded ] = useState( false );
-  
+  const [authenticaded, setAuthenticaded] = useState(false);
+
   useEffect(() => {
-    const token =JSON.parse(localStorage.getItem("@CondoManage:token"))
+    const token = JSON.parse(localStorage.getItem("@CondoManage:token"));
 
     if (token) {
       return setAuthenticaded(true);
@@ -23,7 +23,7 @@ const Routes = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <LandingPage />
+        <LandingPage authenticaded={authenticaded} />
       </Route>
 
       <Route path="/login">
@@ -34,9 +34,10 @@ const Routes = () => {
       </Route>
 
       <Route path="/signup">
-        <SignupPage 
+        <SignupPage
           authenticaded={authenticaded}
-          setAuthenticaded={setAuthenticaded}/>
+          setAuthenticaded={setAuthenticaded}
+        />
       </Route>
 
       <Route path="/dashboard">
@@ -68,9 +69,9 @@ const Routes = () => {
       </Route>
 
       <Route path="/settings">
-        <SettingsPage 
-          authenticaded={authenticaded} 
-          setAuthenticaded={setAuthenticaded} 
+        <SettingsPage
+          authenticaded={authenticaded}
+          setAuthenticaded={setAuthenticaded}
         />
       </Route>
     </Switch>
