@@ -14,16 +14,15 @@ import { Redirect } from "react-router-dom";
 
 const TenantPage = ({ setAuthenticaded, authenticaded }) => {
   const [user] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:infos") || "")
-  );
+    JSON.parse(localStorage.getItem("@CondoManage:infos")));
 
   const [token] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:token")) || []
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
   );
 
   const { showTenants, tenants, addTenant, changeTenant } =
     useContext(TenantsContext);
-console.log(tenants)
+
   const {
     isOpen: isAddOpen,
     onOpen: onAddOpen,
@@ -123,7 +122,9 @@ console.log(tenants)
   };
 
   useEffect(() => {
-    showTenants(token, user.user.id);
+    if(user){
+      showTenants(token, user.user.id);
+    }
   }, [tenants.length]);
 
   if (!authenticaded) {
@@ -270,7 +271,7 @@ console.log(tenants)
               )}
             </Box>
             <ModalListTenants
-              errors={errors}
+              
               currentTenants={currentTenants}
               onCloseAlterTenants={onCloseAlterTenants}
               isOpenAlterTenants={isOpenAlterTenants}
