@@ -75,8 +75,6 @@ const TenantPage = ({ setAuthenticaded, authenticaded }) => {
     + Math.random().toString(16).slice(2)
     + Date.now().toString(16).slice(4)
     +responsible;
-    console.log(serialId)
-    console.log(tenants)
     const newTenants = {
       email,
       password,
@@ -96,29 +94,6 @@ const TenantPage = ({ setAuthenticaded, authenticaded }) => {
     }
     onAddClose();
     return addTenant(newTenants, user.user.id, token);
-  };
-
-  const handleChangeTenants = ({
-    email,
-    password,
-    number,
-    responsible,
-    cpf,
-    value,
-  }) => {
-    const changeTenants = {
-      email,
-      password,
-      number,
-      responsible,
-      cpf,
-      value,
-      status: statusHome,
-      userId: user.user.id,
-    };
-    reset();
-    changeTenant(changeTenants, currentTenants.id, user.user.id, token);
-    onCloseAlterTenants();
   };
 
   useEffect(() => {
@@ -275,10 +250,8 @@ const TenantPage = ({ setAuthenticaded, authenticaded }) => {
               currentTenants={currentTenants}
               onCloseAlterTenants={onCloseAlterTenants}
               isOpenAlterTenants={isOpenAlterTenants}
-              register={register}
-              handleSubmit={handleSubmit}
               setStatusHome={setStatusHome}
-              handleChangeTenants={handleChangeTenants}
+              statusHome={statusHome}
             />
           </Box>
         </Slide>
