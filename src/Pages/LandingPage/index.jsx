@@ -1,9 +1,15 @@
 import { Box, ScaleFade, useDisclosure } from "@chakra-ui/react";
 import background from "../../Assets/Images/background.png";
 import LandingPageContainer from "../../Components/HomePage_components/Landing_components";
+import { Redirect } from "react-router-dom";
 
-const LandingPage = () => {
+const LandingPage = ({ authenticaded }) => {
   const { onOpen } = useDisclosure();
+
+  if (authenticaded) {
+    return <Redirect to="/dashboard" />;
+  }
+
   return (
     <ScaleFade
       in={onOpen}
