@@ -14,7 +14,7 @@ import api from "../../../../services/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import Inputs from "../../../Feats/Inputs";
+import Inputs from "../../../Inputs";
 import LoginHeader from "../LoginHeader";
 import { Redirect } from "react-router-dom";
 

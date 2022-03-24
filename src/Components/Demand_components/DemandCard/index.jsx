@@ -4,7 +4,7 @@ import { IoIosTrash } from "react-icons/io";
 import { DemandsContext } from "../../../Providers/Demands";
 import ModalUpdateDemand from "../ModalUpdateDemand";
 
-const CartDemand = ({ item }) => {
+const DemandCard = ({ item }) => {
   const [token] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:token")) || []
   );
@@ -82,4 +82,4 @@ const CartDemand = ({ item }) => {
   );
 };
 
-export default CartDemand;
+export default DemandCard;

@@ -23,7 +23,7 @@ const TenantPage = ({ setAuthenticaded, authenticaded }) => {
 
   const { showTenants, tenants, addTenant, changeTenant } =
     useContext(TenantsContext);
-
+console.log(tenants)
   const {
     isOpen: isAddOpen,
     onOpen: onAddOpen,
@@ -72,6 +72,12 @@ const TenantPage = ({ setAuthenticaded, authenticaded }) => {
     cpf,
     value,
   }) => {
+    const serialId = number+String.fromCharCode(Math.floor(Math.random() * 26) + 97)
+    + Math.random().toString(16).slice(2)
+    + Date.now().toString(16).slice(4)
+    +responsible;
+    console.log(serialId)
+    console.log(tenants)
     const newTenants = {
       email,
       password,
@@ -80,6 +86,7 @@ const TenantPage = ({ setAuthenticaded, authenticaded }) => {
       cpf,
       value,
       status: statusHome,
+      serial: serialId
     };
     const findNumberTenants = tenants.find(
       (item) => item.number === newTenants.number

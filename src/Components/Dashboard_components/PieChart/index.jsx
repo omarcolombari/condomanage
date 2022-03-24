@@ -1,6 +1,6 @@
 import Chart from "react-google-charts";
 
-const Grafico = ({
+const PieChart = ({
   infoName,
   infoDescribe,
   infoUp,
@@ -31,4 +31,4 @@ const Grafico = ({
     />
   );
 };
-export default Grafico;
+export default PieChart;

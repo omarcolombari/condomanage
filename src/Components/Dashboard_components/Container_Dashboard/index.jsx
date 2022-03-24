@@ -4,7 +4,7 @@ import { IoIosHome, IoMdMap, IoIosBusiness, IoIosMail } from "react-icons/io";
 import { DemandsContext } from "../../../Providers/Demands";
 import { FinancesContext } from "../../../Providers/Finances";
 import { TenantsContext } from "../../../Providers/Tenants";
-import Grafico from "../grafico";
+import PieChart from "../PieChart";
 
 const ContainerDashboard = ({ authenticaded }) => {
   const [user] = useState(
@@ -93,18 +93,18 @@ const ContainerDashboard = ({ authenticaded }) => {
           mt={["20px", "", "0px"]}
         >
           <Box w={["250px", "", "400px"]} width="auto" bg="transparent">
-            <Grafico
+            <PieChart
               infoName="ocupação"
               infoDescribe="desocupados e ocupados"
               infoUp="desocupados"
               infoUpValue={user.user.apartments}
               infoDown="ocupados"
-              infoDownValue={tenants.length}
+              infoDownValue={(tenants.length>0?tenants.length:1)}
               infoTittle="Overview de ocupação"
             />
           </Box>
           <Box w={["250px", "", "400px"]} width="auto" bg="transparent">
-            <Grafico
+            <PieChart
               infoName="finança"
               infoDescribe="entradas e despesas"
               infoUp={graficFinancesEntrada === 0 ? "sem entrada" : "entradas"}
@@ -121,7 +121,7 @@ const ContainerDashboard = ({ authenticaded }) => {
             />
           </Box>
           <Box w={["250px", "", "400px"]} width="auto" bg="transparent">
-            <Grafico
+            <PieChart
               infoName="demandas"
               infoDescribe="em progresso e concluídas"
               infoUp={graficDemandsEntradas === 0 ? "sem demandas" : "demandas"}

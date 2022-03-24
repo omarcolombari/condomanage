@@ -11,7 +11,7 @@ import Header from "../../Components/Header_components/Header";
 import React, { useEffect, useState, useContext } from "react";
 import { DemandsContext } from "../../Providers/Demands";
 import ModalAddDemand from "../../Components/Demand_components/ModalAddDemand";
-import CartDemand from "../../Components/Demand_components/CartDemand";
+import DemandCard from "../../Components/Demand_components/DemandCard";
 import HeaderPage from "../../Components/Demand_components/HeaderPageDemand";
 import { Redirect } from "react-router-dom";
 
@@ -117,7 +117,7 @@ const DemandPage = ({ authenticaded, setAuthenticaded }) => {
                     : status === filterBase
                 )
                 .map((item) => (
-                  <CartDemand key={item.id} item={item} />
+                  <DemandCard key={item.id} item={item} />
                 ))}
             </Box>
             <Box>

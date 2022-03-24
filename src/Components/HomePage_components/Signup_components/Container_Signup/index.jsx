@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import api from "../../../../services/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Inputs from "../../../Feats/Inputs";
+import Inputs from "../../../Inputs";
 import SignupHeader from "../SignupHeader";
 
 const ContainerSignup = () => {
@@ -55,11 +55,7 @@ const ContainerSignup = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  const handleNavigation = (path) => {
-    return history.push(path);
-  };
-
+  
   const handleFormSubmit = (data) => {
     api
       .post("/register", data)
