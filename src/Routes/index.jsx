@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
-import ChakraLandingPage from "../Pages/Chakra_LandingPage";
-import ChakraLoginPage from "../Pages/Chakra_Login";
-import ChakraSignupPage from "../Pages/Chakra_Signup";
-import DashboardUser from "../Pages/DashboardUser";
-import DashboardDemand from "../Pages/DashboardDemand";
-
-import Finance from "../Pages/Finance";
-import TenantsPage from "../Pages/Feature-tenants";
-import Settings from "../Pages/Settings";
+import DashboardPage from "../Pages/DashboardPage";
+import DemandPage from "../Pages/DemandPage";
+import FinancePage from "../Pages/FinancePage";
+import TenantPage from "../Pages/TenantPage";
+import SettingsPage from "../Pages/SettingsPage";
+import LandingPage from "../Pages/LandingPage";
+import LoginPage from "../Pages/LoginPage";
+import SignupPage from "../Pages/SignupPage";
 
 const Routes = () => {
   const [ authenticaded, setAuthenticaded ] = useState( false );
@@ -24,50 +23,53 @@ const Routes = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <ChakraLandingPage />
+        <LandingPage />
       </Route>
 
       <Route path="/login">
-        <ChakraLoginPage
+        <LoginPage
           authenticaded={authenticaded}
           setAuthenticaded={setAuthenticaded}
         />
       </Route>
 
       <Route path="/signup">
-        <ChakraSignupPage />
+        <SignupPage />
       </Route>
 
       <Route path="/dashboard">
-        <DashboardUser
+        <DashboardPage
           authenticaded={authenticaded}
           setAuthenticaded={setAuthenticaded}
         />
       </Route>
 
       <Route path="/finances">
-        <Finance
+        <FinancePage
           authenticaded={authenticaded}
           setAuthenticaded={setAuthenticaded}
         />
       </Route>
 
       <Route path="/tenants">
-        <TenantsPage
+        <TenantPage
           authenticaded={authenticaded}
           setAuthenticaded={setAuthenticaded}
         />
       </Route>
 
       <Route path="/requires">
-        <DashboardDemand
+        <DemandPage
           authenticaded={authenticaded}
           setAuthenticaded={setAuthenticaded}
         />
       </Route>
 
       <Route path="/settings">
-        <Settings authenticaded={authenticaded} setAuthenticaded={setAuthenticaded} />
+        <SettingsPage 
+          authenticaded={authenticaded} 
+          setAuthenticaded={setAuthenticaded} 
+        />
       </Route>
     </Switch>
   );
