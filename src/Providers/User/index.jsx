@@ -7,14 +7,7 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({});
 
-  const [token] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:token")) || []
-  );
-  const [user] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:infos")) || []
-  );
-
-  const getUser = (userId) => {
+  const getUser = (userId, token) => {
     api
       .get(`/users/${userId}`, {
         headers: {
@@ -25,16 +18,16 @@ export const UserProvider = ({ children }) => {
       .catch((err) => err);
   };
 
-  const changeUser = (data) => {
+  const changeUser = (data, userId, token) => {
     api
-      .patch(`/users/${user.user.id}`, data, {
+      .patch(`/users/${userId}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
         toast.success("Dados alterados com sucesso!");
-        getUser(user.user.id);
+        getUser(userId, token);
       })
       .catch((err) => toast.error("Algo deu errado!"));
   };

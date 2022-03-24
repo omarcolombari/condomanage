@@ -7,16 +7,9 @@ export const FinancesContext = createContext();
 export const FinancesProvider = ({ children }) => {
   const [finances, setFinances] = useState([]);
 
-  const [token] = useState(
-    JSON.parse(localStorage.getItem('@CondoManage:token')) || []
-  );
-  const [user] = useState(
-    JSON.parse(localStorage.getItem('@CondoManage:infos')) || []
-  );
-
-  const showFinances = () => {
+  const showFinances = (token, userId) => {
     api
-      .get(`/finances?userId=${user.user.id}`, {
+      .get(`/finances?userId=${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -29,13 +22,13 @@ export const FinancesProvider = ({ children }) => {
       });
   };
 
-  const addFinance = (data) => {
+  const addFinance = (data, userId, token) => {
     api
       .post(
         "/finances",
         {
           ...data,
-          userId: user.user.id,
+          userId: userId,
         },
         {
           headers: {
@@ -44,7 +37,7 @@ export const FinancesProvider = ({ children }) => {
         }
       )
       .then((res) => {
-        showFinances(token);
+        showFinances(token, userId);
         toast.success("Finança adicionada com sucesso!");
       })
       .catch((err) => {
@@ -52,7 +45,7 @@ export const FinancesProvider = ({ children }) => {
       });
   };
 
-  const changeFinance = (data, financeId) => {
+  const changeFinance = (data, financeId, userId, token) => {
     api
       .patch(
         `/finances/${financeId}`,
@@ -67,14 +60,14 @@ export const FinancesProvider = ({ children }) => {
       )
       .then((res) => {
         toast.success("Dados alterados com sucesso!");
-        showFinances(token, user.user.id);
+        showFinances(token, userId);
       })
       .catch((res) => {
         toast.error("Ops! Algo deu errado");
       });
   };
 
-  const removeFinance = (financeId) => {
+  const removeFinance = (financeId, userId, token) => {
     api
       .delete(`/finances/${financeId}`, {
         headers: {
@@ -83,7 +76,7 @@ export const FinancesProvider = ({ children }) => {
       })
       .then((res) => {
         toast.success("Dados arquivados com sucesso!");
-        showFinances(token, user.user.id);
+        showFinances(token, userId);
       })
       .catch((res) => {
         toast.error("Ops! Algo deu errado");

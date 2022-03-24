@@ -7,7 +7,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Slide, useDisclosure } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -19,9 +18,7 @@ import Inputs from "../../Feats/Inputs";
 import LoginHeader from "../LoginHeader";
 import { Redirect } from "react-router-dom";
 
-const ContainerLogin = ({authenticaded,setAuthenticaded}) => {
-  const history = useHistory();
-
+const ContainerLogin = ({ authenticaded, setAuthenticaded }) => {
   const schema = yup.object().shape({
     email: yup.string().email("E-mail inválido").required("E-mail obrigatório"),
     password: yup.string().required("Senha obrigatória"),
@@ -34,10 +31,6 @@ const ContainerLogin = ({authenticaded,setAuthenticaded}) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  const handleNavigation = (path) => {
-    return history.push(path);
-  };
 
   const handleFormSubmit = (data) => {
     api
@@ -55,8 +48,8 @@ const ContainerLogin = ({authenticaded,setAuthenticaded}) => {
 
   const { onOpen } = useDisclosure();
 
-  if(authenticaded){
-    return <Redirect to="/dashboard"/>
+  if (authenticaded) {
+    return <Redirect to="/dashboard" />;
   }
 
   return (
@@ -144,10 +137,7 @@ const ContainerLogin = ({authenticaded,setAuthenticaded}) => {
           </form>
           <Text fontSize={13}>
             Ainda não tem cadastro?{" "}
-            <Link
-              style={{ color: "#005d89", fontWeight: "700" }}
-              onClick={() => handleNavigation("/signup")}
-            >
+            <Link style={{ color: "#005d89", fontWeight: "700" }} to="/signup">
               Clique aqui
             </Link>
           </Text>

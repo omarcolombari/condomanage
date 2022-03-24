@@ -21,13 +21,13 @@ const FinanceCard = ({ item }) => {
   );
 
   const handleRemoveFinance = (financedId) => {
-    removeFinance(financedId);
+    removeFinance(financedId, user.user.id, token);
     onChangeFinanceClose();
   };
   const handleUpdateFinance = (data) => {
     const newData = { ...data };
 
-    changeFinance(newData, item.id);
+    changeFinance(newData, item.id, user.user.id, token);
   };
 
   return (

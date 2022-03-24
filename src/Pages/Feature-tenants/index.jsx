@@ -13,9 +13,12 @@ import Header from "../../Components/Feats/Header";
 import { Redirect } from "react-router-dom";
 
 const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
-  
   const [user] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:infos") || "")
+  );
+
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || []
   );
 
   const { showTenants, tenants, addTenant, changeTenant } =
@@ -32,8 +35,7 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
     onClose: onCloseAlterTenants,
   } = useDisclosure();
 
-  const { onOpen: onTenantPageOpen } = useDisclosure()
-
+  const { onOpen: onTenantPageOpen } = useDisclosure();
 
   const [statusHome, setStatusHome] = useState();
   const [currentTenants, setCurrentTenants] = useState([]);
@@ -87,7 +89,7 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
       return toast.error("Número de apartamento já existe");
     }
 
-    return addTenant(newTenants);
+    return addTenant(newTenants, user.user.id, token);
   };
 
   const handleChangeTenants = ({
@@ -109,155 +111,148 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
       userId: user.user.id,
     };
     reset();
-    changeTenant(changeTenants, currentTenants.id);
+    changeTenant(changeTenants, currentTenants.id, user.user.id, token);
   };
 
   useEffect(() => {
-    showTenants();
+    showTenants(token, user.user.id);
   }, [tenants.length]);
-  
-    if (!authenticaded) {
-        return <Redirect to="/login" />;
-    }
+
+  if (!authenticaded) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <>
-            <Box
-            w="100vw" 
-            h="100vh" 
+      <Box w="100vw" h="100vh" d="flex" flexDir="column" alignItems="center">
+        <Slide in={onTenantPageOpen} style={{ zIndex: 10 }} direction="left">
+          <Header setAuthenticaded={setAuthenticaded} />
+          <Box
             d="flex"
-            flexDir="column"
+            flexDirection="column"
             alignItems="center"
-        >
-            <Slide
-               in={onTenantPageOpen}
-               style={{ zIndex: 10 }} 
-               direction="left" 
-            >
-                
-      <Header setAuthenticaded={setAuthenticaded} />
-      <Box
-        d="flex"
-        flexDirection="column"
-        alignItems="center"
-        margin="10px auto"
-        w={["98%"]}
-        maxW="1300px"
-        h="90%"
-        boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        borderRadius="30px"
-      >
-        <Box w="100%">
-          <Heading
-            padding="30px"
-            variant="title1"
-            d="flex"
-            justifyContent="space-around"
-            w="100%"
-            fontSize={["20px", "25px", "30px"]}
-            alignItems="center"
+            margin="10px auto"
+            w={["98%"]}
+            maxW="1300px"
+            h="90%"
+            boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+            borderRadius="30px"
           >
-            Lista de Inquilinos
-            <IoIosAddCircleOutline
-              cursor="pointer"
-              w="15px"
-              title="Adicionar finança"
-              onClick={onAddOpen}
-            />
-          </Heading>
-
-          <ModalAddTenants
-            register={register}
-            handleAddTenants={handleAddTenants}
-            handleSubmit={handleSubmit}
-            setStatusHome={setStatusHome}
-            onAddClose={onAddClose}
-            isAddOpen={isAddOpen}
-            errors={errors}
-          />
-        </Box>
-
-        <Box
-          w={["95%", "70%", "90%"]}
-          h={["32vh", "", "50vh"]}
-          marginTop="10px"
-          d="flex"
-          flexDir="column"
-          borderRadius="4px"
-          overflow="auto"
-        >
-          {tenants.length > 0 ? (
-            tenants?.map((tenant, index) => (
-              <Box
-                margin="5px 0 5px 0"
-                w="100%"
-                key={index}
-                onClick={() => setCurrentTenants(tenant)}
-                borderLeft={
-                  tenant.status === "Vago" ? "6px solid red" : "6px solid green"
-                }
-                borderRight={
-                  tenant.status === "Vago" ? "6px solid red" : "6px solid green"
-                }
-                borderRadius="4px"
-                marginBottom="4px"
-                cursor="pointer"
-                _hover={{
-                  background:
-                    "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(205,247,255,1) 50%, rgba(56,222,255,1) 100%, rgba(0,212,255,1) 100%, rgba(28,217,255,1) 100%, rgba(56,222,255,1) 100%, rgba(56,222,255,1) 100%)",
-                  boxShadow: "0px 4px 42px -12px rgba(0, 0, 0, 0.25);",
-                }}
-              >
-                <Box
-                  h="40px"
-                  d="flex"
-                  ml="10px"
-                  mr="2%"
-                  justifyContent="space-between"
-                  overflowX="auto"
-                  alignItems="center"
-                  onClick={onOpenAlterTenants}
-                >
-                  <Box d="flex" flexDir="column" gap="5px">
-                    {tenant.responsible} {tenant.number}
-                  </Box>
-                </Box>
-              </Box>
-            ))
-          ) : (
-            <Box
-              h="100%"
-              w="100%"
-              d="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
+            <Box w="100%">
               <Heading
-                variant="title3"
-                fontSize={["16px", "28px"]}
+                padding="30px"
+                variant="title1"
                 d="flex"
-                flexDir="column"
+                justifyContent="space-around"
+                w="100%"
+                fontSize={["20px", "25px", "30px"]}
                 alignItems="center"
               >
-                Sem Inquilinos registrado
-                <IoIosBusiness />
+                Lista de Inquilinos
+                <IoIosAddCircleOutline
+                  cursor="pointer"
+                  w="15px"
+                  title="Adicionar finança"
+                  onClick={onAddOpen}
+                />
               </Heading>
+
+              <ModalAddTenants
+                register={register}
+                handleAddTenants={handleAddTenants}
+                handleSubmit={handleSubmit}
+                setStatusHome={setStatusHome}
+                onAddClose={onAddClose}
+                isAddOpen={isAddOpen}
+                errors={errors}
+              />
             </Box>
-          )}
-        </Box>
-        <ModalListTenants
-          errors={errors}
-          currentTenants={currentTenants}
-          onCloseAlterTenants={onCloseAlterTenants}
-          isOpenAlterTenants={isOpenAlterTenants}
-          register={register}
-          handleSubmit={handleSubmit}
-          setStatusHome={setStatusHome}
-          handleChangeTenants={handleChangeTenants}
-        />
+
+            <Box
+              w={["95%", "70%", "90%"]}
+              h={["32vh", "", "50vh"]}
+              marginTop="10px"
+              d="flex"
+              flexDir="column"
+              borderRadius="4px"
+              overflow="auto"
+            >
+              {tenants.length > 0 ? (
+                tenants?.map((tenant, index) => (
+                  <Box
+                    margin="5px 0 5px 0"
+                    w="100%"
+                    key={index}
+                    onClick={() => setCurrentTenants(tenant)}
+                    borderLeft={
+                      tenant.status === "Vago"
+                        ? "6px solid red"
+                        : "6px solid green"
+                    }
+                    borderRight={
+                      tenant.status === "Vago"
+                        ? "6px solid red"
+                        : "6px solid green"
+                    }
+                    borderRadius="4px"
+                    marginBottom="4px"
+                    cursor="pointer"
+                    _hover={{
+                      background:
+                        "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(205,247,255,1) 50%, rgba(56,222,255,1) 100%, rgba(0,212,255,1) 100%, rgba(28,217,255,1) 100%, rgba(56,222,255,1) 100%, rgba(56,222,255,1) 100%)",
+                      boxShadow: "0px 4px 42px -12px rgba(0, 0, 0, 0.25);",
+                    }}
+                  >
+                    <Box
+                      h="40px"
+                      d="flex"
+                      ml="10px"
+                      mr="2%"
+                      justifyContent="space-between"
+                      overflowX="auto"
+                      alignItems="center"
+                      onClick={onOpenAlterTenants}
+                    >
+                      <Box d="flex" flexDir="column" gap="5px">
+                        {tenant.responsible} {tenant.number}
+                      </Box>
+                    </Box>
+                  </Box>
+                ))
+              ) : (
+                <Box
+                  h="100%"
+                  w="100%"
+                  d="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Heading
+                    variant="title3"
+                    fontSize={["16px", "28px"]}
+                    d="flex"
+                    flexDir="column"
+                    alignItems="center"
+                  >
+                    Sem Inquilinos registrado
+                    <IoIosBusiness />
+                  </Heading>
+                </Box>
+              )}
+            </Box>
+            <ModalListTenants
+              errors={errors}
+              currentTenants={currentTenants}
+              onCloseAlterTenants={onCloseAlterTenants}
+              isOpenAlterTenants={isOpenAlterTenants}
+              register={register}
+              handleSubmit={handleSubmit}
+              setStatusHome={setStatusHome}
+              handleChangeTenants={handleChangeTenants}
+            />
+          </Box>
+        </Slide>
       </Box>
-            </Slide>
-        </Box>  
     </>
   );
 };

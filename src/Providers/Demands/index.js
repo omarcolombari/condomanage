@@ -1,6 +1,6 @@
-import { createContext, useState } from 'react';
-import { toast } from 'react-toastify';
-import api from '../../services/api';
+import { createContext, useState } from "react";
+import { toast } from "react-toastify";
+import api from "../../services/api";
 
 export const DemandsContext = createContext();
 
@@ -8,15 +8,15 @@ export const DemandsProvider = ({ children }) => {
   const [demands, setDemands] = useState([]);
 
   const [token] = useState(
-    JSON.parse(localStorage.getItem('@CondoManage:token')) || []
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || []
   );
   const [user] = useState(
-    JSON.parse(localStorage.getItem('@CondoManage:infos')) || []
+    JSON.parse(localStorage.getItem("@CondoManage:infos")) || []
   );
 
-  const showDemands = () => {
+  const showDemands = (token, userId) => {
     api
-      .get(`/demands?userId=${user.user.id}`, {
+      .get(`/demands?userId=${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -27,13 +27,13 @@ export const DemandsProvider = ({ children }) => {
       .catch((err) => err);
   };
 
-  const addDemand = (data) => {
+  const addDemand = (data, userId, token) => {
     api
       .post(
         `/demands`,
         {
           ...data,
-          userId: user.user.id,
+          userId: userId,
         },
         {
           headers: {
@@ -42,23 +42,21 @@ export const DemandsProvider = ({ children }) => {
         }
       )
       .then((res) => {
-        const { userId } = res.data;
-
         let storageDemand = [...demands];
 
         setDemands([...storageDemand, res.data]);
 
-        toast.success('Demanda adicionada com sucesso!');
+        toast.success("Demanda adicionada com sucesso!");
 
-        showDemands(userId);
+        showDemands(token, userId);
       })
       .catch((err) => {
-        toast.error('Ops! Algo deu errado');
+        toast.error("Ops! Algo deu errado");
       });
   };
 
-  const changeDemand = (data, demandId) => {
-    const newData = { ...data, userId: user.user.id };
+  const changeDemand = (data, demandId, userId, token) => {
+    const newData = { ...data, userId: userId };
 
     api
       .patch(`/demands/${demandId}`, newData, {
@@ -75,15 +73,15 @@ export const DemandsProvider = ({ children }) => {
 
         setDemands([...currentData, res.data]);
 
-        toast.success('Dados alterados com sucesso!');
-        showDemands(token, user.user.id);
+        toast.success("Dados alterados com sucesso!");
+        showDemands(token, userId);
       })
       .catch((err) => {
-        toast.error('Ops! Algo deu errado');
+        toast.error("Ops! Algo deu errado");
       });
   };
 
-  const delDemand = (demandId) => {
+  const delDemand = (demandId, userId, token) => {
     api
       .delete(`/demands/${demandId}`, {
         headers: {
@@ -98,11 +96,11 @@ export const DemandsProvider = ({ children }) => {
         );
 
         setDemands([...currentData]);
-        toast.success('Dados apagados com sucesso!');
-        showDemands(token, user.user.id);
+        toast.success("Dados apagados com sucesso!");
+        showDemands(token, userId);
       })
       .catch((err) => {
-        toast.error('Ops! Algo deu errado');
+        toast.error("Ops! Algo deu errado");
       });
   };
 
@@ -116,7 +114,8 @@ export const DemandsProvider = ({ children }) => {
         token,
         user,
         delDemand,
-      }}>
+      }}
+    >
       {children}
     </DemandsContext.Provider>
   );

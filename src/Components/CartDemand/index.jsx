@@ -1,16 +1,27 @@
 import { Box, Heading, Text, useDisclosure } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { IoIosTrash } from "react-icons/io";
 import { DemandsContext } from "../../Providers/Demands";
 import ModalUpdateDemand from "../ModalUpdateDemand";
 
 const CartDemand = ({ item }) => {
-  const { isOpen: isUpdateDemandOpen, onOpen: onUpdateDemandOpen, onClose: onUpdateDemandClose } = useDisclosure();
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || []
+  );
+  const [user] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:infos")) || []
+  );
+
+  const {
+    isOpen: isUpdateDemandOpen,
+    onOpen: onUpdateDemandOpen,
+    onClose: onUpdateDemandClose,
+  } = useDisclosure();
   const { delDemand } = useContext(DemandsContext);
   const handleDeleteDemand = (demandId) => {
-    delDemand(demandId);
+    delDemand(demandId, user.user.id, token);
   };
-  
+
   return (
     <>
       <Box
@@ -33,7 +44,7 @@ const CartDemand = ({ item }) => {
         <Box
           d="flex"
           ml="10px"
-          mr="2%" 
+          mr="2%"
           justifyContent="space-between"
           overflowX="auto"
           alignItems="center"
@@ -48,9 +59,7 @@ const CartDemand = ({ item }) => {
             <Heading variant="title2" fontSize="18px">
               {item.name}
             </Heading>
-            <Text>
-              {item.description}
-            </Text>
+            <Text>{item.description}</Text>
           </Box>
           <IoIosTrash
             onClick={() => handleDeleteDemand(item.id)}
@@ -69,4 +78,3 @@ const CartDemand = ({ item }) => {
 };
 
 export default CartDemand;
-

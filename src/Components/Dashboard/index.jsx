@@ -4,7 +4,7 @@ import { IoIosHome, IoMdMap, IoIosBusiness, IoIosMail } from "react-icons/io";
 import { DemandsContext } from "../../Providers/Demands";
 import { FinancesContext } from "../../Providers/Finances";
 import { TenantsContext } from "../../Providers/Tenants";
-import Grafico from '../Feats/grafico'
+import Grafico from "../Feats/grafico";
 
 const Dashboard = ({ authenticaded }) => {
   const [user] = useState(
@@ -13,20 +13,30 @@ const Dashboard = ({ authenticaded }) => {
   const [token] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
   );
-  const {tenants,showTenants} = useContext(TenantsContext);
-  const {finances,showFinances} = useContext(FinancesContext);
-  const {demands,showDemands} = useContext(DemandsContext);
-useEffect(() => {
-  showTenants(token, user.user.id);
+
+  const { tenants, showTenants } = useContext(TenantsContext);
+  const { finances, showFinances } = useContext(FinancesContext);
+  const { demands, showDemands } = useContext(DemandsContext);
+
+  useEffect(() => {
+    showTenants(token, user.user.id);
   }, [tenants.length]);
-  useEffect(()=> {
-    showFinances(token,user.user.id)
-  },[finances.lenght]);
-  useEffect(()=> {
-    showDemands(token,user.user.id)
-  },[demands.lenght]);
-  const graficFinancesEntrada = finances.filter((item) => item.status === "Entrada").length;
-  const graficFinancesDespesas = finances.filter((item) => item.status === "Despesa").length;
+
+  useEffect(() => {
+    showFinances(token, user.user.id);
+  }, [finances.lenght]);
+
+  useEffect(() => {
+    showDemands(token, user.user.id);
+  }, [demands.lenght]);
+
+  const graficFinancesEntrada = finances.filter(
+    (item) => item.status === "Entrada"
+  ).length;
+  const graficFinancesDespesas = finances.filter(
+    (item) => item.status === "Despesa"
+  ).length;
+
   return (
     <Box
       w={["98%"]}

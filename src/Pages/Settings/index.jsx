@@ -7,17 +7,20 @@ import { UserContext } from "../../Providers/User";
 import { TenantsContext } from "../../Providers/Tenants";
 
 const Settings = ({ authenticaded, setAuthenticaded }) => {
-  const [user, setUser] = useState({});
-  const { register, handleSubmit } = useForm();
-  const { userInfo, getUser, changeUser } = useContext(UserContext);
-  const { tenants, showTenants } = useContext(TenantsContext);
-  const [userData] = useState(
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || []
+  );
+  const [user] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:infos")) || []
   );
 
+  const { register, handleSubmit } = useForm();
+  const { userInfo, getUser, changeUser } = useContext(UserContext);
+  const { tenants, showTenants } = useContext(TenantsContext);
+
   useEffect(() => {
-    getUser(userData.user.id);
-    showTenants();
+    getUser(user.user.id, token);
+    showTenants(token, user.user.id);
   }, [userInfo.length]);
 
   const onSubmit = (data) => {
@@ -42,12 +45,12 @@ const Settings = ({ authenticaded, setAuthenticaded }) => {
     if (data.email === "") {
       delete data.email;
     }
-    changeUser(data);
+    changeUser(data, user.user.id, token);
   };
 
-  /*if(!authenticaded ){
-        return <Redirect to='/'/>
-    }*/
+  if (!authenticaded) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <Box w="100vw" h="100vh" d="flex" flexDir="column" alignItems="center">

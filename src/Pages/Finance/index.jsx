@@ -1,11 +1,4 @@
-import {
-  useDisclosure,
-  Heading,
-  Button,
-  Box,
-  Slide,
-  Icon,
-} from "@chakra-ui/react";
+import { useDisclosure, Heading, Button, Box, Slide } from "@chakra-ui/react";
 import { useState, useContext, useEffect } from "react";
 import { FinancesContext } from "../../Providers/Finances";
 import Header from "../../Components/Feats/Header";
@@ -28,9 +21,15 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
   const [filterFin, setFilterFin] = useState("Todos");
   const { finances, showFinances, addFinance } = useContext(FinancesContext);
 
+  const [token] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || []
+  );
+  const [user] = useState(
+    JSON.parse(localStorage.getItem("@CondoManage:infos")) || []
+  );
 
   const loadFinances = async () => {
-    await showFinances();
+    await showFinances(token, user.user.id);
   };
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
   }, [finances.length]);
 
   const handleRegisterFinance = (data) => {
-    addFinance(data);
+    addFinance(data, user.user.id, token);
     loadFinances();
     onAddFinanceClose();
   };
