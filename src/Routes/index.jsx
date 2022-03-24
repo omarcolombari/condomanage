@@ -34,7 +34,9 @@ const Routes = () => {
       </Route>
 
       <Route path="/signup">
-        <SignupPage />
+        <SignupPage 
+          authenticaded={authenticaded}
+          setAuthenticaded={setAuthenticaded}/>
       </Route>
 
       <Route path="/dashboard">
