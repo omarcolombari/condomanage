@@ -7,12 +7,14 @@ import { TenantsContext } from "../../../Providers/Tenants";
 import PieChart from "../PieChart";
 
 const ContainerDashboard = ({ authenticaded }) => {
+
   const [user] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:infos")) || ""
   );
   const [token] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
   );
+  
   const { tenants, showTenants } = useContext(TenantsContext);
   const { finances, showFinances } = useContext(FinancesContext);
   const { demands, showDemands } = useContext(DemandsContext);
@@ -99,7 +101,7 @@ const ContainerDashboard = ({ authenticaded }) => {
               infoUp="desocupados"
               infoUpValue={user.user.apartments}
               infoDown="ocupados"
-              infoDownValue={(tenants.length>0?tenants.length:1)}
+              infoDownValue={tenants.length}
               infoTittle="Overview de ocupação"
             />
           </Box>

@@ -1,8 +1,12 @@
 import { Box } from "@chakra-ui/react";
+import { Redirect } from "react-router-dom";
 import background from "../../Assets/Images/background.png";
 import ContainerSignup from "../../Components/HomePage_components/Signup_components/Container_Signup";
 
-const SignupPage = () => {
+const SignupPage = ({authenticaded,setAuthenticaded}) => {
+  if(authenticaded){
+    return <Redirect to="/dashboard"/>
+  }
 
   return (
     <Box
