@@ -6,7 +6,6 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({});
-
   const getUser = (userId, token) => {
     api
       .get(`/users/${userId}`, {
@@ -26,7 +25,7 @@ export const UserProvider = ({ children }) => {
         },
       })
       .then((res) => {
-        toast.success("Dados alterados com sucesso!");
+        toast.success("Dados alterados com sucesso,faça o login novamente!");
         getUser(userId, token);
       })
       .catch((err) => toast.error("Algo deu errado!"));
