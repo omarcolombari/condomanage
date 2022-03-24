@@ -133,7 +133,7 @@ const ModalListTenants = ({
                   focusBorderColor="transparent"
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
-                  placeholder={currentTenants.email}
+                  defaultValue={currentTenants.email}
                   variant="outline"
                   w="95%"
                   h="40px"
@@ -168,7 +168,7 @@ const ModalListTenants = ({
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
-                  placeholder={currentTenants.password}
+                  defaultValue={currentTenants.password}
                   variant="outline"
                   w="95%"
                   h="40px"
@@ -203,7 +203,7 @@ const ModalListTenants = ({
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
-                  placeholder={currentTenants.number}
+                  defaultValue={currentTenants.number}
                   variant="outline"
                   w="95%"
                   h="40px"
@@ -237,7 +237,7 @@ const ModalListTenants = ({
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
-                  placeholder={currentTenants.responsible}
+                  defaultValue={currentTenants.responsible}
                   variant="outline"
                   w="95%"
                   h="40px"
@@ -272,7 +272,7 @@ const ModalListTenants = ({
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
-                  placeholder={currentTenants.cpf}
+                  defaultValue={currentTenants.cpf}
                   variant="outline"
                   w="95%"
                   h="40px"
@@ -307,7 +307,7 @@ const ModalListTenants = ({
                 <Editable
                   _placeholder={{ opacity: 1, color: "white" }}
                   bgColor="#00A5AE"
-                  placeholder={currentTenants.value}
+                  defaultValue={currentTenants.value}
                   variant="outline"
                   w="95%"
                   h="40px"
