@@ -88,7 +88,7 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
     if (findNumberTenants) {
       return toast.error("Número de apartamento já existe");
     }
-
+    onAddClose();
     return addTenant(newTenants, user.user.id, token);
   };
 
@@ -112,6 +112,7 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
     };
     reset();
     changeTenant(changeTenants, currentTenants.id, user.user.id, token);
+    onCloseAlterTenants();
   };
 
   useEffect(() => {
@@ -134,8 +135,8 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
             margin="10px auto"
             w={["98%"]}
             maxW="1300px"
-            h="90%"
-            boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+            h="77vh"
+            boxShadow="0px 5px 10px 1px rgba(0,0,0,0.5)"
             borderRadius="30px"
           >
             <Box w="100%">
@@ -182,6 +183,8 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
                   <Box
                     margin="5px 0 5px 0"
                     w="100%"
+                    height="85px"
+                    display="flex"
                     key={index}
                     onClick={() => setCurrentTenants(tenant)}
                     borderLeft={
@@ -197,6 +200,7 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
                     borderRadius="4px"
                     marginBottom="4px"
                     cursor="pointer"
+                    backgroundColor="#f6f6f6"
                     _hover={{
                       background:
                         "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(205,247,255,1) 50%, rgba(56,222,255,1) 100%, rgba(0,212,255,1) 100%, rgba(28,217,255,1) 100%, rgba(56,222,255,1) 100%, rgba(56,222,255,1) 100%)",
@@ -204,17 +208,29 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
                     }}
                   >
                     <Box
-                      h="40px"
                       d="flex"
                       ml="10px"
                       mr="2%"
+                      height="85px"
                       justifyContent="space-between"
                       overflowX="auto"
                       alignItems="center"
                       onClick={onOpenAlterTenants}
                     >
-                      <Box d="flex" flexDir="column" gap="5px">
-                        {tenant.responsible} {tenant.number}
+                      <Box
+                        d="flex"
+                        flexDir="column"
+                        justifyContent="center"
+                        gap="5px"
+                        height="85px"
+                        // width="100%"
+                      >
+                        <span>
+                          <strong> Nome: </strong> {tenant.responsible}
+                        </span>
+                        <span>
+                          <strong>Nº do apartamento:</strong> {tenant.number}
+                        </span>
                       </Box>
                     </Box>
                   </Box>
@@ -226,6 +242,12 @@ const TenantsPage = ({ setAuthenticaded, authenticaded }) => {
                   d="flex"
                   justifyContent="center"
                   alignItems="center"
+                  _hover={{
+                    background:
+                      "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(205,247,255,1) 50%, rgba(56,222,255,1) 100%, rgba(0,212,255,1) 100%, rgba(28,217,255,1) 100%, rgba(56,222,255,1) 100%, rgba(56,222,255,1) 100%)",
+                    boxShadow: "0px 4px 42px -12px rgba(0, 0, 0, 0.25);",
+                  }}
+                  transition={0.5}
                 >
                   <Heading
                     variant="title3"

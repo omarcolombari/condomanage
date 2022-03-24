@@ -62,35 +62,20 @@ const ModalUpdateDemand = ({
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Box
-              h="250px"
-              css={{
-                "&::-webkit-scrollbar": {
-                  width: "4px",
-                },
-                "&::-webkit-scrollbar-track": {
-                  width: "6px",
-                },
-                "&::-webkit-scrollbar-thumb": {
-                  background: "#00A5AE",
-                  borderRadius: "24px",
-                },
-              }}
-              overflowY="scroll"
-            >
+            <Box h="fit-content">
               <form onSubmit={handleSubmit(handleUpdateDemand)}>
                 <FormControl>
                   <Box>
                     <FormLabel
                       fontFamily="Open Sans, sans-serif"
                       fontStyle="normal"
-                      fontSize="12px"
+                      fontSize="13px"
                       lineHeight="22px"
-                      color="#00A5AE"
+                      color="#FFF"
                     >
                       Nome do dono/responsável:
                     </FormLabel>
-                    <Box bg="#c5e8fb" w="300px" borderRadius="30px">
+                    <Box bg="#00a5ae" w="95%" borderRadius="30px">
                       <Input
                         name="name"
                         value={item.name}
@@ -98,19 +83,19 @@ const ModalUpdateDemand = ({
                         variant="outline"
                         placeholder="Digite aqui o nome"
                         focusBorderColor="transparent"
-                        _placeholder={{ opacity: 1, color: "#00a5ae" }}
+                        _placeholder={{ opacity: 1, color: "#FFF" }}
                       />
                     </Box>
                     <FormLabel
                       fontFamily="Open Sans, sans-serif"
                       fontStyle="normal"
-                      fontSize="12px"
+                      fontSize="13px"
                       lineHeight="22px"
-                      color="#00A5AE"
+                      color="#FFF"
                     >
                       Descrição da demanda:
                     </FormLabel>
-                    <Box bg="#c5e8fb" w="300px" borderRadius="30px">
+                    <Box bg="#00a5ae" w="95%" borderRadius="30px">
                       <Input
                         name="description"
                         readOnly
@@ -118,26 +103,27 @@ const ModalUpdateDemand = ({
                         variant="outline"
                         placeholder="Digite qual a demanda"
                         focusBorderColor="transparent"
-                        _placeholder={{ opacity: 1, color: "#00a5ae" }}
+                        _placeholder={{ opacity: 1, color: "#FFF" }}
                       />
                     </Box>
                     <FormLabel
                       fontFamily="Open Sans, sans-serif"
                       fontStyle="normal"
-                      fontSize="12px"
+                      fontSize="13px"
                       lineHeight="22px"
-                      color="#00A5AE"
+                      color="#FFF"
                     >
                       Status da demanda:
                     </FormLabel>
-                    <Box bg="#c5e8fb" w="300px" borderRadius="30px">
+                    <Box bg="#00a5ae" w="95%" borderRadius="10px">
                       <Select
                         name="status"
                         {...register("status")}
                         variant="outline"
                         placeholder="Status da Demanda"
                         focusBorderColor="transparent"
-                        _placeholder={{ opacity: 1, color: "#00a5ae" }}
+                        borderRadius="10px"
+                        _placeholder={{ opacity: 1, color: "#FFF" }}
                       >
                         <option value="inProgress">Em andamento</option>
                         <option value="completed">Concluída</option>
@@ -148,10 +134,17 @@ const ModalUpdateDemand = ({
                     h="40px"
                     d="flex"
                     w="100%"
-                    justifyContent="start"
+                    mt="15px"
+                    justifyContent="center"
                     alignItems="center"
                   >
-                    <Button type="submit">Atualizar demanda</Button>
+                    <Button
+                      backgroundColor="#00a5ae"
+                      color="#FFF"
+                      type="submit"
+                    >
+                      Atualizar demanda
+                    </Button>
                   </Box>
                 </FormControl>
               </form>

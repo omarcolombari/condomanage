@@ -25,8 +25,6 @@ const DashboardDemand = ({ authenticaded, setAuthenticaded }) => {
   const { onOpen: onUpdateDemandOpen } = useDisclosure();
   const { onOpen: onContainerDemandOpen } = useDisclosure();
 
-  //const [update, setUpdate] = useState([])
-
   const [token] = useState(
     JSON.parse(localStorage.getItem("@CondoManage:token")) || []
   );
@@ -55,7 +53,7 @@ const DashboardDemand = ({ authenticaded, setAuthenticaded }) => {
           <Header setAuthenticaded={setAuthenticaded} />
           <Box
             w="90%"
-            maxW="779.73px"
+            maxW="1300px"
             h={["77vh"]}
             borderRadius="10px"
             boxShadow="0px 5px 10px 1px rgba(0,0,0,0.5)"
@@ -77,7 +75,7 @@ const DashboardDemand = ({ authenticaded, setAuthenticaded }) => {
               >
                 <Button
                   variant="default"
-                  mt={["5px", "", "0px"]}
+                  mt={["5px", "", "15px"]}
                   w={["95%", "70%", "100px"]}
                   onClick={() => setFilterBase("Todas")}
                 >
@@ -85,16 +83,16 @@ const DashboardDemand = ({ authenticaded, setAuthenticaded }) => {
                 </Button>
                 <Button
                   variant="default"
-                  mt={["5px", "", "0px"]}
-                  w={["95%", "70%", "120px"]}
+                  mt={["5px", "", "15px"]}
+                  w={["95%", "70%", "150px"]}
                   onClick={() => setFilterBase("inProgress")}
                 >
                   Em andamento
                 </Button>
                 <Button
                   variant="default"
-                  mt={["5px", "", "0px"]}
-                  w={["95%", "70%", "100px"]}
+                  mt={["5px", "", "15px"]}
+                  w={["95%", "70%", "120px"]}
                   onClick={() => setFilterBase("completed")}
                 >
                   Concluídas
@@ -128,7 +126,8 @@ const DashboardDemand = ({ authenticaded, setAuthenticaded }) => {
                 onAddDemandClose={onAddDemandClose}
               />
             </Box>
-          </Box>
+          </Box>{" "}
+          {/*aqui*/}
         </Box>
       </Slide>
     </Box>

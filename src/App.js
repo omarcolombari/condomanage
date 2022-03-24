@@ -11,15 +11,7 @@ function App() {
   return (
     <ChakraProvider theme={CustomTheme}>
       <ToastContainer
-        position='top-right'
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
+        position='top-left'
       />
       <Routes />
     </ChakraProvider>

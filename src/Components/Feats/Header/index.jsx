@@ -3,18 +3,25 @@ import Logo1 from "../../../Assets/Images/Logo1.png";
 import { IoMdMenu } from "react-icons/io";
 import React from "react";
 import DropDrawer from "../DropDrawer";
+import { useHistory } from "react-router-dom";
 
 const Header = ({ setAuthenticaded }) => {
+  const history = useHistory();
+
   const {
     isOpen: isDrawerOpen,
     onOpen: onDrawerOpen,
     onClose: onDrawerClose,
   } = useDisclosure();
 
+  const returnToDash = () => {
+    return history.push("/dashboard");
+  };
+
   return (
     <Box
       w="100%"
-      h={["10vh", "15vh"]}
+      h={["13vh", "15vh"]}
       bg="#F2F6FF"
       d="flex"
       flexDir="row"
@@ -35,7 +42,13 @@ const Header = ({ setAuthenticaded }) => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Img w={["80px", "100px"]} src={Logo1} alt="CondoManage" />
+          <Img
+            w={["80px", "100px"]}
+            src={Logo1}
+            alt="CondoManage"
+            onClick={returnToDash}
+            cursor="pointer"
+          />
           <IoMdMenu cursor="pointer" size={50} onClick={onDrawerOpen} />
         </Box>
         <DropDrawer

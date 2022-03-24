@@ -53,7 +53,7 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
           <Header setAuthenticaded={setAuthenticaded} />
           <Box
             w="90%"
-            maxW="779.73px"
+            maxW="1300px"
             margin="0 auto"
             h="77vh"
             borderRadius="10px"
@@ -63,7 +63,7 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
             alignItems="center"
             mt="20px"
           >
-            <Box w="100%">
+            <Box w="100%" margin="15px 0">
               <HeaderPage
                 onOpen={onAddFinanceOpen}
                 titulo="Lista de finanças"
@@ -71,6 +71,7 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
               <Box
                 w="100%"
                 d="flex"
+                mt="15px"
                 flexDir={["column-reverse", "", "row"]}
                 justifyContent="space-evenly"
                 alignItems="center"
@@ -147,7 +148,8 @@ const Finance = ({ authenticaded, setAuthenticaded }) => {
             <ModalFinance
               isOpen={isAddFinanceOpen}
               onClose={onAddFinanceClose}
-              handleChange={handleRegisterFinance}
+              loadFinances={loadFinances}
+              onAddFinanceClose={onAddFinanceClose}
               title="Registrar finança"
             />
           </Box>

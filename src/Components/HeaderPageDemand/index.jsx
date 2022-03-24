@@ -3,7 +3,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 
 const HeaderPage = ({ onOpen, titulo }) => {
   return (
-    <Box w="100%">
+    <Box w="100%" marginTop="15px">
       <Heading
         d="flex"
         justifyContent="space-around"
