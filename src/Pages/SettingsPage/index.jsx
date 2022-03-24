@@ -14,14 +14,15 @@ import Header from "../../Components/Header_components/Header";
 import { UserContext } from "../../Providers/User";
 import { TenantsContext } from "../../Providers/Tenants";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const SettingsPage = ({ authenticaded, setAuthenticaded }) => {
+  const history = useHistory();
   const [token] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:token")) || []
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
   );
   const [user] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:infos")) || []
-  );
+    JSON.parse(localStorage.getItem("@CondoManage:infos")));
 
   const { register, handleSubmit } = useForm();
   const { userInfo, getUser, changeUser } = useContext(UserContext);
@@ -30,9 +31,17 @@ const SettingsPage = ({ authenticaded, setAuthenticaded }) => {
   const { onOpen: onContainerDemandOpen } = useDisclosure();
 
   useEffect(() => {
-    getUser(user.user.id, token);
-    showTenants(token, user.user.id);
-  }, [userInfo.length]);
+    if(user){
+      getUser(user.user.id, token);
+      showTenants(token, user.user.id);
+    }
+  }, [userInfo]);
+
+  const logout = () => {
+    localStorage.clear();
+    setAuthenticaded( false );
+    history.push("/login");
+}
 
   const onSubmit = (data) => {
     if (data.name === "") {
@@ -57,10 +66,11 @@ const SettingsPage = ({ authenticaded, setAuthenticaded }) => {
       delete data.email;
     }
     changeUser(data, user.user.id, token);
+    logout();
   };
 
   if (!authenticaded) {
-    return <Link to="/login" />;
+    return <Redirect to="/login" />;
   }
 
   return (

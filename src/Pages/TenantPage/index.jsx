@@ -14,16 +14,15 @@ import { Redirect } from "react-router-dom";
 
 const TenantPage = ({ setAuthenticaded, authenticaded }) => {
   const [user] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:infos") || "")
-  );
+    JSON.parse(localStorage.getItem("@CondoManage:infos")));
 
   const [token] = useState(
-    JSON.parse(localStorage.getItem("@CondoManage:token")) || []
+    JSON.parse(localStorage.getItem("@CondoManage:token")) || ""
   );
 
   const { showTenants, tenants, addTenant, changeTenant } =
     useContext(TenantsContext);
-console.log(tenants)
+
   const {
     isOpen: isAddOpen,
     onOpen: onAddOpen,
@@ -76,8 +75,6 @@ console.log(tenants)
     + Math.random().toString(16).slice(2)
     + Date.now().toString(16).slice(4)
     +responsible;
-    console.log(serialId)
-    console.log(tenants)
     const newTenants = {
       email,
       password,
@@ -99,31 +96,10 @@ console.log(tenants)
     return addTenant(newTenants, user.user.id, token);
   };
 
-  const handleChangeTenants = ({
-    email,
-    password,
-    number,
-    responsible,
-    cpf,
-    value,
-  }) => {
-    const changeTenants = {
-      email,
-      password,
-      number,
-      responsible,
-      cpf,
-      value,
-      status: statusHome,
-      userId: user.user.id,
-    };
-    reset();
-    changeTenant(changeTenants, currentTenants.id, user.user.id, token);
-    onCloseAlterTenants();
-  };
-
   useEffect(() => {
-    showTenants(token, user.user.id);
+    if(user){
+      showTenants(token, user.user.id);
+    }
   }, [tenants.length]);
 
   if (!authenticaded) {
@@ -270,14 +246,12 @@ console.log(tenants)
               )}
             </Box>
             <ModalListTenants
-              errors={errors}
+              
               currentTenants={currentTenants}
               onCloseAlterTenants={onCloseAlterTenants}
               isOpenAlterTenants={isOpenAlterTenants}
-              register={register}
-              handleSubmit={handleSubmit}
               setStatusHome={setStatusHome}
-              handleChangeTenants={handleChangeTenants}
+              statusHome={statusHome}
             />
           </Box>
         </Slide>
