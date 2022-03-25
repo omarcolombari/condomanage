@@ -8,6 +8,7 @@ import SettingsPage from "../Pages/SettingsPage";
 import LandingPage from "../Pages/LandingPage";
 import LoginPage from "../Pages/LoginPage";
 import SignupPage from "../Pages/SignupPage";
+import ProfissionalPage from "../Pages/ProfissionalPage";
 
 const Routes = () => {
   const [authenticaded, setAuthenticaded] = useState(false);
@@ -71,6 +72,13 @@ const Routes = () => {
       <Route path="/settings">
         <SettingsPage
           authenticaded={authenticaded}
+          setAuthenticaded={setAuthenticaded}
+        />
+      </Route>
+
+      <Route path="/profissional">
+        <ProfissionalPage 
+          authenticaded={authenticaded} 
           setAuthenticaded={setAuthenticaded}
         />
       </Route>

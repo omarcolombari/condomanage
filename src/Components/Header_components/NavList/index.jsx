@@ -1,6 +1,6 @@
 import { Heading, ListItem, UnorderedList } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { IoIosApps,IoMdApps,IoIosContacts,IoIosSettings,IoMdExit } from "react-icons/io";
+import { IoIosApps,IoMdApps,IoIosContacts,IoIosSettings,IoMdExit,IoIosPerson } from "react-icons/io";
 import { MdAttachMoney } from "react-icons/md";
 
 const NavList = ( { setAuthenticaded } ) => {
@@ -45,6 +45,10 @@ const NavList = ( { setAuthenticaded } ) => {
             <ListItem>
                 <Heading d="flex" flexDir="row" alignItems="center" variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>handlePages("/settings")}>
                     <IoIosSettings/>Alterações
+                </Heading>
+            </ListItem><ListItem>
+                <Heading d="flex" flexDir="row" alignItems="center" variant="title5" cursor="pointer" fontSize={["24px","24px","36px"]} onClick={()=>handlePages("/profissional")}>
+                    <IoIosPerson/>Squad
                 </Heading>
             </ListItem>
             <ListItem>
