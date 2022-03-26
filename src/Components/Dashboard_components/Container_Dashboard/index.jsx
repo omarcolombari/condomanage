@@ -27,11 +27,15 @@ const ContainerDashboard = ({ authenticaded }) => {
 
   const graficFinancesEntrada = finances.filter(
     (item) => item.status === "Entrada"
-  ).length;
+  ).reduce((acc, cur) => {
+    return acc + Number(cur.value)
+  },0);
 
   const graficFinancesDespesas = finances.filter(
     (item) => item.status === "Despesa"
-  ).length;
+  ).reduce((acc, cur) => {
+    return acc + Number(cur.value)
+  },0);
 
   const graficDemandsEntradas = demands.filter(
     (item) => item.status === "inProgress"
@@ -131,7 +135,7 @@ const ContainerDashboard = ({ authenticaded }) => {
                 graficDemandsEntradas === 0 ? 1 : graficDemandsEntradas
               }
               infoDown={
-                graficDemandsDespesas === 0 ? "sem comcluídas" : "concluídas"
+                graficDemandsDespesas === 0 ? "sem concluídas" : "concluídas"
               }
               infoDownValue={
                 graficDemandsDespesas === 0 ? 1 : graficDemandsDespesas

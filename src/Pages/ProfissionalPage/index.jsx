@@ -56,8 +56,7 @@ const ProfissionalPage = ({ authenticaded, setAuthenticaded }) => {
               photo="https://ca.slack-edge.com/TQZR39SET-U02C0UQHEPL-eef8f9674cef-512"
               nome="Brendo Souza"  
               github="https://github.com/brendosousa"
-              linkedin="https://www.linkedin.com/in/brendo-sousa/"
-              facebook=""
+              linkedin="https://www.linkedin.com/in/brendo-sousa/"facebook=""
             />
             <ProfissionalCard 
               role="Tech lead"
@@ -65,35 +64,30 @@ const ProfissionalPage = ({ authenticaded, setAuthenticaded }) => {
               nome="Omar Gabriel"  
               github="https://github.com/omarcolombari"
               linkedin="https://www.linkedin.com/in/omar-colombari-49a658227/"
-              facebook=""
             /><ProfissionalCard 
               role="Product owner"
               photo={LuanDev}
               nome="Luan Pereira"  
               github="https://github.com/LuanPBS98"
               linkedin="https://www.linkedin.com/in/luan-pereira-6654281b3/"
-              facebook="https://www.facebook.com/profile.php?id=100007238195599"
             /><ProfissionalCard 
               role="Quality Assurance"
               photo="https://ca.slack-edge.com/TQZR39SET-U02AW9VL0TV-6ae415ad071f-512"
               nome="Leonardo Melegari"  
               github="https://github.com/leomelegari"
               linkedin="https://www.linkedin.com/in/leonardo-melegari/"
-              facebook=""
             /><ProfissionalCard 
               role="Quality Assurance"
               photo={anaDev}
               nome="Ana Valeska"  
               github="https://github.com/anavaleska2908"
-              linkedin="https://www.linkedin.com/in/leonardo-melegari/"
-              facebook=""
+              linkedin="https://www.linkedin.com/in/ana-valeska-santos/"
             /><ProfissionalCard 
               role="Quality Assurance"
               photo="https://ca.slack-edge.com/TQZR39SET-U027XJFRE2K-75671ddf0a8f-512"
               nome="Lissandro Miranda"  
               github="https://github.com/lissandrojs"
               linkedin="https://www.linkedin.com/in/lissandro-miranda-056914204/"
-              facebook=""
             />
           </Box>
         </Box>

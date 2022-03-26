@@ -49,9 +49,6 @@ const ProfissionalCard = ({role,photo,nome,github,linkedin,facebook}) =>{
         <a href={linkedin} target="_blank">
           <IoLogoLinkedin color="#0e76a8"/>
         </a>
-        <a href={facebook} target="_blank">
-          <IoLogoFacebook color="#0e76a8"/>
-        </a>
       </Box>
     </Box>
   )
