@@ -48,11 +48,11 @@
 
 ## Equipe
   
-  - Product Owner: Luan Pereira
-  - Tech Leader: Omar Gabriel
-  - Scrum Master: Brendo Sousa
-  - Quality Assurance: Ana Valeska Santos
-  - Quality Assurance: Lissandro Miranda Rocha
-  - Quality Assurance: Leonardo Melegari
+  - Product Owner: <a href="https://github.com/LuanPBS98">Luan Pereira</a>
+  - Tech Leader: <a href="https://github.com/omarcolombari">Omar Gabriel</a>
+  - Scrum Master: <a href="https://github.com/brendosousa">Brendo Sousa</a>
+  - Quality Assurance: <a href="https://github.com/anavaleska2908">Ana Valeska Santos</a>
+  - Quality Assurance: <a href="https://github.com/lissandrojs">Lissandro Miranda Rocha</a>
+  - Quality Assurance: <a href="https://github.com/leomelegari">Leonardo Melegari</a>
   
 
