@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# CondoManage - uma aplicação desenvolvida para auxiliar no gerenciamento de condomínios
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Contexto
 
-## Available Scripts
+<p>Proprietários e administradores de condomínios muitas vezes encontram dificuldades para gerir as demandas administrativas e financeiras para prédios de pequeno e médio porte. O sistema mais utilizado atualmente se baseia em anotações manuais que são difíceis de controlar. Entre as maiores dificuldades está a organização de entrada e saída financeira e demandas de manutenção e reparos do condomínio. O tempo gasto para resolver tais obstáculos se torna um grande aborrecimento para os administradores e seus inquilinos, sendo que problemas envolvendo manutenções (reparos na rede elétrica, na rede de água encanada) levam muito tempo para serem mapeados e cuidadosamente averiguados. Ademais, há também problemas que envolvem convivência, tais como vizinhos em um edifício que se incomodam com barulhos altos, sons de animais, odores, etc. O responsável por cuidar do condomínio e do bem estar dos seus inquilinos possui dificuldade em atender todas as demandas o mais breve possível nessas estruturas de pequeno e médio porte, pois toda a informação necessária para manter esse controle acaba descentralizada e inacessível em certos casos.<p/>
 
-In the project directory, you can run:
 
-### `yarn start`
+## Conceito e funcionalidades
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<p>Um sistema web através do qual os administradores de prédios e locações possam gerenciar as demandas do imóvel (ou dos imóveis) e também acompanhar as pendências de seus inquilinos para garantir o controle financeiro do negócio. O usuário poderá cadastrar o seu imóvel através de uma página de cadastro e logo em seguida adentrar no sistema através de uma página de login. Com o usuário devidamente autenticado, é possível fazer o cadastro de um morador registrando o nome, informações pessoais e também um identificador para a parte do imóvel que estará alugando. Também é possível cadastrar um débito para aluguel mensal e colocar um status de pendente, pago ou atrasado. Ademais, também é possível registrar demandas do imóvel como reformas, reparos e afins, podendo classificar em pendentes ou concluídas. Outra funcionalidade é filtrar os inquilinos pelas pendências resolvidas ou não e de igual modo as demandas. Ao final, o sistema permite que o usuário remova um morador que não é mais ativo e guarde o registro do período em que foi usuário do local.
+</p>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<h2>Link para a página</h2>
+<a href="https://condomanage-kappa.vercel.app/">CondoManage<a/>
+  
+## Tecnologias utilizadas
 
-### `yarn test`
+<p>Esse projeto foi construído primariamente utilizando HTML5, CSS3, JavaScript ES6 e Git para controle de versionamento.</p>
+  
+## Ferramentas e procedimentos
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  <p>Para a construção do código, os seguintes frameworks e bibliotecas:</p>
+  <ul>
+    <li>ReactJs</li>
+    <li>Styled Components</li>
+    <li>Chakra</li>
+    <li>React Router Dom@5</li>
+    <li>React Hook Form</li>
+    <li>Yup</li>
+    <li>@hookform/resolvers</li>
+    <li>Context API</li>
+    <li>Axios</li>
+    <li>React Toastfy</li>
+    <li>@hookform/resolvers</li>
+    <li>React Icons</li>
+  </ul>
+  
+  <p>Para simular uma base de dados, foi construída uma API utilizando JSON Server e JSON Server Auth</p>
+  
+  <p>Para a metodologia de trabalho de grupo, organização de tarefas e registro do progresso as seguintes ferramentas e padrões foram utilizados:</p>
+  <ul>
+    <li>Scrum</li>
+    <li>Trello</li>
+    <li>Figma</li>
+    <li>Notion</li>
+    <li>Google Docs</li>
+  </ul>
 
-### `yarn build`
+## Equipe
+  
+  - Product Owner: Luan Pereira
+  - Tech Leader: Omar Gabriel
+  - Scrum Master: Brendo Sousa
+  - Quality Assurance: Ana Valeska Santos
+  - Quality Assurance: Lissandro Miranda Rocha
+  - Quality Assurance: Leonardo Melegari
+  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
