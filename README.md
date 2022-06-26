@@ -1,4 +1,8 @@
-# CondoManage - uma aplicação desenvolvida para auxiliar no gerenciamento de condomínios
+# CondoManage
+
+<div align="center">
+  <img src="./src/Assets/Images/Logo1.png" witdth="400" height="400"/>
+</div>  
 
 ## Contexto
 
